@@ -1,0 +1,43 @@
+{
+  "schema_version": "0.2",
+  "pack_id": "speed_control",
+  "description": "快慢镜本地裁决：升格范围/时长分级（impact_only 约1s / causal_chain 约3s / sequence 约5s），时间压缩/追逐降格，默认实时并显式禁止慢动作（Neowow 原则：慢动作只在打击点，禁止全程慢动作）。段3升格版由手动重写改为机制化配置。",
+  "data": {
+    "slow_motion_seconds": 1.0,
+    "slow_motion_scopes": {
+      "impact_only": {
+        "seconds": 1.0,
+        "zh": "关键打击/高光瞬间",
+        "en": "the impact/highlight moment",
+        "negative_zh": "慢动作仅限打击瞬间（约1s），其余实时",
+        "negative_en": "slow motion only at the impact moment (about 1s), then real time",
+        "triggers": ["击中", "重击", "命中", "斩杀", "爆裂", "破碎", "炸", "拔下", "一拳", "撞", "坠落", "腾空", "飞跃", "砍", "劈", "重摔", "砸在", "掐", "撕开", "血染", "血珠"]
+      },
+      "causal_chain": {
+        "seconds": 3.0,
+        "zh": "刺入瞬间完整因果链（剑入→没入→透出→血涌→僵直）",
+        "en": "the full causal chain of the stab (blade entry→penetration→pierce-through→blood surge→rigid shock)",
+        "negative_zh": "慢动作仅限刺入瞬间完整因果链约3s，其余实时",
+        "negative_en": "slow motion only for the full causal chain of the stab (~3s), then real time",
+        "triggers": ["刺入", "贯穿", "刺中", "刺进", "捅", "一剑"]
+      },
+      "sequence": {
+        "seconds": 5.0,
+        "zh": "完整动作序列",
+        "en": "the full action sequence",
+        "negative_zh": "慢动作仅限完整动作序列约5s，其余实时",
+        "negative_en": "slow motion only for the full action sequence (~5s), then real time",
+        "triggers": []
+      }
+    },
+    "slow_motion_triggers": [
+      "击中", "重击", "命中", "一拳", "撞", "破碎", "爆裂", "炸", "坠落", "腾空", "飞跃", "斩杀", "砍", "劈", "牺牲", "重摔", "砸在", "掐", "撕开", "刺入", "拔下", "血染", "血珠", "贯穿", "刺中", "刺进", "捅", "一剑"
+    ],
+    "slow_motion_emotions": [
+      "狂乱", "震惊", "崩溃", "痛苦", "爆发", "顶点", "极致", "决然", "悲伤", "疼痛"
+    ],
+    "fast_motion_triggers": [
+      "飞奔", "追逐", "追赶", "狂奔", "闪回", "时间流逝", "蒙太奇", "匆忙", "一拥而上", "快进"
+    ]
+  }
+}

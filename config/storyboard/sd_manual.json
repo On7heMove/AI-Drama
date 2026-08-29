@@ -1,0 +1,254 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "sd_manual",
+  "description": "即梦 Seedance 2.0 官方使用手册规则包（2026-08-15 学习落盘）：平台参数硬约束 + 审核避坑 + 手册提示词写作法。来源：飞书 wiki A5RHwWhoBiOnjukIIw6cu5ybnXQ（浏览器通读 + Qwen-VL 学习 49 屏示例）。长期规则：SD2.0 生成时长最高档=15s（对齐 scene_segment hard_max_sec=15）。",
+  "source": {
+    "platform": "即梦 Dreamina Seedance 2.0（即梦官网 jimeng.jianying.com）",
+    "url": "https://bytedance.larkoffice.com/wiki/A5RHwWhoBiOnjukIIw6cu5ybnXQ",
+    "official_site": "https://jimeng.jianying.com/",
+    "learned_at": "2026-08-15",
+    "method": "浏览器通读全文 + Qwen-VL(qwen3.7-flash) 学习 49 张页面截图示例（含案例视频封面/提示词/评论区避坑）"
+  },
+  "data": {
+    "platform_limits": {
+      "generation_duration_sec": {
+        "selectable": [
+          4,
+          5,
+          6,
+          8,
+          10,
+          12,
+          15
+        ],
+        "min_sec": 4,
+        "max_sec": 15,
+        "hard_max_sec": 15
+      },
+      "image_input": {
+        "formats": [
+          "jpeg",
+          "png",
+          "webp",
+          "bmp",
+          "tiff",
+          "gif"
+        ],
+        "max_files": 9,
+        "max_size_mb": 30
+      },
+      "video_input": {
+        "formats": [
+          "mp4",
+          "mov"
+        ],
+        "max_files": 3,
+        "total_duration_sec": [
+          2,
+          15
+        ],
+        "max_size_mb": 50,
+        "total_pixel_range": [
+          409600,
+          927408
+        ]
+      },
+      "mixed_input_max_files": 12,
+      "voice_output": "自带音效/配乐，支持音频输入"
+    },
+    "face_upload_restriction": {
+      "rule": "平台合规：暂不支持上传含写实人脸素材（图片/视频均拦截，含 AI 生成写实人脸），上传后无法生成",
+      "prompt_impact_zh": "人物一致性不能依赖真人脸参考；人物描述用特征化语言（年龄/发型/衣着/气质），禁用真实人名与公众人物名",
+      "prompt_impact_en": "do not rely on real-person face references; describe characters by traits (age/hair/clothing/aura); never use real or celebrity names"
+    },
+    "blocked_terms": {
+      "note": "评论区实测：审核缺少语境判断，名人/IP 与部分普通词会被误杀。hard=检测即告警并判合规失败；risk=易误杀词，仅告警不判失败",
+      "hard": [
+        "周迅",
+        "哈利波特",
+        "漫威",
+        "复仇者联盟",
+        "奥特曼",
+        "迪士尼",
+        "皮克斯",
+        "宫崎骏",
+        "龙珠",
+        "火影忍者",
+        "名侦探柯南",
+        "蜘蛛侠",
+        "钢铁侠"
+      ],
+      "risk": [
+        "银河",
+        "宁静",
+        "夏雨",
+        "温情",
+        "四周迅速显现"
+      ]
+    },
+    "subtitle_watermark_negative": {
+      "zh": "无字幕、无水印、无片头Logo",
+      "en": "no subtitles, no watermark, no opening logo",
+      "note": "手册评论区实测：生成带音频画面时模型倾向自动加字幕，'不要字幕'可能无效，需显式声明无字幕并后期处理"
+    },
+    "prompt_rules": {
+      "timeline_prompting": "0-5秒/6-11秒/12-15秒 时间戳分段叙事（已落【x-y秒】时间轴，逐秒动作/情绪）",
+      "at_reference_syntax": "@图片/@视频/@音频 多模态引用：@图片定首帧/主体/场景/道具，@视频定运镜/动作/节奏，@音频定配乐/音色（有参考资产时启用）",
+      "emotion_tags": "情绪标签（好奇/放松/专注/桀骜/委屈又呆萌）辅助微表情与动作张力",
+      "multi_subject_binding": "多主体编号绑定：主体1(红衣女将军)+主体1武器=@图片3+主体1情绪=专注；本系统站位/轴线机制已覆盖左右关系",
+      "specific_camera_vocab_zh": [
+        "低视角环绕",
+        "右摇90度",
+        "急停",
+        "右摇180度",
+        "怼脸拍摄",
+        "一镜到底",
+        "主观视角",
+        "鱼眼镜头",
+        "超广角建立镜头",
+        "低机位轻微仰拍",
+        "侧逆光体积光",
+        "跟踪镜头",
+        "推拉摇移"
+      ],
+      "specific_camera_vocab_en": [
+        "low-angle orbit",
+        "pan right 90 degrees",
+        "hard stop",
+        "pan 180 degrees",
+        "face-on close-up",
+        "one-take",
+        "POV",
+        "fisheye lens",
+        "ultra-wide establishing shot",
+        "low-angle slight tilt-up",
+        "backlit volumetric light",
+        "tracking shot",
+        "push-pull"
+      ],
+      "structured_params_template": "时长/比例/分辨率/手持/抖动/曝光/对焦/无字幕/仅环境音+对白/口型同步 分模块声明（参考评论区用户模板）"
+    },
+    "review_risks": {
+      "female_realism": "写实女性角色/特摄风格易触发审核拦截（评论区实测），生成失败率高；保持原创角色特征化描述、避免擦边",
+      "audio_ref_mismatch": "参考音频音色可能与画面角色不一致（如女声参考出男声），对白/旁白建议后期配音优先",
+      "subtitle_auto": "带音频生成时模型自动加字幕且'不要字幕'可能无效，须显式负面 无字幕 + 后期处理",
+      "quality_variance": "高峰期排队/算力波动导致同一提示词效果不稳定，正式生成前可先低档验证"
+    },
+    "official_prompt_guide": {
+      "source": {
+        "doc": "Dreamina Seedance 2.0 series prompt guide",
+        "url": "https://docs.byteplus.com/en/docs/ModelArk/2222480",
+        "last_updated": "2026-08-11",
+        "learned_at": "2026-08-18",
+        "method": "官方页面全文抓取（27,001 字符）提炼",
+        "authority": "official"
+      },
+      "status": "pending_validation",
+      "note": "待 SD 实测验证后接入 director 管线；与 sd_manual（平台参数/审核）互补，与 model-mechanics 八大机制互相印证。",
+      "rules": [
+        {
+          "id": "no_precise_timing",
+          "zh": "不要对各分镜写死精确秒数（0-3秒精确计时不稳定，强制限时可能生成异常）；优先让模型按剧情自然生成节奏",
+          "en": "do not fix precise per-shot seconds; 0-3s precise timing is unstable, let the model pace naturally",
+          "validated": false
+        },
+        {
+          "id": "one_camera_move_per_shot",
+          "zh": "单个镜头只指定 1 种运镜，禁止同镜叠加推+拉+摇+移，否则图像稳定性下降",
+          "en": "specify only 1 camera move per shot; do not stack push/pull/pan/track in one shot",
+          "validated": false
+        },
+        {
+          "id": "action_three_principles",
+          "zh": "动作落到身体部位+补幅度/速度/力度；优先慢、轻、连贯小动作，避免冲刺/大跳/剧烈翻滚等高爆发大动态；补动作间惯性衔接",
+          "en": "body-part actions + degree quantification (range/speed/force); prefer slow gentle continuous small motions; avoid high-burst large dynamics; bridge transitions with inertia",
+          "validated": false
+        },
+        {
+          "id": "concrete_emotion",
+          "zh": "情绪用具体身体细节表达，禁止'非常悲伤/极度愤怒'式抽象情绪词",
+          "en": "show emotion via concrete physical details, never abstract mood words",
+          "validated": false
+        },
+        {
+          "id": "multi_subject_over4_risk",
+          "zh": "参考/重点人物超过 4 人稳定性显著下降（人数错误/重复角色）；须拆镜、降级群演、减少同框重点",
+          "en": "more than 4 key people in one frame destabilizes output; split shots, de-emphasize extras, cap co-framed leads",
+          "validated": false
+        },
+        {
+          "id": "spatial_via_reference_first",
+          "zh": "多主体空间关系优先用参考图表达，减少复杂文本描述",
+          "en": "express spatial relationships via reference images first, reduce complex text",
+          "validated": false
+        },
+        {
+          "id": "subject_label_binding",
+          "zh": "角色每次出现须显式引用（<主体N>@<图片N>）或沿用固定标签；禁止同帧出现外观完全相同的重复角色",
+          "en": "reference each subject explicitly every time or reuse fixed labels; ban duplicate identical avatars in frame",
+          "validated": false
+        },
+        {
+          "id": "face_ref_headshot",
+          "zh": "防 ID 漂移：用无表情头像特写（少肩颈/背景干扰）+ 全身照；重要素材放前；勿用多视图参考（易当多个主体）",
+          "en": "anti-ID-drift: expressionless headshot + full-body ref, important assets first, avoid multi-view refs",
+          "validated": false
+        },
+        {
+          "id": "assets_cap_4to5",
+          "zh": "参考素材 4~5 个封顶（角色图+场景图+运镜视频+音频），勿用满限额",
+          "en": "cap reference assets at 4-5 (char + scene + camera video + audio); do not max out",
+          "validated": false
+        },
+        {
+          "id": "portrait_subtitle_risk",
+          "zh": "9:16 带音频生成时模型倾向自动加字幕，且 16:9 出字幕概率显著低于 9:16；无法 100% 规避，须显式负面+后期处理",
+          "en": "portrait + audio tends to auto-add subtitles; landscape has far lower subtitle probability; explicit negative + post-processing required",
+          "validated": false
+        },
+        {
+          "id": "style_drift_lock",
+          "zh": "参考图写实且未强调风格时易漂成真人实拍；风格锁定词（2D 日漫/3D 国漫/真人实拍等）必须显式给出",
+          "en": "realistic refs without explicit style drift to live-action; always state the style lock explicitly",
+          "validated": false
+        },
+        {
+          "id": "extension_vs_stitching",
+          "zh": "对话场景用长镜头延伸（沉浸连贯）；动作/转折用分段拼接（保节奏）；两者可组合",
+          "en": "dialogue scenes: continuous long-take extension; action/turning points: segmented stitching; combine as needed",
+          "validated": false
+        },
+        {
+          "id": "dialogue_language_unified",
+          "zh": "对白语言必须一致，避免中英混用（专有名词除外）",
+          "en": "keep dialogue language consistent; no zh/en mixing except proper nouns",
+          "validated": false
+        },
+        {
+          "id": "text_common_words",
+          "zh": "精确文字渲染用常见词、避免生僻字/特殊符号，台词用引号包裹",
+          "en": "exact text rendering: common words, avoid rare chars/symbols, quote dialogue",
+          "validated": false
+        },
+        {
+          "id": "stitch_jumpcut_fix",
+          "zh": "延伸拼接点跳帧：前一视频末剪 6 帧、后一视频首剪 1 帧，后期对齐关键帧",
+          "en": "stitch jump cuts: trim 6 frames from previous tail and 1 frame from next head, align keyframes in post",
+          "validated": false
+        },
+        {
+          "id": "ending_noise_fade",
+          "zh": "有旁白时片尾易出咔哒/截断噪音：后期音量包络淡出",
+          "en": "narration ending may click/cut off: apply volume envelope fade-out in post",
+          "validated": false
+        },
+        {
+          "id": "homophone_fix",
+          "zh": "多音字/生僻字易误读：改写为同音常用字（如螭龙山→吃龙山）",
+          "en": "polyphonic/rare chars mispronounce: rewrite as common homophones",
+          "validated": false
+        }
+      ]
+    }
+  }
+}

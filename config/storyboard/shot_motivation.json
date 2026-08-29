@@ -1,0 +1,442 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "shot_motivation",
+  "description": "镜头动机规则包（2026-08-15 v0.13.1 实测校准）：动机类型学 + 动机→镜头工具包 + 本地触发词 + J/L-Cut 表 + 审查规则。镜头动机=导演通过呈现什么画面向观众传递什么信息/情绪/衔接理由；形式学依据：波德维尔《电影艺术》动机=元素出现的正当理由（现实认知/叙事/类型惯例/风格模式四来源）。机制：本地确定性推导为主（节拍自身文本打分+位置规则+场景类型回退），LLM 在低置信节拍上辅助生成并本地校验；**镜头动机为后台数据，不进提示词（自研产品护城河，2026-08-15 决策）**；审查走后台日志。",
+  "data": {
+    "taxonomy": {
+      "info_introduce_env": {
+        "name": "介绍环境",
+        "goal_zh": "让观众先建立空间与氛围认知",
+        "goal_en": "establish space and atmosphere first"
+      },
+      "info_introduce_person": {
+        "name": "介绍人物",
+        "goal_zh": "让观众认出人物并建立其在场感",
+        "goal_en": "introduce the character and establish presence"
+      },
+      "info_reaction": {
+        "name": "展现反馈",
+        "goal_zh": "让观众看到听者对说话内容的反应",
+        "goal_en": "show the listener's reaction to what is being said"
+      },
+      "info_result": {
+        "name": "展现结果/细节",
+        "goal_zh": "用局部特写让观众看清关键动作的结果或细节",
+        "goal_en": "show the outcome or key detail via close-up"
+      },
+      "info_reveal": {
+        "name": "揭示悬念",
+        "goal_zh": "延迟揭示，逐步揭开真相或身份",
+        "goal_en": "delay the reveal, unveil truth or identity gradually"
+      },
+      "info_relation": {
+        "name": "交代关系",
+        "goal_zh": "让观众看懂人物间的空间与权力关系",
+        "goal_en": "make spatial and power relations legible"
+      },
+      "emotion_amplify": {
+        "name": "放大情绪",
+        "goal_zh": "把角色的内心情绪放大给观众",
+        "goal_en": "amplify the character's inner emotion"
+      },
+      "emotion_pressure": {
+        "name": "制造压迫/不安",
+        "goal_zh": "用角度与构图营造压迫或不安",
+        "goal_en": "create pressure or unease through angle and framing"
+      },
+      "emotion_haste": {
+        "name": "展现匆忙/动势",
+        "goal_zh": "用局部+运动压缩传递'赶路/慌乱'的动势",
+        "goal_en": "convey haste or urgency through partial view and motion"
+      },
+      "grammar_cut": {
+        "name": "连接/转场",
+        "goal_zh": "让镜头衔接有理由（新信息/视线/动作/声音）",
+        "goal_en": "motivate the cut (new info, eyeline, action, or sound)"
+      },
+      "grammar_reaction": {
+        "name": "反应衔接",
+        "goal_zh": "在对话中给听者反应镜头，形成正反打",
+        "goal_en": "insert the listener's reaction in dialogue, forming shot-reverse-shot"
+      }
+    },
+    "trigger_map": {
+      "info_introduce_env": [
+        "环境",
+        "空镜",
+        "广场",
+        "城市",
+        "大厅",
+        "旷野",
+        "城堡",
+        "扫场",
+        "远眺",
+        "全景",
+        "定场",
+        "初到",
+        "来到",
+        "进入",
+        "矗立",
+        "整个",
+        "俯瞰"
+      ],
+      "info_introduce_person": [
+        "出场",
+        "亮相",
+        "首次",
+        "登场",
+        "现身",
+        "走进",
+        "迎面",
+        "立于",
+        "站在门口",
+        "回头",
+        "转身"
+      ],
+      "info_reaction": [
+        "反应",
+        "听到",
+        "听闻",
+        "愣住",
+        "沉默",
+        "皱眉",
+        "对视",
+        "看向",
+        "望着",
+        "回望",
+        "脸色",
+        "表情",
+        "无措",
+        "震惊",
+        "不可置信",
+        "反馈",
+        "望向",
+        "视线",
+        "盯着",
+        "瞥",
+        "余光"
+      ],
+      "info_result": [
+        "伤口",
+        "血迹",
+        "剑尖",
+        "血珠",
+        "刺入",
+        "贯穿",
+        "拔下",
+        "崩",
+        "裂开",
+        "碎",
+        "断",
+        "翻转",
+        "戒指",
+        "怀表",
+        "信",
+        "钥匙",
+        "细节",
+        "结果",
+        "涌出",
+        "拔出",
+        "扭转",
+        "滴进",
+        "滚落"
+      ],
+      "info_reveal": [
+        "揭示",
+        "真相",
+        "身份",
+        "原来",
+        "突然",
+        "猛然",
+        "惊觉",
+        "发现",
+        "秘密",
+        "伏笔",
+        "悬疑",
+        "谜",
+        "揭开",
+        "怨毒",
+        "窥视",
+        "阴影",
+        "隐在",
+        "冷笑",
+        "意味深长",
+        "诡异"
+      ],
+      "info_relation": [
+        "对峙",
+        "谈判",
+        "上下级",
+        "主仆",
+        "君臣",
+        "敌对",
+        "盟友",
+        "众人",
+        "围",
+        "群",
+        "对坐",
+        "相对",
+        "俯视"
+      ],
+      "emotion_amplify": [
+        "哭",
+        "泪",
+        "笑",
+        "悲痛",
+        "崩溃",
+        "心碎",
+        "绝望",
+        "狂喜",
+        "欣喜",
+        "愤怒",
+        "爆发",
+        "颤抖",
+        "哽咽",
+        "欲言又止",
+        "震惊"
+      ],
+      "emotion_pressure": [
+        "压迫",
+        "压抑",
+        "阴森",
+        "囚",
+        "笼",
+        "威胁",
+        "危险",
+        "恐惧",
+        "窒息",
+        "逼仄",
+        "高塔",
+        "跪",
+        "匍匐",
+        "仰望"
+      ],
+      "emotion_haste": [
+        "赶路",
+        "匆忙",
+        "急",
+        "狂奔",
+        "飞奔",
+        "逃亡",
+        "追逐",
+        "快跑",
+        "疾驰",
+        "马蹄",
+        "慌张",
+        "仓皇",
+        "冲刺",
+        "慌乱"
+      ],
+      "grammar_cut": [
+        "转场",
+        "闪回",
+        "切黑",
+        "叠化",
+        "硬切",
+        "衔接",
+        "过渡",
+        "蒙太奇"
+      ],
+      "grammar_reaction": [
+        "对白",
+        "说话",
+        "讲述",
+        "质问",
+        "耳语",
+        "争吵",
+        "对话",
+        "回应",
+        "回答",
+        "反问"
+      ]
+    },
+    "tool_map": {
+      "info_introduce_env": {
+        "scale": "远景/大远景",
+        "angle": "平视/俯视",
+        "movement": "缓推/横移/摇",
+        "camera_pos": "远位定场机位",
+        "zh": "远景建立空间，缓推或横移扫过环境，让观众先看到'在哪里'",
+        "en": "wide establishing shot; slow push or lateral pan across the space so the audience sees WHERE first"
+      },
+      "info_introduce_person": {
+        "scale": "中景→中近景→特写",
+        "angle": "平视",
+        "movement": "缓推",
+        "camera_pos": "正面推进机位",
+        "zh": "由远及近收束：先让人物入画（中景），再逐步推近到中近景/特写，完成'他是谁'的信息递进",
+        "en": "narrow from medium to close-up in stages: bring the character into frame, then push in, completing the WHO"
+      },
+      "info_reaction": {
+        "scale": "中近景/特写",
+        "angle": "平视/过肩",
+        "movement": "固定/轻微缓推",
+        "camera_pos": "听者正面/过肩机位",
+        "zh": "切到听者反应镜头（正反打）；若台词继续而画面已切，用 L-Cut：声音先入、画面提前到反应",
+        "en": "cut to the listener's reaction (shot-reverse-shot); if the line continues over the cut, use L-Cut: audio leads, picture lands on the reaction"
+      },
+      "info_result": {
+        "scale": "特写/大特写/插入",
+        "angle": "低机位/平视",
+        "movement": "固定/急推",
+        "camera_pos": "贴近细节/低机位",
+        "zh": "用局部特写（马蹄/剑尖/伤口）压缩关键结果，低机位增强动势与分量",
+        "en": "use an insert close-up (hoof, blade, wound) to compress the key outcome; low angle adds weight and momentum"
+      },
+      "info_reveal": {
+        "scale": "空镜/中景→特写",
+        "angle": "平视",
+        "movement": "缓推→静止聚焦",
+        "camera_pos": "延迟揭示机位（前景遮挡/景深）",
+        "zh": "先局部/遮挡延迟揭示，再逐步聚焦；rack focus 或前景虚焦引导视线到真相",
+        "en": "delay the reveal with partial view or obstruction, then rack focus or push to the truth"
+      },
+      "info_relation": {
+        "scale": "双人中景/全景",
+        "angle": "平视/过肩",
+        "movement": "固定",
+        "camera_pos": "轴线一侧机位",
+        "zh": "用双人/全景交代相对位置与权力关系，保持 180° 轴线恒定",
+        "en": "use a two-shot or wide to lay out relative position and power, keeping the 180-degree line stable"
+      },
+      "emotion_amplify": {
+        "scale": "特写/大特写",
+        "angle": "平视",
+        "movement": "缓推",
+        "camera_pos": "贴近主体",
+        "zh": "特写+缓推+浅景深放大内心情绪，留白给情绪",
+        "en": "close-up plus slow push plus shallow depth to amplify inner emotion, leaving breathing room"
+      },
+      "emotion_pressure": {
+        "scale": "中近景/全景",
+        "angle": "低机位仰拍/荷兰角",
+        "movement": "固定/缓慢推近",
+        "camera_pos": "低机位",
+        "zh": "低机位仰拍或荷兰角制造压迫/不安",
+        "en": "low-angle tilt-up or Dutch angle to create pressure or unease"
+      },
+      "emotion_haste": {
+        "scale": "特写/全景",
+        "angle": "低机位",
+        "movement": "跟拍/快速摇",
+        "camera_pos": "侧面跟随机位/低机位",
+        "zh": "低机位特写局部（马蹄/脚步）+ 侧面跟拍，用动势代替全景交代'赶路'",
+        "en": "low-angle insert (hooves, feet) plus lateral tracking; convey haste through momentum instead of a full wide"
+      },
+      "grammar_cut": {
+        "scale": "承接上一镜",
+        "angle": "承接",
+        "movement": "承接/叠化",
+        "camera_pos": "承接",
+        "zh": "剪切必须有理由：新信息/视线/动作/声音；转场用匹配剪辑或 J/L-Cut",
+        "en": "every cut needs a reason: new info, eyeline, action, or sound; use match cuts or J/L-Cut for transitions"
+      },
+      "grammar_reaction": {
+        "scale": "中近景/过肩",
+        "angle": "过肩/平视",
+        "movement": "固定",
+        "camera_pos": "反打机位",
+        "zh": "对话中给听者反应，正反打保持视线匹配；画面先入可用 J-Cut（先看到反应再听到台词）",
+        "en": "insert the listener's reaction in dialogue; shot-reverse-shot keeps eyeline; use J-Cut when the picture leads and the line follows"
+      }
+    },
+    "j_l_cut": {
+      "l_cut": {
+        "name": "L-Cut（声音先入）",
+        "zh": "L-Cut（声音先入）：上一镜头的声音延续到下一个画面（用于：A 说话时切到 B/C 的反应，台词声继续）",
+        "en": "L-Cut (audio leads): audio from the previous shot continues over the next picture (show B/C's reaction while A keeps talking)",
+        "triggers": [
+          "反应",
+          "听到",
+          "说话",
+          "对话",
+          "同时",
+          "反馈",
+          "愣住",
+          "沉默",
+          "表情",
+          "开口",
+          "高喊",
+          "致辞",
+          "宣讲",
+          "宣告",
+          "祝词",
+          "念",
+          "说"
+        ]
+      },
+      "j_cut": {
+        "name": "J-Cut（画面先入）",
+        "zh": "J-Cut（画面先入）：下一个画面的声音提前进入（用于：先看到新场景/新人物，再听到其声音）",
+        "en": "J-Cut (picture leads): the next picture's audio enters before the cut (see the new scene or character before hearing it)",
+        "triggers": [
+          "先看到",
+          "画面先入",
+          "先闻其声",
+          "未见其人",
+          "听到声",
+          "声音提前",
+          "闪入"
+        ]
+      }
+    },
+    "review_rules": {
+      "unmotivated_patterns": [
+        "固定机位无信息增量",
+        "无理由越轴",
+        "无动机晃动",
+        "同景别连用无变化",
+        "特写无情绪或信息目标",
+        "空镜无氛围或信息目标"
+      ],
+      "zh": "每镜必须有镜头动机：向观众传达什么信息/情绪/衔接理由；无动机镜头（无信息增量/无情绪变化/无衔接理由）判为不合格",
+      "en": "Every shot must have a motivation: what info, emotion, or connection it delivers; unmotivated shots (no new info, no emotional change, no connective reason) fail"
+    },
+    "motivation_formalism": {
+      "source": "波德维尔《电影艺术：形式与风格》插图修订第8版（大卫·波德维尔、克里斯汀·汤普森）· 动机形式学（2026-08-15 投喂学习）",
+      "definition_zh": "动机 = 影片中某一元素出现的正当理由：观众期待任何元素都有在此出现的逻辑解释",
+      "definition_en": "motivation = the justification for an element's presence; audiences expect every element to have a logical reason for being there",
+      "types": {
+        "realistic": {
+          "name": "写实动机",
+          "source_zh": "观众对现实世界的认知",
+          "zh": "元素因符合现实世界的逻辑/常理而正当（蜡烛给光一个理由、人物行为符合现实）",
+          "en": "justified by the audience's knowledge of the real world (a candle motivates the light; behavior follows real-world logic)"
+        },
+        "narrative": {
+          "name": "叙事动机",
+          "source_zh": "叙事的因素",
+          "zh": "元素因服务于故事因果/角色目标/平行对照而正当（角色特征驱动事件、基础动机驱动整体结构）",
+          "en": "justified by narrative factors: story causality, character goals, parallelism"
+        },
+        "intertextual": {
+          "name": "互文动机",
+          "source_zh": "类型、惯例",
+          "zh": "元素因类型/体裁惯例而正当（歌舞片里歌唱、新闻报道类型、恐怖片吓人公式）",
+          "en": "justified by genre/convention (singing in a musical, reportage conventions, horror formulas)"
+        },
+        "artistic": {
+          "name": "艺术动机",
+          "source_zh": "影片中的风格模式",
+          "zh": "元素因影片风格/视觉母题/形式模式而正当（风格化机位、视觉平行、母题重复）",
+          "en": "justified by the film's stylistic patterns, motifs, and formal design"
+        }
+      },
+      "justification_by_key": {
+        "info_introduce_env": "realistic",
+        "info_introduce_person": "narrative",
+        "info_reaction": "narrative",
+        "info_result": "narrative",
+        "info_reveal": "narrative",
+        "info_relation": "narrative",
+        "emotion_amplify": "artistic",
+        "emotion_pressure": "artistic",
+        "emotion_haste": "realistic",
+        "grammar_cut": "artistic",
+        "grammar_reaction": "narrative"
+      },
+      "principle_zh": "经典好莱坞叙事：动机越清楚越完整越好；艺术片可有意暧昧化。无动机元素=形式不统一。",
+      "principle_en": "Classical Hollywood keeps motivation clear and complete; art films may deliberately leave it ambiguous. Unmotivated elements = formal disunity."
+    }
+  }
+}

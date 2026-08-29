@@ -1,0 +1,2003 @@
+{
+  "schema_version": "0.1",
+  "updated": "2026-08-24",
+  "note": "cangjie 蒸馏 221 个视听语言 skill → 提示词产线（产线二）环节分类。消费方：storyboard 生成的镜头/剪辑/声音/视觉规则与校验器。",
+  "skill_count": 221,
+  "stages": {
+    "storyboard_shot": 44,
+    "storyboard_edit": 49,
+    "storyboard_sound": 53,
+    "storyboard_visual": 75
+  },
+  "skills": [
+    {
+      "id": "dialogue-anti-shot-reverse",
+      "slug": "dialogue-anti-shot-reverse",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户在设计/审查对话场景分镜，问\"这场对话怎么拍才不无聊/有张力\"、或发现自己总是在用 标准正反打（shot/reverse）时调用。也适用于\"什么时候正反打反而最好\"的边界判断。 不适用于：动作/追逐段落、无声段落、单人多镜头演讲。关键 trigger：对话场景/正反打/ 反打镜头/无聊/对话怎么拍、dialogue scene / shot reverse / boring talk scene。",
+      "tags": "[对话场景, 正反打, 反默认]"
+    },
+    {
+      "id": "director-actor-collab",
+      "slug": "director-actor-collab",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'怎么和演员配合拍好复杂调度'、'演员不配合/自我怀疑怎么办'、'创意机位会不会拖慢拍摄'时调用。核心：让演员有事做、给更多任务推到本能表演、提前计划并解释机位。不适用于：选角/剧本层问题。关键 trigger：演员配合/排练/本能表演/提前计划、actor blocking / rehearsal / instinct performance。",
+      "tags": "[导演, 演员, 协作]"
+    },
+    {
+      "id": "editing-restraint",
+      "slug": "editing-restraint",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'对话戏怎么剪才不累'、'特写/剪切什么时候给'、'电话戏怎么拍'或觉得'每句都特写'时调用。核心：特写与剪切是稀缺资源，越少越重；焦距有'广角开场+长焦后续'分工；电话戏少特写多肢体。不适用于：动作段落剪接、MV 快剪。关键 trigger：少剪切/特写时机/电话戏/焦距分工、cut less / when to use close-up / phone scene。",
+      "tags": "[剪辑, 特写, 节制]"
+    },
+    {
+      "id": "motion-rest-and-change",
+      "slug": "motion-rest-and-change",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'吵架戏最重要的台词怎么让观众听进去'、'一场戏的转折/变化怎么让观众感觉到'、或想用'静止 vs 运动'控制节奏时调用。核心：重要台词静止、泛泛争执运动；转折必须呈现可见的变化过程。不适用于：纯动作段落节奏、镜头时长计算。关键 trigger：重要台词/静止/变化过程/一静一动/转折怎么拍、stillness / key line / change must be visible。",
+      "tags": "[节奏, 运动, 转折]"
+    },
+    {
+      "id": "motivation-principle",
+      "slug": "motivation-principle",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'演员为什么走到这里/回头/镜头为什么动'、担心调度显做作、或想让走位与运镜'有理由'时调用。核心：演员走位与摄影机运动都必须有叙事理由，没理由=炫技/做作。不适用于：纯装饰性运镜审美、实验影像。关键 trigger：走位理由/回头假不假/镜头为什么动/动机、motivation / reason for move / why does the camera move。",
+      "tags": "[动机, 运镜, 真实感]"
+    },
+    {
+      "id": "multi-person-gaze-map",
+      "slug": "multi-person-gaze-map",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'多人对话怎么让观众分清谁在跟谁说'、'群戏新角色开口怕迷路'、或想用一镜拍完多人对话时调用。核心：用目光方向+转身动作定位每个人（视线地图），单镜头内靠演员配合画框做焦点转换。不适用于：双人对话、纯调度走位训练。关键 trigger：多人/群戏/谁在跟谁说/转身现人/一镜拍完、group scene / who is talking / gaze direction。",
+      "tags": "[多人会话, 视线, 空间定位]"
+    },
+    {
+      "id": "obstacle-as-relationship",
+      "slug": "obstacle-as-relationship",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户想让'两人关系疏远/对抗/隔阂'被观众直接看见，或问'怎么用门/墙/窗/书架制造张力'时调用。核心：把抽象关系物化为真实障碍物，建立隔阂→隔物对话→关键处打破。不适用于：纯道具审美、无关系变化的场景。关键 trigger：隔阂/疏远/隔着门吵/障碍物/打破隔阂、obstacle / barrier / separation / wall between。",
+      "tags": "[障碍物, 人物关系, 叙事弧]"
+    },
+    {
+      "id": "power-by-camera-contrast",
+      "slug": "power-by-camera-contrast",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户想让观众一眼看出对话双方谁强谁弱/谁是主导（反派/英雄/上司），或问'怎么用机位让角色有压迫感/威严感'时调用。不适用于：无声对峙的细微情绪、非对抗性亲密戏。关键 trigger：力量/强势/威慑/仰拍/高度/机位靠近、power / dominance / low angle / camera height。",
+      "tags": "[镜头调度, 权力关系, 对比]"
+    },
+    {
+      "id": "push-in-and-retreat",
+      "slug": "push-in-and-retreat",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'镜头推近还是后退'、'怎么让情绪积累/抽离'、'两人越谈越近怎么拍'时调用。核心：推近=情绪积累（单线推），后退/远景=抽离现实或孤独。不适用于：变焦与推轨的机械参数、纯构图偏好。关键 trigger：推近/拉远/情绪积累/孤独/抽离、push in / pull back / dolly / isolation。",
+      "tags": "[镜头运动, 情绪积累, 抽离]"
+    },
+    {
+      "id": "realistic-behavior-no-staring",
+      "slug": "realistic-behavior-no-staring",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'怎么让对话戏表演自然/不假'、'演员要不要一直对视'、'两人怎么建立联系又不面对面'时调用。核心：以现实交谈行为为基准——熟人很少对视、各忙各的，把对视留给关键剧情。不适用于：喜剧直给、儿童向/仪式性对白。关键 trigger：对视/眼神交流/表演假/自然/少看对方、eye contact / staring / natural conversation。",
+      "tags": "[表演, 对视, 真实感]"
+    },
+    {
+      "id": "space-first-and-breaking-rules",
+      "slug": "space-first-and-breaking-rules",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户想让观众在对话/多人戏里始终清楚'谁在哪儿、看着谁'，或想用越轴/同侧构图制造冲突与焦虑却怕观众迷路时调用。核心：先铺垫空间与视线，再破规则。不适用于：无空间定位需求的纯情绪空镜。关键 trigger：越轴/跨线/左右位置/开场镜头/谁在跟谁说、crossing the line / establish spatial / opening shot。",
+      "tags": "[镜头调度, 空间连续性, 越轴, 开场]"
+    },
+    {
+      "id": "telephoto-wide-lens-semantics",
+      "slug": "telephoto-wide-lens-semantics",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'这场戏用长焦还是广角'、'怎么把远处两人拉近/孤立'、'怎么用镜头制造压迫或空间感'时调用。核心：长焦=压缩/孤立/速度失真，广角=空间/扭曲/速度，中焦=平衡；焦距是语义选择。不适用于：推轨/摇摄等运动选择（那是别的 skill）。关键 trigger：长焦/广角/焦距/压缩/孤立、telephoto / wide angle / focal length / compress。",
+      "tags": "[镜头语言, 焦距, 空间]"
+    },
+    {
+      "id": "tension-staging-packages",
+      "slug": "tension-staging-packages",
+      "source_book": "master-shots-2",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'门边相持/幽闭/边界处/深布景这些张力场景怎么拍'、'怎么制造拥挤压迫感'时调用。核心：把张力装进特定空间包——门边两焦距、人物前景幽闭、屋内屋外边界、深布景放大空间。不适用于：张力来自台词/表演本身、动作追逐段落。关键 trigger：门边/相持/幽闭/拥挤/边界/深布景、doorway / claustrophobic / tension staging。",
+      "tags": "[张力, 空间调度, 幽闭]"
+    },
+    {
+      "id": "action-scene-craft",
+      "slug": "action-scene-craft",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'动作/追逐场面怎么组织'、'主观视点怎么用'、'一击怎么拍才重'、'单镜头内怎么打包信息'时调用。核心：动作场面=主观视点+加强视觉动作五种方法+单镜头信息包；高潮分镜。不适用于：普通对话机位、速度感单一参数（那是 speed-formula）。关键 trigger：动作场面/主观视点/一击两镜/复杂旋转/单镜头信息包、action scene / subjective POV / single-shot info pack。",
+      "tags": "[动作戏, 主观视点, 单镜头]"
+    },
+    {
+      "id": "actor-position-and-performance",
+      "slug": "actor-position-and-performance",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'拍特写/对话先摆演员还是先摆机位'、'怎么让演员身体说话'、'表演戏怎么拍'时调用。核心：演员位置先于机位；特写靠演员角度而非机位；让演员知道你在拍什么。不适用于：机位高度/权力类问题、纯对白改写。关键 trigger：演员位置/特写怎么拍/身体表演/告诉演员拍什么、actor position / blocking first / body performance。",
+      "tags": "[表演, 调度, 特写]"
+    },
+    {
+      "id": "anti-establishing-and-symbolic-staging",
+      "slug": "anti-establishing-and-symbolic-staging",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'开场怎么交代外景地不套路'、'机位运动能不能表达关系/气场'、'双重推进/俯瞰后拉/孤立推进'时调用。核心：反定场（顺带完成定场）+象征性调度（机位运动携带主题含义）。不适用于：纯美学装饰、无象征目标的调度。关键 trigger：定场/开场套路/象征/气场/双重推进/俯瞰后拉、establishing / symbolic staging / double push / crane pull-back。",
+      "tags": "[定场, 象征, 调度]"
+    },
+    {
+      "id": "camera-height-and-power",
+      "slug": "camera-height-and-power",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'机位高度怎么定'、'怎么让角色有威严/权威或显得弱势'、'权力怎么从A转给B'时调用。核心：镜头高度=权力与同情（微调即意义）；谁离机位近谁掌控局面。不适用于：构图美观、无权力关系的戏。关键 trigger：高度/俯仰/威严/权力交接/谁掌控、camera height / power / dominance / who is in control。",
+      "tags": "[镜头高度, 权力, 同情]"
+    },
+    {
+      "id": "camera-motivated-by-action",
+      "slug": "camera-motivated-by-action",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'镜头为什么动/怎么让运镜自然'、'手持长镜头怎么不闷'、'道具能不能驱动镜头'时调用。核心：运镜由画面内动作（演员步伐/物体/视线）触发；动作拿走镜头就没理由。不适用于：纯风格化运镜、无动机的炫技需求。关键 trigger：运镜动机/镜头为什么动/激发摄影机/道具驱动、camera motivated / why move / action-driven camera。",
+      "tags": "[运镜动机, 沉浸感, 导演]"
+    },
+    {
+      "id": "director-craft-master",
+      "slug": "director-craft-master",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'导演的镜头哲学/即兴发挥'、'长镜头什么时候用'、'背景运动怎么用'、'大特写/剪影的克制'时调用。核心：摄影机是解释器不是捕捉器；长镜头要有理由；背景运动给运镜动力；即兴观察注意力去向；非常规手段（大特写/剪影）要节制并告知演员。不适用于：单一场面的具体机位（用对应 skill）。关键 trigger：导演技巧/即兴/长镜头理由/背景运动/解释器、director craft / improvisation / long take reason / camera as interpreter。",
+      "tags": "[导演, 即兴, 长镜头]"
+    },
+    {
+      "id": "hide-and-reveal-toolkit",
+      "slug": "hide-and-reveal-toolkit",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'怎么让观众猜角色在想什么'、'剪影/朦胧/镜面/假墙什么时候用'、'怎么隐藏信息再揭示'时调用。核心：剪影/朦胧画面/镜面/窗框/假墙/不可见面部是'隐藏-揭示'工具，先藏关键信息让观众参与猜测，再在正确时机揭示。不适用于：需要清晰传达表情的关键对白、纯审美装饰。关键 trigger：剪影/朦胧/镜面/隐藏/神秘感/猜测、silhouette / obscuring / mirror / hide and reveal。",
+      "tags": "[隐藏, 揭示, 取景]"
+    },
+    {
+      "id": "lens-focal-semantics",
+      "slug": "lens-focal-semantics",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'这场戏用长焦/广角/中焦'、'怎么让画面更压缩或更开阔'、'默认广角定场-中焦双人-长焦特写要不要打破'时调用。核心：焦距三件套的语义分工+默认切换套路可打破。不适用于：机位运动/推轨选择。关键 trigger：长焦/广角/中焦/焦距语义/打破三段式、focal length / telephoto / wide / lens choice。",
+      "tags": "[焦距, 镜头语言, 语义]"
+    },
+    {
+      "id": "multi-person-layout-anchor",
+      "slug": "multi-person-layout-anchor",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'群戏怎么开头才不迷路'、'多人对话谁在跟谁说'、'锚点人物怎么用'时调用。核心：头 10 秒建立布局（谁坐在哪、在看谁）+锚点人物持续定位。不适用于：双人对话、无空间定位的群像空镜。关键 trigger：群戏/多人/头10秒/锚点/谁在跟谁说、group scene / first ten seconds / anchor character / who is talking。",
+      "tags": "[多人场景, 布局, 空间定位]"
+    },
+    {
+      "id": "speed-formula",
+      "slug": "speed-formula",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'追逐/打斗怎么拍出速度感'、'不用快剪怎么显快'、'低预算动作戏'时调用。核心：速度感=低角度+短焦+前景掠过+与演员等速跟拍。不适用于：慢节奏心理戏、纯剪辑节奏。关键 trigger：速度感/追逐/显快/前景掠过、speed / chase / feel fast / foreground passing。",
+      "tags": "[动作戏, 速度感, 运动设计]"
+    },
+    {
+      "id": "viewpoint-and-story-points",
+      "slug": "viewpoint-and-story-points",
+      "source_book": "master-shots-3",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'这场戏从谁的视点讲'、'怎么按视点演员的情感设计镜头'、'一场戏要让观众按什么顺序看到什么'时调用。核心：视觉化场景从视点演员的情感出发；先定'观众要看什么+顺序'（故事点）再设计镜头。不适用于：纯机位/构图细节、对白改写。关键 trigger：视点/谁的视角/情感体验/故事点/看什么顺序、viewpoint / whose story / story points / what to see first。",
+      "tags": "[视点, 导演思维, 故事点]"
+    },
+    {
+      "id": "axis-triangle-crossline",
+      "slug": "axis-triangle-crossline",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'对话戏机位怎么摆'、'180度轴线/越轴怎么办'、'三角机位系统怎么用'时调用。核心：动作轴线原则（选一侧保持）+三角机位系统（五种基本机位）+合法越轴三法。不适用于：多人布局、单镜头调度。关键 trigger：轴线/越轴/三角机位/机位怎么摆/180度、axis / 180 rule / triangle camera / crossing the line。",
+      "tags": "[机位, 轴线, 三角机位]"
+    },
+    {
+      "id": "depth-angle-framing",
+      "slug": "depth-angle-framing",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'纵深调度怎么用'、'摄影角度怎么定'、'开放/封闭构图'、'怎么省剪辑又突出重点'时调用。核心：纵深调度=省略剪辑+选择性强调；角度价值由故事决定；开放/封闭构图调节观众介入。不适用于：机位轴线、转场。关键 trigger：纵深/景深/角度怎么定/开放封闭构图、depth staging / camera angle / open closed framing。",
+      "tags": "[纵深, 角度, 构图]"
+    },
+    {
+      "id": "director-craft-and-communication",
+      "slug": "director-craft-and-communication",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'导演的职责/如何与团队沟通'、'面向观众原则'、'地点不好拍怎么办'、'规则能不能破'时调用。核心：导演使每个画面有意义；面向观众原则；与地点配合而非对抗；规则是起点不是限制；观众比想象聪明。不适用于：单场具体机位、对白改写。关键 trigger：导演职责/面向观众/地点难拍/破规则、director responsibility / face the audience / work with location / break the rules。",
+      "tags": "[导演, 沟通, 地点]"
+    },
+    {
+      "id": "mobile-staging-and-longshot",
+      "slug": "mobile-staging-and-longshot",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'运动镜头怎么设计'、'长镜头什么时候用'、'推轨/环绕/升降怎么选'、'以演员运动取代剪辑'时调用。核心：运动镜头=剪辑的替代（阿斯泰尔）；演员运动可'内建'剪辑；长镜头要有理由；单一长镜头是赌博。不适用于：转场/段落标点、机位轴线。关键 trigger：运动镜头/长镜头/推轨/环绕/以演员运动代替剪辑、mobile staging / long take / dolly / actor movement as cut。",
+      "tags": "[运动镜头, 长镜头, 调度]"
+    },
+    {
+      "id": "pattern-position-multi-staging",
+      "slug": "pattern-position-multi-staging",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'多人对话演员怎么摆'、'A/I/L 形态怎么用'、'群戏怎么简化'时调用。核心：形态（A/I/L）+位置（position）调度系统；多人浓缩为中心人物+轴线浓缩为 I 形态。不适用于：双人机位细节（用 axis 系）。关键 trigger：演员形态/位置/多人调度/A形态/I形态/群戏简化、pattern / position / staging multi / group simplify。",
+      "tags": "[调度, 形态位置, 多人]"
+    },
+    {
+      "id": "question-answer-editing",
+      "slug": "question-answer-editing",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'两个镜头怎么接才有悬念'、'信息什么时候给观众'、'答案前置/延迟回答'时调用。核心：剪辑=问答模式（问题与答案重叠连接）；'观众知道什么、何时知道'决定结构。不适用于：动作连续性匹配、镜头时长。关键 trigger：悬念/先给答案/延迟揭晓/观众知道什么、question-answer / reveal timing / suspense / what does the audience know。",
+      "tags": "[剪辑, 问答模式, 悬念]"
+    },
+    {
+      "id": "reaction-and-restraint",
+      "slug": "reaction-and-restraint",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'对话戏信息从哪来'、'听者的反应怎么拍'、'重要对白要不要特写'时调用。核心：反应镜头与动作信息等量；说话者不一定是焦点；不要一律特写（间接手段）。不适用于：机位/轴线细节、对白改写。关键 trigger：反应镜头/听者表情/重要对白/特写什么时候、reaction shot / listener / close-up timing / restraint。",
+      "tags": "[反应镜头, 注意力, 节制]"
+    },
+    {
+      "id": "transition-punctuation",
+      "slug": "transition-punctuation",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'两个场景/段落之间用什么转场'、'淡出/叠化/划变怎么选'、'怎么给段落加标点'时调用。核心：转场=叙事标点：剪切连接现在时、叠化表示时间、淡接分隔场景、动作划变=无形剪辑。不适用于：镜头内运动、机位轴线。关键 trigger：转场/淡入淡出/叠化/划变/段落标点、transition / dissolve / fade / wipe / punctuation。",
+      "tags": "[转场, 段落, 叙事标点]"
+    },
+    {
+      "id": "viewpoint-and-identification",
+      "slug": "viewpoint-and-identification",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'这场戏观众该认同谁'、'视点怎么定'、'镜头给谁多'时调用。核心：每个镜头都表达视点（第一人称/受限制第三人称/全知）；认同由开场人物/镜头时长/视线剪切/眼睛特写决定，且必须一致。不适用于：机位/轴线细节、对白改写。关键 trigger：视点/认同/站在谁那边/镜头给谁、viewpoint / identification / whose side / POV。",
+      "tags": "[视点, 认同, 叙述]"
+    },
+    {
+      "id": "visualization-workflow",
+      "slug": "visualization-workflow",
+      "source_book": "katz-film-directing",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'拿到剧本怎么把它变成镜头/分镜'、'怎么训练电影感'、'同一场景怎么设计多个版本'、'故事板怎么用'时调用。核心：影像化=直觉+反思；察觉→探索→发现；版本比较法训练判断力；故事板是'电影的日记'。不适用于：单个镜头的机位参数、演员调度细节。关键 trigger：影像化/分镜/故事板/版本比较/怎么把剧本变镜头、visualization / storyboard / shot design / version compare。",
+      "tags": "[影像化, 故事板, 版本比较]"
+    },
+    {
+      "id": "action-scene-craft",
+      "slug": "action-scene-craft",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'动作/追逐场面怎么组织'、'主观视点怎么用'、'加强视觉动作的方法'时调用。核心：动作性场面=主观视点+加强视觉动作五种方法（固定移动结合/逐步加动作/一击两镜/穿插/推向高潮）。不适用于：速度感单参数（camera-movement-rules）、普通对话。关键 trigger：动作场面/主观视点/视觉动作/高潮、action scene / subjective POV / intensify action。",
+      "tags": "[动作场面, 主观视点, 视觉强化]"
+    },
+    {
+      "id": "camera-movement-rules",
+      "slug": "camera-movement-rules",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'摄影机运动有什么规律'、'摇摄/移动/升降怎么用'、'追逐戏怎么剪'、'运动镜头何时有动机'时调用。核心：运动镜头二十条基本规律+追逐剪辑（固定拍被追者/摇拍追逐者）+摇/移/升降各有语义；运动必须有戏剧动机。不适用于：演员运动的剪接（movement-splitting）、转场。关键 trigger：摇摄/移动/升降/运动镜头规律/追逐剪辑、camera movement / pan / dolly / crane / chase cutting。",
+      "tags": "[运动镜头, 摇摄, 移动, 追逐]"
+    },
+    {
+      "id": "enter-exit-and-performance-areas",
+      "slug": "enter-exit-and-performance-areas",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'角色出画入画怎么连接场景'、'表演区怎么组织'、'长运动怎么分割'时调用。核心：出画入画连接不同场景/表演区；表演区（前/中/后）组织空间，一次一名演员跨越；重复运动无新信息则削弱。不适用于：机位轴线、转场。关键 trigger：出画入画/表演区/连接场景/长运动、enter exit frame / performance area / connect scenes。",
+      "tags": "[出入画, 表演区, 场景连接]"
+    },
+    {
+      "id": "in-camera-composition",
+      "slug": "in-camera-composition",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'一场戏怎么用主导长镜头不靠剪辑'、'主镜头+插入/平行剪辑怎么组合'、'身体姿势开放/闭合'、'补偿动作'时调用。核心：镜头内组接（段落镜头）=主导长镜头内完成调度；身体姿势语义（开放/中性/闭合）；被横过者补偿动作重建平衡；技巧必须为戏服务。不适用于：静态对话剪辑型式、转场。关键 trigger：段落镜头/镜头内组接/主镜头/身体姿势/补偿动作、in-camera / master shot / posture / compensation。",
+      "tags": "[段落镜头, 组接, 身体姿势]"
+    },
+    {
+      "id": "motivation-and-mastery",
+      "slug": "motivation-and-mastery",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'所有运动都要有动机吗'、'升降镜头什么时候用'、'技巧与想象力什么关系'、'怎么真正学会电影语言'时调用。核心：所有运动必须有动机（情绪动机最佳）；升降节制；技巧+想象力=艺术家；研究大师作品+亲手剪辑。不适用于：单场具体机位、对白改写。关键 trigger：运动动机/升降节制/技巧与想象力/拉片学习、motivation for movement / crane restraint / craft vs imagination / study masters。",
+      "tags": "[动机, 节制, 学习法]"
+    },
+    {
+      "id": "movement-splitting-continuity",
+      "slug": "movement-splitting-continuity",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'连续运动怎么切成多镜头'、'运动方向怎么保持'、'运动后怎么切'、'起坐行走奔跑怎么分切'时调用。核心：运动分切（机位同一侧+方向交代）、运动后剪接（共同视轴）、画面内运动切分（1/3+2/3、大小一致）。不适用于：静态对话、转场。关键 trigger：运动分切/方向/运动后剪接/共同视轴/起坐行走、split action / direction / cut after motion / common axis。",
+      "tags": "[运动分切, 连续性, 剪接]"
+    },
+    {
+      "id": "parallel-editing-and-language",
+      "slug": "parallel-editing-and-language",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'两条故事线怎么组织/交叉'、'动作-反动作怎么用'、'电影语言的基本规则'时调用。核心：平行剪辑（动作-反动作交替）是叙事骨架，决定机位/结构/剪辑程式；加一等于三=两个符号结合产生新含义；电影只能描绘外部结果。不适用于：单场机位细节、转场。关键 trigger：平行剪辑/交叉/两条线/动作反动作/电影语言、parallel editing / cross-cutting / action-reaction。",
+      "tags": "[平行剪辑, 动作反动作, 电影语言]"
+    },
+    {
+      "id": "punctuation",
+      "slug": "punctuation",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'段落之间怎么加标点'、'淡出/跳切/定格/空场什么时候用'、'怎么给叙述加顿歇/着重'时调用。核心：分句法=段落划分的标点（淡出淡入/跳切/定格/空场/垂直运动/摄影机运动）；选择要有判断力。不适用于：镜头间问答、运动匹配。关键 trigger：段落标点/淡出/跳切/定格/空场/顿歇、punctuation / fade / jump cut / freeze / pause。",
+      "tags": "[分句法, 段落, 标点]"
+    },
+    {
+      "id": "static-dialogue-editing",
+      "slug": "static-dialogue-editing",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'静态对话（演员机位都不动）怎么剪才有戏'、'接近与远离法'、'再交代镜头什么时候用'、'沉默反应怎么拍'、'数量对比'时调用。核心：静态对话依赖剪辑型式（多机位/近景强调/接近与远离法）；再交代镜头中途重置；沉默反应比说话者更有力；数量对比=人数差异组织。不适用于：动态场面、机位轴线。关键 trigger：静态对话/接近与远离/再交代/沉默反应/数量对比、static dialogue / approach and retreat / reestablish / silent reaction。",
+      "tags": "[静态对话, 剪辑型式, 节奏]"
+    },
+    {
+      "id": "triangle-principle",
+      "slug": "triangle-principle",
+      "source_book": "grammar-of-film-language",
+      "stage": "storyboard_shot",
+      "stage_cn": "镜头调度",
+      "trigger": "用户问'双人对话机位怎么摆'、'关系线/轴线怎么处理'、'外反拍/内反拍怎么选'时调用。核心：关系线（头部之间）+三角形原理（选一侧保持，五种变化）；换三角形=观众糊涂。不适用于：三人以上布局、单镜头调度。关键 trigger：关系线/轴线/三角形/外反拍/内反拍/机位、line of relationship / triangle / over-the-shoulder / reverse shot。",
+      "tags": "[关系线, 三角形, 机位]"
+    },
+    {
+      "id": "cut-motivation",
+      "slug": "cut-motivation",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户不确定“这个剪切该不该做”“为什么要现在切”时使用；或素材里有很多“好看但没理由”的镜头想取舍。不适用：已经明确要快节奏/风格化的场景。触发词：该不该切、为什么现在切、这镜头的动机是什么、找不到理由的剪切。触发词补充：该不该剪进来、要不要保留这个镜头。",
+      "tags": "[motivation, cut-decision, restraint]"
+    },
+    {
+      "id": "dialogue-editing",
+      "slug": "dialogue-editing",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪对话/访谈/群戏对白、纠结“要不要删停顿、什么时候插反应镜头、三人对话怎么剪、口头禅怎么办”时使用。不适用：独白长镜有意保留。触发词：删不删停顿、反应镜头放哪、三人对话、口头禅、等他说完再切。",
+      "tags": "[dialogue, reaction-shot, pause, performance]"
+    },
+    {
+      "id": "edit-rules-and-creativity",
+      "slug": "edit-rules-and-creativity",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“能不能打破这条剪辑规则”“什么时候可以破格”“规则是不是太死”之间摇摆时使用。先掌握规则、理解目的，再为特定镜头/特殊意图破格；不懂规则就“创新”只是混乱。不适用：具体切点技术问题。触发词：能打破规则吗、什么时候可以破格、规则太死、毕加索。",
+      "tags": "[rules, creativity, mastery, boundary]"
+    },
+    {
+      "id": "jumpcut-and-eyeline",
+      "slug": "jumpcut-and-eyeline",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户遇到“镜头看着跳”但说不清原因、或要设计正反打/视线引导时使用。判断跳切=画面差异不足（机位<30°或构图重复）而非“切太快”；用视线匹配引导观众注意力。不适用：刻意跳切风格。触发词：跳切、角度太近、看着跳、视线空间、视线匹配。触发词补充：老感觉跳、镜头接起来跳。",
+      "tags": "[jump-cut, camera-angle, eyeline, attention]"
+    },
+    {
+      "id": "motion-shot-cutting",
+      "slug": "motion-shot-cutting",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪摇/移/推拉镜头、或“运动镜头切进切出总是跳”时使用。默认“静止↔静止”接口；运动接运动需速度匹配；避免在运动主体直接切同主体静止镜头；摇移方向不可逆转。不适用：纯静态素材。触发词：运动镜头怎么切、切入正在移动的镜头、静止起止、横摇方向。",
+      "tags": "[camera-motion, cut-point, seamless, whip-pan]"
+    },
+    {
+      "id": "shot-size-management",
+      "slug": "shot-size-management",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户处理“什么时候用特写、什么时候给远景、新人物怎么介绍、特写后要不要远景”等景别布局问题；或成片因景别跳变显得乱。不适用：纯节奏问题。触发词：新人物用什么镜头、特写太多、要不要定场镜头、远景直切特写。",
+      "tags": "[close-up, shot-size, information, reestablish]"
+    },
+    {
+      "id": "shot-types-classifier",
+      "slug": "shot-types-classifier",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户拿到镜头不确定它属于哪类、该怎么剪时使用：按四要素（镜头移动/摄影机移动/座架移动/被摄对象移动）判别简单/复杂/运动镜头，并据此决定剪辑策略。不适用：成片节奏审查。触发词：这是什么镜头、运动镜头怎么剪、镜头分类。",
+      "tags": "[shot-type, lens, classification]"
+    },
+    {
+      "id": "six-elements-cut-check",
+      "slug": "six-elements-cut-check",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在判断一个剪辑点是否成立、或某段剪辑“看着别扭但说不出为什么”、或想系统训练剪切判断时使用；也可用来给成片做逐镜体检。不适用：纯软件操作问题、还没有素材的构思阶段。触发词：这个镜头该不该要、为什么这里剪了看着跳、怎么剪才流畅、帮我诊断这个剪辑点。",
+      "tags": "[cut-decision, checklist, continuity, editing]"
+    },
+    {
+      "id": "sound-editing",
+      "slug": "sound-editing",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户处理“声音先出还是画面先出、音乐多大、音乐压不压话、声画关系”等问题时使用。声音是并列的叙事轨道：声音导前做转场接口，对话优先于音乐。不适用：纯混音参数调整。触发词：声音导前、音乐要不要压过对白、声轨优先、声画关系。触发词补充：配乐盖住对白、音乐太大。",
+      "tags": "[sound, music, dialogue-mix, audio]"
+    },
+    {
+      "id": "space-and-screen-direction",
+      "slug": "space-and-screen-direction",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户处理有方向性的动作（追车、走动、对话关系）时，担心跨线/方向逆转；或想判断“为什么车突然掉头了”。不适用：纯静态双人对话以外的微调（对话轴细节仍可用）。触发词：动作线、180度、越轴、银幕方向、方向反了。触发词补充：出画、入画、从左出画。",
+      "tags": "[180-rule, screen-direction, continuity, space]"
+    },
+    {
+      "id": "time-and-workflow",
+      "slug": "time-and-workflow",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户处理“冗长过程怎么压缩、每镜停几秒、粗剪该多细、剪完怎么看”等时间与流程问题。工具：描述法定时长、插入/切出/叠化/蒙太奇压缩；流程：先多后删、搁置重看、寻求反馈。不适用：转场语义选择。触发词：怎么压缩时间、每镜几秒、粗剪、剪完没感觉、找人看看。",
+      "tags": "[time, montage, rough-cut, pacing, feedback]"
+    },
+    {
+      "id": "transition-selection",
+      "slug": "transition-selection",
+      "source_book": "grammar-of-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“这个转场点该用切/叠化/划变/淡入淡出”之间犹豫、或想表达“概念/明喻”等意义连接时使用。按转场语义与五种剪辑类型选型；黑屏、自然划变、快速横摇是特殊工具。不适用：转场已成、仅微调时长。触发词：用叠化还是硬切、这个转场什么意思、概念剪辑、明喻。",
+      "tags": "[transition, dissolve, wipe, edit-type, meaning]"
+    },
+    {
+      "id": "action-deception",
+      "slug": "action-deception",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪“站起/坐下/出入画/转身”等身体动作、想找到自然切点、或动作跨剪切总是不连贯时使用。切点=动作意图显现/着力点/眼睛未离画面；出入画保持方向。不适用：非动作类纯对话。触发词：站起来的镜头怎么切、出画入画、动作接不上、脚触地。",
+      "tags": "[action-cut, body-motion, screen-direction, timing]"
+    },
+    {
+      "id": "close-up-management",
+      "slug": "close-up-management",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“特写什么时候用、怎么用特写补洞/修问题剪切、素材有瑕疵怎么办”时使用。特写是最强武器要留力；特写/切出/插入/偷特写是解决问题工具。不适用：纯景别布局（同书 shot-size? 没有——invisible 用本 skill 承担）。触发词：特写太多、用特写补、素材有问题、切出、插入镜头。",
+      "tags": "[close-up, insert-shot, problem-solving, cutaway]"
+    },
+    {
+      "id": "dialogue-and-sound",
+      "slug": "dialogue-and-sound",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪对白戏、想用交叠对白/环境声连接镜头、或“对白接不上/声轨不连贯”时使用。交叠=前镜声轨延续进后镜；环境声=桥接不连贯剪切的胶水；保持声轨流畅清晰。不适用：纯音乐混音。触发词：交叠对白、环境声、对白接不上、声轨、wild track。",
+      "tags": "[overlapping-dialogue, wild-track, sound, dialogue]"
+    },
+    {
+      "id": "edit-magic-mindset",
+      "slug": "edit-magic-mindset",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“什么是好剪辑、剪辑师该怎么看待这份工作、规则与创新的关系”等观念层面需要校准，或作品“技术上对但没魔法”时使用。好的剪辑看不见；剪辑是思考不是删减；先学规则再破；剪辑师是观众的特使。不适用：具体切点技术。触发词：什么是好剪辑、剪辑是删减吗、怎么才有魔法、观众为什么没感觉。",
+      "tags": "[mindset, invisible-cut, deception, rules, craft]"
+    },
+    {
+      "id": "eye-mechanics",
+      "slug": "eye-mechanics",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户想知道“怎么把剪切藏起来”“为什么大音量处剪切更顺”“观众注意力往哪看”时使用。利用 3–5 帧眨眼适应期与声像错位隐藏剪切。不适用：可见剪辑风格。触发词：怎么藏剪切、眨眼、3帧、大音量处切、耳光声、观众注意力。",
+      "tags": "[blink, perception, hidden-cut, sound]"
+    },
+    {
+      "id": "genre-strategy",
+      "slug": "genre-strategy",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户接到不同类型的片子（对白/喜剧/惊悚/推理/动作/情色/歌舞）想知道“这套素材该按什么打法剪”时使用。类型决定剪辑自由度与规则优先级。不适用：单一切点微调。触发词：喜剧怎么剪、惊悚剪辑、动作追逐、情色片剪辑、类型打法。",
+      "tags": "[genre, strategy, comedy, suspense, erotic, action]"
+    },
+    {
+      "id": "music-montage",
+      "slug": "music-montage",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户要给段落配歌曲做蒙太奇、或“音乐卡点怎么卡、歌词要不要对着画面”时使用。镜头时长跟乐句、强拍处起切、歌词若即若离、名曲不截断、蒙太奇须与全片一致。不适用：无音乐的纯叙事剪辑。触发词：卡点、蒙太奇、歌词对不上、名曲、配乐剪辑。触发词补充：名曲能剪短吗、歌曲完整。",
+      "tags": "[montage, music, song-integrity, rhythm]"
+    },
+    {
+      "id": "rough-cut-method",
+      "slug": "rough-cut-method",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户刚开始剪一个项目、不知从何下手、或初剪阶段卡壳时使用。先做场景问题清单，再先粗后精（允许初剪又长又糙）、卡住就搁置、全保留素材。不适用：精剪阶段的微调。触发词：从哪开始剪、初剪怎么剪、场景关于什么、剪不动了。",
+      "tags": "[rough-cut, workflow, intuition, scene-analysis]"
+    },
+    {
+      "id": "screening-and-partnership",
+      "slug": "screening-and-partnership",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“试映后一堆意见怎么处理、与导演意见不合怎么办、怎么跟制片/导演沟通”时使用。真实反应>意见卡；观众指疼≠病根；导演-剪辑师是婚姻：忠诚、透明、据理力争、愿意尝试。不适用：纯剪辑技术。触发词：试映、观众意见、导演不同意、制片施压、意见卡。",
+      "tags": "[feedback, test-screening, collaboration, trust]"
+    },
+    {
+      "id": "stage-line-management",
+      "slug": "stage-line-management",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪对话/群戏、担心越轴、或“谁在看谁乱了”时使用。对话必须守轴；越轴用特写桥接或借注意力偷越；动作场景可故意越轴。不适用：纯动作追逐（可越轴）。触发词：轴线、越轴、谁在看谁、群戏怎么剪、跨轴。",
+      "tags": "[stage-line, 180-rule, crossing, ensemble]"
+    },
+    {
+      "id": "time-deception",
+      "slug": "time-deception",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户要压缩冗长过程、或故意延长悬念、或“时间感不对”时使用。压缩三判据（无聊/急于发现/已知会发生）；延展两判据（榨取悬念/需要更多信息）。不适用：纯变速技术。触发词：怎么压缩、太拖了、延长悬念、炸弹倒计时、观众会无聊。",
+      "tags": "[time-compression, suspense, cross-cutting, pacing]"
+    },
+    {
+      "id": "viewpoint-selection",
+      "slug": "viewpoint-selection",
+      "source_book": "invisible-cut",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“这场戏从谁的视点看、观众该知道多少、要不要让观众先知道”时使用。主观=代入同看同反应；客观=观众先知道（喜剧/悬疑更有效）。不适用：剪辑点/声音。触发词：主观视点、客观视点、观众该知道多少、先让观众知道、代入感。",
+      "tags": "[viewpoint, subjective, objective, information]"
+    },
+    {
+      "id": "attention-misdirection",
+      "slug": "attention-misdirection",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“观众注意力往哪看、怎么引导注意、想让人看A时在B处动手脚”时使用。剪辑师像魔术师：自问观众在想什么/看哪里/该如何感受，用障眼法引导。不适用：纯信息整理。触发词：观众注意力、引导注意、障眼法、魔术师、看哪里。",
+      "tags": "[attention, misdirection, audience, magician]"
+    },
+    {
+      "id": "blink-cut-point",
+      "slug": "blink-cut-point",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“为什么这个剪切能成立、切点该放在哪”时使用。人眼以眨眼切割现实=剪切的认知基础；切点=潜在眨眼点，在观众正要索要之前一点点给出。不适用：无对白动作段的节奏。触发词：眨眼、什么时候切、潜在眨眼点、替观众眨眼、切点时机。",
+      "tags": "[blink, timing, cognition, cut-point]"
+    },
+    {
+      "id": "content-over-technology",
+      "slug": "content-over-technology",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在纠结“换新工具/新技术值不值、是不是技术决定一切、剪辑该以什么为中心”时使用。技术兴奋期过后内容回归；工具不应喧宾夺主。不适用：具体软件操作。触发词：新技术、工具值不值、内容为主、技术决定一切、要不要升级设备。",
+      "tags": "[technology, content, perspective, workflow]"
+    },
+    {
+      "id": "cut-rate-and-pacing",
+      "slug": "cut-rate-and-pacing",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“这段内容该剪多快、为什么剪太快/太慢、不同内容怎么定切率”时使用。打斗≈25切/分钟、对话≈6切/分钟；没有对错，只有“该慢板奏成快板”才错；数字工具容易让人为快而快。不适用：单点切点时机。触发词：剪多快、切率、节奏太快、卡点频率、为快而快。触发词补充：停几秒、镜头时长。",
+      "tags": "[cut-rate, pacing, content, calibration]"
+    },
+    {
+      "id": "editor-objectivity",
+      "slug": "editor-objectivity",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“剪辑判断被拍摄经历污染、导演看素材不客观、剪辑师该不该懂现场”时使用。剪辑师只看画幅内、做观众特使；导演杀青后需隔离卸载信息。不适用：纯技术操作。触发词：剪辑师该不该去现场、导演不客观、画幅外、观众特使、隔离两周。",
+      "tags": "[objectivity, ambassador, director, separation]"
+    },
+    {
+      "id": "footage-analysis-and-map",
+      "slug": "footage-analysis-and-map",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在素材海量“看不完/记不住”、想系统分析素材、或担心剪辑选择被压垮时使用。为每条素材选“决定性瞬间”代表剧照；面对天文数字的组合必须要有地图与笔记。不适用：素材很少的短项目。触发词：素材太多、看不完、代表剧照、决定性瞬间、剪辑地图、记笔记。",
+      "tags": "[footage-analysis, decisive-moment, planning, notes]"
+    },
+    {
+      "id": "less-is-more",
+      "slug": "less-is-more",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“是不是剪太满了、要不要留白、信息给太多还是太少”时使用。剪辑师是导游，不能一直指点；留白让观众参与想象。不适用：需要高信息密度的新闻/教学。触发词：剪太满、要不要留白、信息太多、观众被摁着看、以少胜多。",
+      "tags": "[restraint, audience, participation, cut-density]"
+    },
+    {
+      "id": "rhythm-trust-invisible",
+      "slug": "rhythm-trust-invisible",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“怎么知道片子有没有抓住观众、为什么观众不愿交托、剪辑改到什么程度算完成”时使用。观众同步眨眼/忍住咳嗽=被抓住；剪辑要建立一致的情感思想节奏；改到镜头互相创造、作者退场。不适用：具体切点技术。触发词：观众有没有被抓住、同步眨眼、交托、看不见自己、什么时候算完成。",
+      "tags": "[rhythm, trust, invisible-cut, audience]"
+    },
+    {
+      "id": "screen-size-calibration",
+      "slug": "screen-size-calibration",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“为什么小屏上剪好、大银幕一看太快”、或想在剪辑室模拟影院观感时使用。小屏=“看”（一眼吸收），大银幕=“细看”（身体投入）；用小纸人比例校准屏幕；最高清采集、多在大银幕放映。不适用：纯手机端内容。触发词：小屏剪太快、大银幕、细看、小纸人、最高清采集。",
+      "tags": "[screen-size, detail, rhythm, calibration]"
+    },
+    {
+      "id": "six-principles-cut",
+      "slug": "six-principles-cut",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“这个剪辑点该按什么标准取舍、要牺牲一条原则时牺牲哪条”时使用。六原则按 情感51%>故事23%>节奏10%>视线7%>二维5%>三维4% 排序；高层满足掩盖低层问题。不适用：纯软件操作。触发词：这个切点对不对、该牺牲哪条原则、情感第一、剪辑优先级。",
+      "tags": "[cut-decision, priority, emotion, story]"
+    },
+    {
+      "id": "stone-clay-workflow",
+      "slug": "stone-clay-workflow",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“随机存取 vs 线性检看、为什么我总漏掉好镜头、工作方式怎么影响剪辑”时使用。线性存取如凿石（靠辨识），随机存取如捏陶（靠回想）；辨识能力>回想能力，要保留系统重看。不适用：纯工具推荐。触发词：随机存取、线性剪辑、KEM、Avid、漏掉好镜头、辨识、回想。",
+      "tags": "[workflow, random-access, linear, recognition]"
+    },
+    {
+      "id": "test-screening-diagnosis",
+      "slug": "test-screening-diagnosis",
+      "source_book": "blink-of-an-eye",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“试映后一堆意见怎么处理、观众说某场戏差要不要删、和导演在修改上冲突”时使用。观众只能指“哪里疼”不能诊断“病根”（反射性疼痛症）；别照单全收意见卡；强烈判断要用测试版争取。不适用：纯剪辑技术。触发词：试映、观众意见、反射性疼痛、意见卡、删这场戏吗。",
+      "tags": "[test-screening, feedback, diagnosis, conviction]"
+    },
+    {
+      "id": "action-editing",
+      "slug": "action-editing",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪动作/追逐/打斗、或“动作戏不够刺激/没感觉”时使用。四要素：认同（特写/视点）→刺激（移动/速度）→冲突（交叉剪接）→强化（结尾长度变化）。不适用：纯对白戏。触发词：动作戏怎么剪、追逐、没感觉、认同、高潮强化。",
+      "tags": "[action, identification, conflict, intensification]"
+    },
+    {
+      "id": "continuity-basics",
+      "slug": "continuity-basics",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“镜头接不上/方向乱/色调跳/新场景没交代”时使用。四支柱：屏幕方向、定场镜头、色调匹配、动作匹配；技术连贯为叙事目的服务。不适用：风格化剪辑。触发词：接不上、方向乱、色调跳、定场镜头、匹配镜头、连贯性。",
+      "tags": "[continuity, screen-direction, establishing, tone-matching]"
+    },
+    {
+      "id": "craft-ethics-and-comedy",
+      "slug": "craft-ethics-and-comedy",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“喜剧怎么剪、借鉴经典怎么不落俗套、技巧要不要有理由、剪辑有没有伦理责任”时使用。喜剧=出乎意料+夸张+视觉幽默；模仿需创新；技巧需理由；剪辑需伦理底线。不适用：具体切点技术。触发词：喜剧怎么剪、模仿、俗套、技巧理由、伦理、负责任剪辑。",
+      "tags": "[ethics, comedy, technique, imitation, innovation]"
+    },
+    {
+      "id": "dialogue-editing",
+      "slug": "dialogue-editing",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪对白戏、判断“这段对白主要干什么、怎么组织镜头”时使用。对白可同时推进情节/塑造人物/喜剧穿插；按目的选镜头策略（前景-背景/主观/反应）。不适用：对白内容改写。触发词：这段对白干什么、对白剪辑、前景背景、塑造人物、喜剧穿插。触发词补充：对白戏怎么剪、视觉层次。",
+      "tags": "[dialogue, purpose, character, comedy]"
+    },
+    {
+      "id": "digital-realism",
+      "slug": "digital-realism",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“要营造‘想象的真实’/风格化现实、数字素材怎么用”时使用。五途径：视频/建构/观察想象/场面/特效；按叙事目标选。不适用：纯写实纪录。触发词：想象的真实、数字真实、CGI、建构感、史诗感、假却好看。",
+      "tags": "[digital, realism, cgi, technique]"
+    },
+    {
+      "id": "documentary-editing",
+      "slug": "documentary-editing",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪纪录片/资料片、“素材怎么组织才有力量、要不要用戏剧化结构”时使用。辩证段落+并列+速度改变意义；可借用戏剧结构（主人公-反派/情节/类型）。不适用：纯虚构剧情片。触发词：纪录片怎么剪、辩证段落、并列、速度改变意义、戏剧化纪录片。触发词补充：放慢、加快、速度改变素材含义。",
+      "tags": "[documentary, dialectic, juxtaposition, speed]"
+    },
+    {
+      "id": "dramatic-emphasis-and-subjective",
+      "slug": "dramatic-emphasis-and-subjective",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“怎么突出戏剧重点、怎么表现人物内心（恐惧/药物/失聪）”时使用。工具：特写/动态蒙太奇/并列/速度，按叙事选；主观状态=外在客观×内在主观交替。不适用：纯信息整理。触发词：突出重点、戏剧性重点、主观状态、内心世界、特写节奏。",
+      "tags": "[dramatic-emphasis, subjectivity, close-up, speed]"
+    },
+    {
+      "id": "dramatic-purpose-selection",
+      "slug": "dramatic-purpose-selection",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“这个镜头该不该放、动作要展示哪些细节、场景为什么显得拖”时使用。镜头取舍由戏剧目的决定：无益于叙事的镜头不放；展示什么动作细节由要传达的信息决定。不适用：纯节奏问题。触发词：这个镜头要不要、细节展示多少、无用的镜头、戏剧目的、取舍。",
+      "tags": "[selection, dramatic-purpose, economy, editing-decision]"
+    },
+    {
+      "id": "duration-and-rhythm",
+      "slug": "duration-and-rhythm",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“每个镜头停几秒、为什么剪出来没节奏、镜头长度怎么定”时使用。镜头长度=信息量；长度必须有差异才有节奏；信息多的长、重复的特写短。不适用：单点切点时机。触发词：每镜几秒、没节奏、镜头太短/太长、信息量、时长怎么定。",
+      "tags": "[duration, information, rhythm, pacing]"
+    },
+    {
+      "id": "edit-goals-framework",
+      "slug": "edit-goals-framework",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“同一批素材不知道怎么剪、先想什么再动手、判断剪得好不好”时使用。先定目标：叙事明晰性/戏剧性重点/潜台词/审美；目标决定策略。不适用：纯软件操作。触发词：这段素材怎么剪、剪辑目标、要讲清什么、潜台词、风格化。",
+      "tags": "[goal, narrative-clarity, subtext, aesthetic]"
+    },
+    {
+      "id": "montage-and-parallel",
+      "slug": "montage-and-parallel",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“一个段落靠什么产生冲击、怎么用镜头组合表达思想/制造悬念”时使用。五种蒙太奇定位意义来源；平行动作/交叉剪接制造冲突与悬念。不适用：单点切点。触发词：蒙太奇、五种蒙太奇、平行剪辑、交叉剪接、并置、制造悬念。",
+      "tags": "[montage, eisenstein, parallel, cross-cutting]"
+    },
+    {
+      "id": "mtv-feel-state",
+      "slug": "mtv-feel-state",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在剪“感觉型/卡点/情绪优先”内容（MV、短视频、宣传片、部分剧情片段）时使用。三件套：创造感觉状态、情节降格、消除时空（特写多于远景、前景多于背景、跳切+速度）。不适用：严格叙事推理片。触发词：卡点、感觉型、MV、短视频节奏、情绪优先、时空消除。",
+      "tags": "[mtv, feel-state, plot-devaluation, time-space]"
+    },
+    {
+      "id": "nonlinear-narrative",
+      "slug": "nonlinear-narrative",
+      "source_book": "dancyger-editing",
+      "stage": "storyboard_edit",
+      "stage_cn": "剪辑",
+      "trigger": "用户在“想表达个体/多视角/打破线性因果、非线性怎么剪才不乱”时使用。多人物作叙述者、以关系为骨架、插曲式结构；非线性≠乱序。不适用：需要强因果的悬疑推理。触发词：非线性、多视角、以关系为骨架、插曲式、打破线性。触发词补充：剪出来是乱的、非线性素材怎么组织。",
+      "tags": "[nonlinear, perspective, relationship, structure]"
+    },
+    {
+      "id": "auditory-hierarchy",
+      "slug": "auditory-hierarchy",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在混录/声轨编排时遇到'语言和音乐/效果打架''谁该让位'的问题时使用；也用于判断哪些声音该删。不适用于：单个声音的创造、编组感知机制。触发词：混录、谁让位、语言优先、声音打架、删除最小影响力、层级（auditory hierarchy / mix priority / dialogue first / what to cut）。",
+      "tags": "[\"mixing\", \"priority\", \"dialogue\"]"
+    },
+    {
+      "id": "emotion-layers",
+      "slug": "emotion-layers",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想制造悬念、喜剧反差或'观众知道角色不知道'的效果时使用；也用于'观众会怎么感觉'与'角色怎么感觉'不一致的设计。不适用于：单条音效选择、纯混录。触发词：悬念、观众比角色紧张、喜剧反差、第一情绪、第二情绪、信息差（primary emotion / secondary emotion / suspense / dramatic irony）。",
+      "tags": "[\"emotion\", \"suspense\", \"dramatic-irony\"]"
+    },
+    {
+      "id": "entrainment-directing",
+      "slug": "entrainment-directing",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想用节奏/频率把观众带进某种身心状态（恍惚/兴奋/平静）、或设计状态转换的过渡时使用；也用于'为什么突然变奏会出戏'。不适用于：惊吓节奏设计、混录。触发词：带入状态、恍惚、脑波、节奏同步、渐进变化、跳切出戏、互引（entrainment / trance / brainwave / gradual change）。",
+      "tags": "[\"entrainment\", \"state\", \"rhythm\"]"
+    },
+    {
+      "id": "expectation-deviation",
+      "slug": "expectation-deviation",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计张力/惊吓/悬念节奏、或判断'为什么这场戏不抓人/太疲劳'时使用；也用于节奏设计（何时违背预期、何时应验）。不适用于：情绪层分离、混录。触发词：张力、惊吓、虚惊、预期、违背、节奏、太准无聊、太偏不连贯（expectation / deviation / tension / scare rhythm）。",
+      "tags": "[\"expectation\", \"tension\", \"rhythm\"]"
+    },
+    {
+      "id": "foley-sound-object",
+      "slug": "foley-sound-object",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要为一个动作/事件创造或合成声音、评估'真实素材够不够'、或没有拟音棚时找替代声源时使用；也用于'这个声音怎么做出来的'。不适用于：声音的符号含义、混录。触发词：拟音、声音对象、合成、替代声源、听效果、脚步声、拳击声（foley / sound object / synthesis / substitute source / make it sound like）。",
+      "tags": "[\"foley\", \"synthesis\", \"sound-object\"]"
+    },
+    {
+      "id": "gestalt-listening",
+      "slug": "gestalt-listening",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想理解'为什么几个声音混在一起听不清/成一个声''怎么让某个声音从背景里突出来'时使用；也用于设计声音层次、掩盖瑕疵、判断观众注意焦点。不适用于：情绪设计、混录电平。触发词：听不清、声音糊、编组、突出、背景、轮廓、掩蔽、格式塔（gestalt / figure-ground / grouping / masking / stand out）。",
+      "tags": "[\"gestalt\", \"perception\", \"grouping\"]"
+    },
+    {
+      "id": "language-elimination",
+      "slug": "language-elimination",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想让观众'听不到台词反而更有效'、把语言变成氛围/群杂、或给不可理解的语言设计声音个性时使用；也用于'台词是否必须清晰'的判断。不适用于：对白写作、潜文本改写。触发词：听不清台词、语言消除、群杂、发挥性语言、外语、胡言乱语（elimination / walla / emanation / unintelligible dialogue）。",
+      "tags": "[\"dialogue\", \"elimination\", \"walla\"]"
+    },
+    {
+      "id": "less-is-more",
+      "slug": "less-is-more",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户觉得声音'太满/太吵'、想用最少元素做出最大冲击、或判断该删哪些声音时使用；也用于'为什么塞满反而没效果'。不适用于：需要丰富层次的大场面铺陈、纯音乐创作。触发词：少即是多、声音太满、太吵、删声音、最少元素、观众脑补（less is more / too busy / remove sounds / minimal）。",
+      "tags": "[\"economy\", \"minimalism\", \"attention\"]"
+    },
+    {
+      "id": "music-narrative-mapping",
+      "slug": "music-narrative-mapping",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想用音乐/声音主题的结构支撑故事发展、安排主题出现与再现时机、或理解'为什么结构感强'时使用；也用于无配乐影片的声音主题排布。不适用于：单条音效、混录。触发词：奏鸣曲、英雄之旅、主题再现、音调中心、回家、结构（sonata / hero journey / theme variation / tonal center / structure）。",
+      "tags": "[\"music\", \"narrative\", \"structure\"]"
+    },
+    {
+      "id": "polarity-visual-map",
+      "slug": "polarity-visual-map",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想把剧本的零散声音想法整理成结构化主题、或想把整片情绪基调可视化时使用；也用于'这场戏的对立主题是什么''两个声音主题怎么对位'。不适用于：不需要主题结构的单镜配音、纯音乐创作。触发词：两极、对立主题、声音分组、视觉图、主题对位、情绪曲线（bipolar / polarity / visual map / theme contrast）。",
+      "tags": "[\"polarity\", \"theme\", \"visualization\"]"
+    },
+    {
+      "id": "script-sound-reading",
+      "slug": "script-sound-reading",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在拿到剧本、想先于画面建立声音方案时使用；也用于'一场戏的声音清单怎么做''台词之外要听什么'。不适用于：已经成片后的声音分析、单条音效设计。触发词：读剧本、先听声音、心耳、四类声音、情绪关键词、声音发展线（script reading / what to listen for / inner ear / sound cues）。",
+      "tags": "[\"script-reading\", \"analysis\", \"sound-cues\"]"
+    },
+    {
+      "id": "silence-design",
+      "slug": "silence-design",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想让一段戏'安静/压抑/不对劲'、或判断'直接静音为什么穿帮'时使用；也用于删除该有的声音制造悬念。不适用于：情绪双通道设计、混录。触发词：寂静、安静、留白、静音、选择性删除、真空、不安（silence / quiet / omission / vacuum / eerie calm）。",
+      "tags": "[\"silence\", \"omission\", \"suspense\"]"
+    },
+    {
+      "id": "sound-design-workflow",
+      "slug": "sound-design-workflow",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要为一整部片子规划声音制作流程、安排前期介入或评估声音预算时使用；也用于'声音怎么省钱/现场要录什么/实验阶段怎么管理'。不适用于：单个镜头的具体选声、纯混录技术参数。触发词：声音设计流程、前期介入、声音预算、用声音省钱、同期声要录什么、实验阶段（sound design workflow / preproduction / budget / room tone / wild track）。",
+      "tags": "[\"workflow\", \"preproduction\", \"budget\", \"production-sound\"]"
+    },
+    {
+      "id": "sound-map-drafts",
+      "slug": "sound-map-drafts",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要把声音设计落到可执行的声轨图、或要给混录师一份精确指导时使用；也用于'声音怎么分类标进声轨''淡入淡出怎么标注'。不适用于：情绪基调层面的视觉图、混录本身。触发词：声音图、提示单、cue sheet、声轨、淡入淡出、三稿（sound map / cue sheet / track layout / cross fade）。",
+      "tags": "[\"sound-map\", \"cue-sheet\", \"tracking\"]"
+    },
+    {
+      "id": "sound-reference-layers",
+      "slug": "sound-reference-layers",
+      "source_book": "sound-design",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想判断'这个声音为什么有效/会不会变俗套'、设计跨文化可理解的声音、或确保声音身份全片一致时使用。不适用于：纯音色设计、混录。触发词：声音符号、文化差异、参考层、一致性、资料音乐、标志声（sound reference / acoustic symbol / cultural / consistency / leitmotif）。",
+      "tags": "[\"symbol\", \"culture\", \"consistency\"]"
+    },
+    {
+      "id": "acousmetre-suspense",
+      "slug": "acousmetre-suspense",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计'只闻其声不见其人'的神秘存在、决定何时揭示声源、或理解恐怖/科幻的悬念资产时使用；也用于'去幻听'（解除无声源化）的转折设计。不适用于：一般画外音分类、混录。触发词：无形音角色、只闻其声、何时显形、acousmêtre、无声源、神秘存在（acousmêtre / acousmatic / reveal the source / unseen voice）。",
+      "tags": "[\"acousmetre\", \"suspense\", \"voice\"]"
+    },
+    {
+      "id": "audio-space-design",
+      "slug": "audio-space-design",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计'声音处于哪个空间''让观众感到室内外/远近/包围感''用混响表现空间还是声源'时使用；也用于画内/画外/非叙境、主动/被动画外、环境声的选择。不适用于：时间设计、情绪通道。触发词：画内画外、非叙境、空间感、混响、扩展域、环境声、主动画外（space / offscreen / reverb / superfield / territory sound）。",
+      "tags": "[\"space\", \"offscreen\", \"reverb\", \"superfield\"]"
+    },
+    {
+      "id": "audiovisual-added-value",
+      "slug": "audiovisual-added-value",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想知道'声音为什么改变了画面的意义''同一个画面配不同声音为什么感觉不同''观众为什么会以为声音是画面自带的'时使用；也用于设计声画组合的意义注入。不适用于：混录、音效合成。触发词：增值、声画关系、声音改变了画面、视听合约、声音给画面加什么（added value / audiovisual contract / sound changes the image）。",
+      "tags": "[\"added-value\", \"audio-vision\", \"perception\"]"
+    },
+    {
+      "id": "audiovisual-analysis",
+      "slug": "audiovisual-analysis",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户拿到一段成片想系统分析它的声音结构、或想训练'真的看/真的听'时使用；也用于避免'回顾的幻觉'和假记忆。不适用于：声音创造、混录。触发词：视听分析、掩蔽法、强制结合、连贯性、同步点、先描述后解释（audiovisual analysis / masking method / forced marriage / describe first）。",
+      "tags": "[\"analysis\", \"method\", \"perception\"]"
+    },
+    {
+      "id": "listening-modes",
+      "slug": "listening-modes",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想训练'听声音'的基本功、理解'为什么同一声音不同人听出不同含义'、或做简化聆听练习时使用；也用于判断观众以哪种模式接收。不适用于：声音创造、混录。触发词：聆听模式、简化聆听、因果聆听、语义聆听、主动听、听音训练（listening modes / reduced listening / causal / semantic / ear training）。",
+      "tags": "[\"listening\", \"perception\", \"training\"]"
+    },
+    {
+      "id": "point-of-audition",
+      "slug": "point-of-audition",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计'从角色的耳朵里听'、判断'谁在听这段声音'、或用电话滤波/呼吸声制造主观听点时使用；也用于理解'为什么听点由影像决定'。不适用于：声源位置分类、混录。触发词：听点、谁在听、主观听、电话滤波、耳朵里的声音、第一人称听感（point of audition / who is listening / subjective hearing / POV sound）。",
+      "tags": "[\"point-of-audition\", \"subjectivity\", \"listening\"]"
+    },
+    {
+      "id": "rendering-vs-reproduction",
+      "slug": "rendering-vs-reproduction",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户发现'真实录音反而不像真的''合成声一听就对'、想用声音传达重量/材质/触感、或批判'同期声最真实'迷思时使用；也用于拟音/音效设计的'真实感'判断。不适用于：混录、编组感知。触发词：渲染、重现、真实感、逼真、材质、触感、同期声不真实（rendering / reproduction / verisimilitude / material / realism）。",
+      "tags": "[\"rendering\", \"realism\", \"perception\"]"
+    },
+    {
+      "id": "silence-by-contrast",
+      "slug": "silence-by-contrast",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计'无声/寂静'段落、理解'为什么直接静音穿帮'、或用前后对比构建沉默时使用；也用于'有声电影使沉默成为可能'的设计。不适用于：情绪通道、混录。触发词：沉默、无声、静音穿帮、对比、布莱松、反差（silence / by contrast / Bresson / zero sound / contrast）。",
+      "tags": "[\"silence\", \"contrast\", \"perception\"]"
+    },
+    {
+      "id": "sound-temporalization",
+      "slug": "sound-temporalization",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想让静态/空镜头'活起来'、给剪辑段落线性连续感、或让镜头指向未来制造急迫感时使用；也用于理解'为什么声音快过眼睛'。不适用于：情绪通道、混录。触发词：时间化、静止镜头、线性化、向量化、急迫感、声音比眼快（temporalization / vectorization / linearization / static shot / urgency）。",
+      "tags": "[\"temporalization\", \"time\", \"perception\"]"
+    },
+    {
+      "id": "soundtrack-ontology",
+      "slug": "soundtrack-ontology",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想理解'为什么不能把声音当独立声轨分析''为什么说'对位'是误用'、或设计声画纵向关系（和谐/不协和）时使用；也用于反驳'声画该各管各'的直觉。不适用于：具体声轨编排、混录。触发词：不存在声带、对位、纵向、和谐、不协和、声画各管各（no soundtrack / counterpoint / vertical / harmony / dissonance）。",
+      "tags": "[\"ontology\", \"counterpoint\", \"vertical\"]"
+    },
+    {
+      "id": "speech-image-design",
+      "slug": "speech-image-design",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计旁白/对白/群杂在声画中的位置、判断'这句话该不该影响画面''说与见是配合还是冲突'时使用；也用于旁白过多失控、离心处理。不适用于：对白写作、潜文本。触发词：旁白、文本语、发散语、戏剧语、离心、说与见、画外音（textual speech / emanation / voiceover / decentering / said vs shown）。",
+      "tags": "[\"speech\", \"voiceover\", \"narrative\"]"
+    },
+    {
+      "id": "synchresis",
+      "slug": "synchresis",
+      "source_book": "chion-audiovision",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想给画面配声、判断'为什么任何声音都能配上这个画面'、或设计同步点/松紧同步风格时使用；也用于配音、拟音、恐怖声的'必然感'设计。不适用于：意义注入（增值）、混录。触发词：同步整合、同步点、配音、对嘴、松紧同步、任何声音都能配（synchresis / sync point / dubbing / lip sync）。",
+      "tags": "[\"synchresis\", \"sync\", \"dubbing\"]"
+    },
+    {
+      "id": "delivery-mastering",
+      "slug": "delivery-mastering",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在终混完成后准备发行交付、担心 M&E 被退回、或想建立母带/QC 纪律时使用；也用于'声道错配/同步误差'事故预防与母带归档。不适用于：混录操作、temp 战略。触发词：发行母带、print master、M&E、国际声带、TV 版、声道配置、QC、母带归档（print master / M&E / foreign mix / delivery / quality control）。",
+      "tags": "[\"delivery\", \"mastering\", \"quality-control\"]"
+    },
+    {
+      "id": "dialogue-salvage",
+      "slug": "dialogue-salvage",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户遇到对白瑕疵（off-mic/底噪/口误）、要选补救路径、或要在 ADR 棚保住表演质量时使用；也用于'现场补录 wild track 还是后期 ADR'的决策。不适用于：对白写作、混录。触发词：对白瑕疵、off-mic、补录、wild track、ADR、循环配音、表演优先（dialogue / off-mic / wild track / ADR / looping / performance）。",
+      "tags": "[\"dialogue\", \"ADR\", \"production-sound\"]"
+    },
+    {
+      "id": "foley-acting",
+      "slug": "foley-acting",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计有性格、全片一致的脚步声/动作声、或自己做拟音时使用；也用于理解'为什么拟音要表演而非踩点'。不适用于：对白、混录。触发词：拟音、脚步声、角色性格、进入角色、Foley（foley / footsteps / character / act the part / sync-to-picture）。",
+      "tags": "[\"foley\", \"performance\", \"character\"]"
+    },
+    {
+      "id": "frequency-layering",
+      "slug": "frequency-layering",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户叠音效/音乐时发现'变糊变脏'、想构建层次分明的大声音、或判断两层声音是否冲突时使用；也用于'像和弦一样搭声音'。不适用于：混录电平、素材创造。触发词：叠音效、糊、mud、频率冲突、音符和弦、层次（layering / mud / frequency / chord / stack sounds）。",
+      "tags": "[\"frequency\", \"layering\", \"mixing\"]"
+    },
+    {
+      "id": "predub-strategy",
+      "slug": "predub-strategy",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在混录准备阶段想规划'怎么分组预混''给混录师留多少余地''现场要不要多轨离散记录'时使用；也用于终混超时/煎熬的诊断。不适用于：单点叠声、终混操作。触发词：预混、分轨、stem、留余地、离散记录、终混超时（predub / stem / headroom / discrete tracks / final mix）。",
+      "tags": "[\"predub\", \"mixing\", \"stem\"]"
+    },
+    {
+      "id": "preproduction-sound-planning",
+      "slug": "preproduction-sound-planning",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在开拍前想规划'同期要带回什么''怎么定混录棚/人''后期怎么省重建费'时使用；也用于建立声报/元数据纪律。不适用于：单个声音创造、混录。触发词：战前计划、开拍前规划、采集清单、wild track、room tone、声报、元数据（battle plan / preproduction / wild track / room tone / sound reports）。",
+      "tags": "[\"preproduction\", \"planning\", \"production-sound\"]"
+    },
+    {
+      "id": "reality-vs-entertainment",
+      "slug": "reality-vs-entertainment",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户发现'真实素材平淡无味''观众不认真实录音'、或想判断一段声音要不要'加工升级'时使用；也用于'Big Sound'哲学的理解。不适用于：混录、符号含义。触发词：真实声、娱乐声、平淡、组合声、Big Sound、感知优先（reality vs entertainment / authentic but flat / perception）。",
+      "tags": "[\"reality\", \"entertainment\", \"perception\"]"
+    },
+    {
+      "id": "sound-design-keystone",
+      "slug": "sound-design-keystone",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想判断'这段声音算好还是坏''要不要保留某个炫技处理'、或建立声音设计的质量尺时使用；也用于'少即是多/留余地'的总纲判断。不适用于：具体技术操作、混录。触发词：把观众带出电影、好声音、炫技、成败判据、貂毛笔（take the audience out / good sound design / sable brush / keystone）。",
+      "tags": "[\"quality\", \"judgment\", \"storytelling\"]"
+    },
+    {
+      "id": "sound-empowerment",
+      "slug": "sound-empowerment",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要向制片/导演说明'声音需要前期配合'、评估声音预算、或面对'最低价供应商/后期再修'话术时使用；也用于让决策者理解声音价值。不适用于：具体音效创造、混录。触发词：说服制片人、声音预算、前期配合、最低价、后期再修、赋权（empowerment / convince the producer / budget / fix it later / lowest bid）。",
+      "tags": "[\"empowerment\", \"budget\", \"communication\"]"
+    },
+    {
+      "id": "stereo-thinking",
+      "slug": "stereo-thinking",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想在拍摄/剪辑阶段就为立体声/环绕声做规划、判断'为什么后期做不出声像效果'、或给声像留进出空拍时使用。不适用于：混录操作、单点叠声。触发词：立体声、环绕、声像、pan、进出空拍、单声道思维（stereo thinking / pan / surround / beat before / offscreen）。",
+      "tags": "[\"stereo\", \"panning\", \"editing\"]"
+    },
+    {
+      "id": "temp-dub-strategy",
+      "slug": "temp-dub-strategy",
+      "source_book": "practical-motion-sound",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要安排临时混录/试映、担心临时素材被当成最终标准、或想保护终混概念时使用；也用于'制片人每周要看 temp'的应对。不适用于：终混操作、预混分组。触发词：临时混录、temp dub、试映、纹身效应、终混优先（temp dub / test screening / tattoo effect / final mix focus）。",
+      "tags": "[\"temp-dub\", \"test-screening\", \"strategy\"]"
+    },
+    {
+      "id": "auditory-hierarchy",
+      "slug": "auditory-hierarchy",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在混录/声轨编排时遇到'语言和音乐/效果打架''谁该让位'的问题时使用；也用于判断哪些声音该删。不适用于：单个声音的创造、编组感知机制。触发词：混录、谁让位、语言优先、声音打架、删除最小影响力、层级（auditory hierarchy / mix priority / dialogue first / what to cut）。",
+      "tags": "[\"mixing\", \"priority\", \"dialogue\"]"
+    },
+    {
+      "id": "emotion-layers",
+      "slug": "emotion-layers",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想制造悬念、喜剧反差或'观众知道角色不知道'的效果时使用；也用于'观众会怎么感觉'与'角色怎么感觉'不一致的设计。不适用于：单条音效选择、纯混录。触发词：悬念、观众比角色紧张、喜剧反差、第一情绪、第二情绪、信息差（primary emotion / secondary emotion / suspense / dramatic irony）。",
+      "tags": "[\"emotion\", \"suspense\", \"dramatic-irony\"]"
+    },
+    {
+      "id": "entrainment-directing",
+      "slug": "entrainment-directing",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想用节奏/频率把观众带进某种身心状态（恍惚/兴奋/平静）、或设计状态转换的过渡时使用；也用于'为什么突然变奏会出戏'。不适用于：惊吓节奏设计、混录。触发词：带入状态、恍惚、脑波、节奏同步、渐进变化、跳切出戏、互引（entrainment / trance / brainwave / gradual change）。",
+      "tags": "[\"entrainment\", \"state\", \"rhythm\"]"
+    },
+    {
+      "id": "expectation-deviation",
+      "slug": "expectation-deviation",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想设计张力/惊吓/悬念节奏、或判断'为什么这场戏不抓人/太疲劳'时使用；也用于节奏设计（何时违背预期、何时应验）。不适用于：情绪层分离、混录。触发词：张力、惊吓、虚惊、预期、违背、节奏、太准无聊、太偏不连贯（expectation / deviation / tension / scare rhythm）。",
+      "tags": "[\"expectation\", \"tension\", \"rhythm\"]"
+    },
+    {
+      "id": "foley-sound-object",
+      "slug": "foley-sound-object",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要为一个动作/事件创造或合成声音、评估'真实素材够不够'、或没有拟音棚时找替代声源时使用；也用于'这个声音怎么做出来的'。不适用于：声音的符号含义、混录。触发词：拟音、声音对象、合成、替代声源、听效果、脚步声、拳击声（foley / sound object / synthesis / substitute source / make it sound like）。",
+      "tags": "[\"foley\", \"synthesis\", \"sound-object\"]"
+    },
+    {
+      "id": "gestalt-listening",
+      "slug": "gestalt-listening",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想理解'为什么几个声音混在一起听不清/成一个声''怎么让某个声音从背景里突出来'时使用；也用于设计声音层次、掩盖瑕疵、判断观众注意焦点。不适用于：情绪设计、混录电平。触发词：听不清、声音糊、编组、突出、背景、轮廓、掩蔽、格式塔（gestalt / figure-ground / grouping / masking / stand out）。",
+      "tags": "[\"gestalt\", \"perception\", \"grouping\"]"
+    },
+    {
+      "id": "language-elimination",
+      "slug": "language-elimination",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想让观众'听不到台词反而更有效'、把语言变成氛围/群杂、或给不可理解的语言设计声音个性时使用；也用于'台词是否必须清晰'的判断。不适用于：对白写作、潜文本改写。触发词：听不清台词、语言消除、群杂、发挥性语言、外语、胡言乱语（elimination / walla / emanation / unintelligible dialogue）。",
+      "tags": "[\"dialogue\", \"elimination\", \"walla\"]"
+    },
+    {
+      "id": "less-is-more",
+      "slug": "less-is-more",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户觉得声音'太满/太吵'、想用最少元素做出最大冲击、或判断该删哪些声音时使用；也用于'为什么塞满反而没效果'。不适用于：需要丰富层次的大场面铺陈、纯音乐创作。触发词：少即是多、声音太满、太吵、删声音、最少元素、观众脑补（less is more / too busy / remove sounds / minimal）。",
+      "tags": "[\"economy\", \"minimalism\", \"attention\"]"
+    },
+    {
+      "id": "music-narrative-mapping",
+      "slug": "music-narrative-mapping",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想用音乐/声音主题的结构支撑故事发展、安排主题出现与再现时机、或理解'为什么结构感强'时使用；也用于无配乐影片的声音主题排布。不适用于：单条音效、混录。触发词：奏鸣曲、英雄之旅、主题再现、音调中心、回家、结构（sonata / hero journey / theme variation / tonal center / structure）。",
+      "tags": "[\"music\", \"narrative\", \"structure\"]"
+    },
+    {
+      "id": "polarity-visual-map",
+      "slug": "polarity-visual-map",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想把剧本的零散声音想法整理成结构化主题、或想把整片情绪基调可视化时使用；也用于'这场戏的对立主题是什么''两个声音主题怎么对位'。不适用于：不需要主题结构的单镜配音、纯音乐创作。触发词：两极、对立主题、声音分组、视觉图、主题对位、情绪曲线（bipolar / polarity / visual map / theme contrast）。",
+      "tags": "[\"polarity\", \"theme\", \"visualization\"]"
+    },
+    {
+      "id": "script-sound-reading",
+      "slug": "script-sound-reading",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户在拿到剧本、想先于画面建立声音方案时使用；也用于'一场戏的声音清单怎么做''台词之外要听什么'。不适用于：已经成片后的声音分析、单条音效设计。触发词：读剧本、先听声音、心耳、四类声音、情绪关键词、声音发展线（script reading / what to listen for / inner ear / sound cues）。",
+      "tags": "[\"script-reading\", \"analysis\", \"sound-cues\"]"
+    },
+    {
+      "id": "silence-design",
+      "slug": "silence-design",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想让一段戏'安静/压抑/不对劲'、或判断'直接静音为什么穿帮'时使用；也用于删除该有的声音制造悬念。不适用于：情绪双通道设计、混录。触发词：寂静、安静、留白、静音、选择性删除、真空、不安（silence / quiet / omission / vacuum / eerie calm）。",
+      "tags": "[\"silence\", \"omission\", \"suspense\"]"
+    },
+    {
+      "id": "sound-design-workflow",
+      "slug": "sound-design-workflow",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要为一整部片子规划声音制作流程、安排前期介入或评估声音预算时使用；也用于'声音怎么省钱/现场要录什么/实验阶段怎么管理'。不适用于：单个镜头的具体选声、纯混录技术参数。触发词：声音设计流程、前期介入、声音预算、用声音省钱、同期声要录什么、实验阶段（sound design workflow / preproduction / budget / room tone / wild track）。",
+      "tags": "[\"workflow\", \"preproduction\", \"budget\", \"production-sound\"]"
+    },
+    {
+      "id": "sound-map-drafts",
+      "slug": "sound-map-drafts",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户要把声音设计落到可执行的声轨图、或要给混录师一份精确指导时使用；也用于'声音怎么分类标进声轨''淡入淡出怎么标注'。不适用于：情绪基调层面的视觉图、混录本身。触发词：声音图、提示单、cue sheet、声轨、淡入淡出、三稿（sound map / cue sheet / track layout / cross fade）。",
+      "tags": "[\"sound-map\", \"cue-sheet\", \"tracking\"]"
+    },
+    {
+      "id": "sound-reference-layers",
+      "slug": "sound-reference-layers",
+      "source_book": "sound-design-expressive",
+      "stage": "storyboard_sound",
+      "stage_cn": "声音",
+      "trigger": "用户想判断'这个声音为什么有效/会不会变俗套'、设计跨文化可理解的声音、或确保声音身份全片一致时使用。不适用于：纯音色设计、混录。触发词：声音符号、文化差异、参考层、一致性、资料音乐、标志声（sound reference / acoustic symbol / cultural / consistency / leitmotif）。",
+      "tags": "[\"symbol\", \"culture\", \"consistency\"]"
+    },
+    {
+      "id": "audience-color-fatigue",
+      "slug": "audience-color-fatigue",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户审片发现\"看着累/刺眼/色彩太满\"、或问\"强烈的色彩技巧能不能一直用\"时调用。按生理心理承受力检查强度与疲劳，无意义的色彩跳跃=惊奇之后只有厌恶。不适用于：色彩象征/单色问题。trigger: 看着累/太刺眼/色彩太满/视觉疲劳/惊奇/audience fatigue/too colorful。",
+      "tags": "[audience, fatigue, restraint]"
+    },
+    {
+      "id": "bw-in-color-film",
+      "slug": "bw-in-color-film",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户要在彩色片里插黑白段落、问\"黑白什么时候用/怎么用\"、想弱化暴力/标记时空/突出彩色焦点时调用。按人物内心投射/时空转换/突出彩色/强化视觉效果（+弱化暴力）选型。不适用于：纯黑白片整体设计。trigger: 黑白/闪回用黑白/弱化血腥/突出彩色/black and white/flashback。",
+      "tags": "[black-and-white, techniques, violence]"
+    },
+    {
+      "id": "color-as-language",
+      "slug": "color-as-language",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户审片问\"这个道具颜色/背景色要不要留\"、或要确保画面每个颜色都有动机时调用。把色彩当造型/情绪元素逐块检查任务（表意/造型/情绪），无任务的色=噪音。不适用于：色彩象征设计、色调实现。trigger: 这个颜色为什么在/要不要删/每个颜色都有任务吗/颜色动机/color motivation。",
+      "tags": "[color, intentionality, motivation]"
+    },
+    {
+      "id": "color-attribute-analysis",
+      "slug": "color-attribute-analysis",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户说\"这颜色不对劲/脏/廉价\"却说不清哪里不对、要分析或设计某块颜色、或跨镜头调色对不上时调用。用色相/明度/饱和度三维定位问题（黑白灰只有明度）。不适用于：色彩文化含义、象征设计、对比构图。trigger: 颜色不对/饱和度/明度/色相/调色对不上/color looks off/hue/saturation/value。",
+      "tags": "[color, analysis, hue-value-saturation]"
+    },
+    {
+      "id": "color-contrast-types",
+      "slug": "color-contrast-types",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户说\"两块颜色放一起不协调/太跳/没层次\"、要让主体从背景跳出来、或做明暗/冷暖/补色对比设计时调用。按同时/补色/明暗/冷暖/面积/饱和度对比逐类检查；补色并置互相增强是\"醒目\"底牌。不适用于：单块颜色本身的描述（用 color-attribute-analysis）。trigger: 对比/不协调/补色/跳出来/contrast/complementary。",
+      "tags": "[color, contrast, complementary]"
+    },
+    {
+      "id": "color-perceptual-effects",
+      "slug": "color-perceptual-effects",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"这个颜色会让人感觉怎样/两个等面积色块为何一大一小/怎么制造距离或面积感\"时调用。按冷暖/轻重/进退/膨胀收缩/兴奋沉静逐项预测观众主观感受；冷暖是情绪/时空的第一杠杆。不适用于：双色对比（用 color-contrast-types）。trigger: 冷暖/显得近/显得大/膨胀/轻快/兴奋/感觉怎样/perception/warm cool feel。",
+      "tags": "[color, perception, emotion]"
+    },
+    {
+      "id": "color-score-blueprint",
+      "slug": "color-score-blueprint",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户设计长片/多集内容怕色彩散、问\"全片色彩怎么统起来\"、或要逐场景分配色调时调用。先写全片总谱（基调+色彩结构蓝图），再为每场戏写\"主题旋律\"（场景色调），让场景间色调变化形成起伏轮廓。不适用于：单场色调实现（用 tone-three-stage-construction）。trigger: 全片色彩/多集色彩/色彩结构/总谱/不散/color structure/score。",
+      "tags": "[color, structure, blueprint]"
+    },
+    {
+      "id": "color-stylization",
+      "slug": "color-stylization",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户想\"做出可辨识的色彩风格/作者签名\"、问\"库布里克式大色块怎么做/统一色调算不算风格\"时调用。风格化=色彩约束+造型统一（大色块+封闭空间/水墨单色系/色调区隔空间），整体风格先于单点技巧。不适用于：单场色调实现。trigger: 风格/作者签名/大色块/统一色调算风格吗/stylization/signature look。",
+      "tags": "[stylization, author-cinema, unity]"
+    },
+    {
+      "id": "color-symbolism-levels",
+      "slug": "color-symbolism-levels",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户要\"用颜色表达某种含义/隐喻\"、问\"这个颜色象征什么/观众读不懂怎么办\"、或设计片内色彩规则时调用。按独立→局部→整体三层次选型，象征必须片内铺垫+查文化语境；主观色彩变异须绑定人物心理。不适用于：纯对比/单色描述。trigger: 象征/隐喻/颜色代表/铺垫/读不懂/主观色彩/symbolism/metaphor。",
+      "tags": "[color, symbolism, culture]"
+    },
+    {
+      "id": "film-color-five-properties",
+      "slug": "film-color-five-properties",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户审片时发现\"单帧好看整片乱/跳\"、问电影色彩和绘画有什么不同、或要检查色彩的时间性/相继对比/视听联觉时调用。对照客观性/技术性/运动性和时间性/相继对比性/视听联觉性五特性。不适用于：静态画面单色问题。trigger: 单帧好看整片乱/相继对比/视听联觉/电影色彩特性/cinematic color/sequential contrast。",
+      "tags": "[film-color, cinema-specific, contrast]"
+    },
+    {
+      "id": "subjective-color-psychology",
+      "slug": "subjective-color-psychology",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户想用非现实颜色（红沙漠/蓝脸/随情绪变色的墙）、或问\"假颜色观众会接受吗\"时调用。主观色彩必须绑定人物心理（这是谁的眼睛/什么情绪），无锚点的假色=廉价滤镜。不适用于：客观配色与象征。trigger: 主观颜色/不真实的颜色/心理色/红色沙漠式/主观色彩/subjective color/psychological color。",
+      "tags": "[subjective-color, psychology, expression]"
+    },
+    {
+      "id": "tone-three-stage-construction",
+      "slug": "tone-three-stage-construction",
+      "source_book": "film-color",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户要\"定一场戏/一条片子的色调\"、问色调怎么实现、或把抽象\"感动\"转成视觉时调用。按拍摄前（立意/选景/选季节/光线/机位）→拍摄中（滤色镜/曝光/色光）→拍摄后（统一）三阶段执行；色调是开拍前必须定的视觉语言，曝光是控饱和的工具。不适用于：色彩象征设计、黑白运用。trigger: 色调/基调/调子/氛围色/怎么做出XX调/tone/mood/color grade。",
+      "tags": "[color-tone, production-workflow, exposure]"
+    },
+    {
+      "id": "color-three-dimensions",
+      "slug": "color-three-dimensions",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"怎么准确描述颜色/沟通偏色/让颜色变灰\"时调用。用色相/亮度/饱和度三维描述（+色样），互补色相混=不饱和（变灰）；全饱和色亮度不同（黄最亮蓝紫最暗）。不适用于：象征/对比（跨书）。trigger: 描述颜色/偏色/变灰/饱和度/互补色/color description/hue。",
+      "tags": "[color, hbs, communication]"
+    },
+    {
+      "id": "contrast-affinity",
+      "slug": "contrast-affinity",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"画面/段落太跳或太平/视觉强度怎么控制/剪辑片段乱\"时调用。所有视觉元素按对比=刺激/相似=平静组织，纯对比抓狂、纯相似无聊；存在于镜头内/间/段落间。不适用于：具体元素（用 seven-visual-elements）。trigger: 太跳/太平/视觉强度/对比相似/每镜都变/too much contrast/flat。",
+      "tags": "[contrast-affinity, intensity, structure]"
+    },
+    {
+      "id": "depth-cue-direction",
+      "slug": "depth-cue-direction",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"怎么让画面立体/怎么压平空间/前后景关系\"时调用。每一条深度线索（透视/重叠/聚焦/散射/位置高低/近大远小/相对运动/影调分离/色彩分离）都可正用（纵深）或反用（平面）。不适用于：空间选型（用 space-type-choice）。trigger: 怎么变立体/怎么压平/深度线索/前景后景/近大远小/depth cue。",
+      "tags": "[depth, cue, flat]"
+    },
+    {
+      "id": "movement-frame-relation",
+      "slug": "movement-frame-relation",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"跟拍没动感/画面里的运动怎么判断/推拉摇移的视觉意义\"时调用。分清实际/表象/诱导/相对运动；屏幕运动的本质=与景框/参照物的位置关系。不适用于：节奏（用 rhythm-three-elements）。trigger: 没动感/运动怎么判断/跟拍/相对运动/景框/movement/frame relation。",
+      "tags": "[movement, frame, relation]"
+    },
+    {
+      "id": "rhythm-three-elements",
+      "slug": "rhythm-three-elements",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"画面/剪辑没有节奏感/快慢情绪/主要次要节奏\"时调用。任何节奏由间隔/重复/节拍构成（静止/运动/剪辑皆有）；节奏≠运动速度；快=激动喜剧、慢=冷静悲剧（避免模式化）。不适用于：运动分析（用 movement-frame-relation）。trigger: 没节奏/剪辑节拍/快慢情绪/节奏设计/rhythm/beat。",
+      "tags": "[rhythm, beat, pacing]"
+    },
+    {
+      "id": "seven-visual-elements",
+      "slug": "seven-visual-elements",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"审片除了好看还能说什么/画面怎么系统拆解\"时调用。把任意画面拆成空间/线条/形状/影调/色彩/运动/节奏七维逐项过；元素不会因忽视消失。不适用于：强度控制（用 contrast-affinity）。trigger: 怎么审画面/拆解/七个元素/除了好看/visual elements。",
+      "tags": "[elements, review, checklist]"
+    },
+    {
+      "id": "space-type-choice",
+      "slug": "space-type-choice",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"要压抑/开阔/困惑的空间感/平面算不算失误\"时调用。空间四类型：纵深（深度线索）/平面（反用线索，幽闭隔离）/有限/模糊（紧张困惑）；空间=情绪与叙事的选择。不适用于：7元素总清单。trigger: 压抑/幽闭/空间感/平面/纵深/模糊空间/space feel/flat space。",
+      "tags": "[space, emotion, choice]"
+    },
+    {
+      "id": "story-visual-design",
+      "slug": "story-visual-design",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"高潮段画面该做什么/从剧本到视觉结构/视觉元素怎么选\"时调用。先画故事张力曲线（开端/冲突/高潮/结局），再逐段分配视觉设计；选元素用四法（直觉/主观/研究/分析选择）+三问（故事/视角/地点）。不适用于：单维元素工具。trigger: 高潮画面/视觉结构/从剧本到视觉/元素怎么选/张力图/tension chart。",
+      "tags": "[story, visual, structure]"
+    },
+    {
+      "id": "tone-control-sync",
+      "slug": "tone-control-sync",
+      "source_book": "eyes-words",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"画面亮暗怎么控/想让观众看不清主体/主体被藏住\"时调用。三种控制：反射光（美术/服装）、入射光（灯光）、曝光；影调同步=衬托主体、非同步=隐藏主体（恐怖/悬念）。不适用于：色彩/空间。trigger: 影调/亮度/看不清主体/藏住/灯光还是服装/tone/sync。",
+      "tags": "[tone, control, attention]"
+    },
+    {
+      "id": "camera-as-eyes",
+      "slug": "camera-as-eyes",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户定机位/分镜、问\"从谁的视角拍/观众知道多少\"时调用。先选视角（客观/主观POV/过肩/侦探），视角决定观众知道多少与认同谁。不适用于：灯光/连续性。trigger: 谁的视角/主观镜头/过肩/观众知道多少/POV/point of view/whose eyes。",
+      "tags": "[viewpoint, audience, POV]"
+    },
+    {
+      "id": "camera-movement-motivation",
+      "slug": "camera-movement-motivation",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"要不要动摄影机/移动没动机/跟拍没动感\"时调用。移动必须有动机（跟表演/揭示信息/换视角），结束要\"安顿\"停顿给剪辑；无动机移动=拉出故事。不适用于：运镜参数（跨书）。trigger: 摄影机要动吗/没动感/移动动机/安顿/摄于无形/camera move/motivation。",
+      "tags": "[camera-movement, motivation, invisible]"
+    },
+    {
+      "id": "color-control-two-axis",
+      "slug": "color-control-two-axis",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"白平衡对了还偏绿/荧光灯偏色/选灯\"时调用。光源颜色两轴描述：红蓝轴（色温）+品红绿轴；非连续光谱光源只有相关色温，须加 CC 校正+查显色指数。不适用于：色彩叙事（用 color-narrative）。trigger: 偏绿/白平衡/荧光灯/色温/品红/显色指数/color cast/green。",
+      "tags": "[color, color-temperature, white-balance]"
+    },
+    {
+      "id": "color-narrative",
+      "slug": "color-narrative",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"用颜色表达情绪/区分时间/夜景带蓝\"时调用。色彩直达情感层，是潜台词工具；按情绪/时间/象征编码（暖=热烈、冷=疏离、过去黑白/现在彩色、夜景带蓝）。不适用于：色彩技术控制（用 color-control-two-axis）。trigger: 颜色表达情绪/过去用黑白/夜景带蓝/色彩潜台词/color story/emotion color。",
+      "tags": "[color, narrative, emotion]"
+    },
+    {
+      "id": "continuity-axis",
+      "slug": "continuity-axis",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"穿帮/越轴/正反打忽左忽右/道具换位\"时调用。按内容/动作/位置/时间四类检查连续性；180 度分割线可破但不可让观众混淆（例外：位置变化/机位移动/中轴镜头/完全反转）。不适用于：剪辑节奏。trigger: 穿帮/越轴/正反打/连续性/分割线/180度/continuity/axis。",
+      "tags": "[continuity, axis, coverage]"
+    },
+    {
+      "id": "cri-light-quality",
+      "slug": "cri-light-quality",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"选灯/廉价LED拍肤色发灰/显色指数\"时调用。CRI 衡量光源还原颜色能力，<90 不可用于摄影；配合色彩两轴一起看。不适用于：色温校正（用 color-control-two-axis）。trigger: 显色指数/CRI/灯偏色/肤色发灰/选灯/light CRI。",
+      "tags": "[cri, light, color-accuracy]"
+    },
+    {
+      "id": "director-dp-collaboration",
+      "slug": "director-dp-collaboration",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"导演和摄影怎么协作/DP 职责/意见不合\"时调用。共同任务=用摄影机讲故事；DP 统领全局但不替换导演构想；导演要懂技术才能合理提要求。不适用于：具体拍摄设计。trigger: 导演摄影怎么配合/DP 职责/意见不合/实现构想/director DP。",
+      "tags": "[collaboration, director, DP]"
+    },
+    {
+      "id": "exposure-four-factors",
+      "slug": "exposure-four-factors",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"现场太暗/要浅景深/曝光补偿怎么配/后期能不能救\"时调用。四旋钮：场景光量/光圈/快门/ISO（水桶模型），每个有代价；曝光错误别指望后期（=噪点）。不适用于：光的质量（跨书）与分区落点。trigger: 太暗/光圈快门/ISO/曝光补偿/后期再改/exposure/ISO。",
+      "tags": "[exposure, four-factors, fix-in-post]"
+    },
+    {
+      "id": "focus-depth-narrative",
+      "slug": "focus-depth-narrative",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"对焦给谁/浅景深/深焦/拉焦\"时调用。对焦=选择观众注意力（说话人/最突出者/最戏剧化者，可能冲突需商定）；浅景深做选择性对焦、深焦让前后景同清晰。不适用于：光圈曝光数值（用 exposure-four-factors）。trigger: 焦点给谁/浅景深/深焦/拉焦/选择性对焦/focus/depth of field。",
+      "tags": "[focus, depth-of-field, narrative]"
+    },
+    {
+      "id": "lighting-task-list",
+      "slug": "lighting-task-list",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户布光、问\"灯往哪打/为什么画面扁平/对话场景怎么打光\"时调用。按灯光八任务（全域色调/色彩控制/形状/分隔/景深/质感/情绪/曝光）逐项过；避免正面平光，主光从后场打。不适用于：色彩叙事（用 color-narrative）。trigger: 布光/画面扁平/证件照光/对话打光/主光位置/lighting/flat。",
+      "tags": "[lighting, task-list, flat-light]"
+    },
+    {
+      "id": "night-blue-lighting",
+      "slug": "night-blue-lighting",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"夜景拍出来不像晚上/月光是什么色/要不要打蓝光\"时调用。夜景带蓝不是物理真实而是感知真实（昏暗下人眼对蓝紫敏感，普基涅效应）；为感知设计而非为真实设计。不适用于：色彩叙事总设计（用 color-narrative）。trigger: 夜景不像晚上/月光色/打蓝光/夜晚感/night scene/blue night。",
+      "tags": "[night, lighting, perception]"
+    },
+    {
+      "id": "no-accidental-frames",
+      "slug": "no-accidental-frames",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户审片问\"这个元素/阴影/颜色为什么在\"、要画面每个元素都有叙事任务时调用。逐元素问\"为什么在/承担什么任务\"，无任务即噪音。不适用于：视角/连续性。trigger: 这个为什么在/画面无偶然/每元素有意义/删哪个/no accidents。",
+      "tags": "[intentionality, review, no-accidents]"
+    },
+    {
+      "id": "rules-before-breaking",
+      "slug": "rules-before-breaking",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"这条规则能破吗/为什么这么拍\"时调用。先理解每条规则存在的原因（防什么错），再决定是否打破；懂原因的打破=创造力工具。不适用于：具体技术参数。trigger: 规则能破吗/为什么这么拍/惯例/打破规则/break the rules。",
+      "tags": "[rules, craft, judgment]"
+    },
+    {
+      "id": "set-fast-checklist",
+      "slug": "set-fast-checklist",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"开拍前检查什么/场记板怎么打/镜头表\"时调用。按 FAST 固定顺序检查（焦点F/光圈A/速度S/转速T）；场记板承载场号/次/卷号/帧率/特效。不适用于：具体拍摄设计。trigger: 开拍前检查/FAST/场记板/打板/set check/slate。",
+      "tags": "[set-operations, checklist, slate]"
+    },
+    {
+      "id": "shoot-for-edit",
+      "slug": "shoot-for-edit",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"拍完剪辑接不上/素材不够/要不要多拍\"时调用。拍摄按剪辑倒推：动作重叠、滚动切解决站位、备用/反应镜头、按回转组织机位。不适用于：连续性检查（用 continuity-axis）。trigger: 剪辑接不上/素材不够/动作重叠/备用镜头/反应镜头/shoot for edit/coverage。",
+      "tags": "[editing, coverage, planning]"
+    },
+    {
+      "id": "visual-symbolism",
+      "slug": "visual-symbolism",
+      "source_book": "cinematography-theory",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户要\"台词之外还想让观众感到什么/用画面传达潜台词/光的象征\"时调用。把潜台词翻译成视觉载体（光/色/动作/道具/构图），画面无偶然。不适用于：视角选择、灯光任务实现。trigger: 潜台词/象征/用光表达/画面暗示/视觉隐喻/subtext/symbolism。",
+      "tags": "[symbolism, subtext, visual-narrative]"
+    },
+    {
+      "id": "color-vs-bw-choice",
+      "slug": "color-vs-bw-choice",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户纠结\"这场景拍彩色还是黑白/色彩是不是必要的\"时调用。按快门之前二选一：色彩在构图/情感中是否必要且核心？必要→彩色（哪怕单一绿）；不必要/干扰→黑白。不适用于：光的质量（用 light-quality-vs-quantity）。trigger: 拍彩色还是黑白/这个颜色要不要保留/色彩重要吗/color or black and white。",
+      "tags": "[color, black-and-white, decision]"
+    },
+    {
+      "id": "composition-guides-eyes",
+      "slug": "composition-guides-eyes",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"构图是什么/怎么构图/观众先看哪里\"时调用。好构图=有计划地安排读者视线（先看最重要元素），核心是统一的思想+简单性；不是摆元素/套规则。不适用于：元素情感匹配（那是具体元素语义）。trigger: 怎么构图/先看哪里/统一思想/简单/构图引导/composition/guide the eye。",
+      "tags": "[composition, visual-guide, simplicity]"
+    },
+    {
+      "id": "contrast-tone-juxtaposition",
+      "slug": "contrast-tone-juxtaposition",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"照片为什么灰/明明黑白都有却不够干脆/反差由什么决定\"时调用。反差取决于明暗是否紧邻与中间影调是否缺失，不是黑到白的跨度；要干脆=去中间调，要柔和=拉开距离。不适用于：元素情感（用 element-emotion-matching）。trigger: 没反差/灰/不干脆/影调范围/contrast/flat。",
+      "tags": "[contrast, tone, technique]"
+    },
+    {
+      "id": "creativity-obstacles-intuition",
+      "slug": "creativity-obstacles-intuition",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"没灵感/创作卡住/觉得没天赋\"时调用。先排查三障碍（抗拒尝试/没时间/外界期望），再加深投入（直觉=兴趣+知识+投入的产物）。不适用于：具体构图/曝光问题。trigger: 没灵感/创意枯竭/被框死/怎么变有创意/直觉/intuition/creativity stuck。",
+      "tags": "[creativity, intuition, obstacles]"
+    },
+    {
+      "id": "element-emotion-matching",
+      "slug": "element-emotion-matching",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"哪种线条/形状/反差给人什么感觉/怎么拍出宁静或紧张\"时调用。锯齿线/锐利形状/高反差=紧张狂热，弧线/柔和/灰调=平静舒缓，竖线=稳定；元素必须与情绪匹配。不适用于：整体构图流程（用 composition-guides-eyes）。trigger: 线条给人什么感觉/怎么拍出宁静/高反差/锯齿/弧线/emotional effect of lines。",
+      "tags": "[elements, emotion, visual-language]"
+    },
+    {
+      "id": "frame-edge-check",
+      "slug": "frame-edge-check",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"照片总被边角杂物毁掉/怎么预防穿帮元素\"时调用。按快门前花几秒扫视取景器四边（强反差/亮物/树枝电线杆），转一两度或裁掉；事前处理优于事后补救。不适用于：整体构图流程。trigger: 边角有杂物/电线杆/干扰物/巡视边境/frame edges/distractions。",
+      "tags": "[frame, pre-shot, checklist]"
+    },
+    {
+      "id": "intent-driven-development",
+      "slug": "intent-driven-development",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"高反差/低反差场景怎么处理/曝光显影基准是什么/作品千篇一律\"时调用。显影/后期以你的演绎目标为基准，不是场景本来长什么样；公式化\"安全处理\"=可预测而沉闷。不适用于：曝光落点工具（用 zone-system）。trigger: 按什么基准处理/高反差加显影吗/公式化/千篇一律/想要的影调/intent driven。",
+      "tags": "[development, intent, anti-formula]"
+    },
+    {
+      "id": "interest-viewpoint",
+      "slug": "interest-viewpoint",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"该拍什么/照片没灵魂/怎么表达自己\"时调用。先找让你兴奋的题材（兴趣=引擎），再确认\"你的观点可以被看见\"——拍\"你对它的反应\"而非汇报。不适用于：具体技术/构图。trigger: 不知道拍什么/照片没灵魂/怎么表达/我的兴趣/观点/viewpoint/interest。",
+      "tags": "[interest, viewpoint, expression]"
+    },
+    {
+      "id": "light-quality-vs-quantity",
+      "slug": "light-quality-vs-quantity",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户问\"这光能不能拍/光不够怎么办/顺光侧光逆光怎么选\"时调用。数量（亮度）可补偿，质量（方向/颜色/清晰度/扩散度）不可随意补偿；质量不匹配时最优决策是等待/换场地/不拍。不适用于：曝光参数（用 zone-system）。trigger: 光不好/等光/光的质量/侧光逆光/这光能拍吗/light quality/lighting conditions。",
+      "tags": "[light, quality, decision]"
+    },
+    {
+      "id": "mobility-limits",
+      "slug": "mobility-limits",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"只会一种拍法/想突破/拍不到想要的挫败\"时调用。保持方法论开放（不自我设限），同时理解媒介局限（有些感受本不属于照片）。不适用于：具体技术。trigger: 自我设限/只会一种/突破/拍不到/摄影的局限/mobility/limits。",
+      "tags": "[flexibility, limits, openness]"
+    },
+    {
+      "id": "self-critique-two-phase",
+      "slug": "self-critique-two-phase",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户想客观评价自己的作品、问\"怎么进步/找谁点评\"时调用。拍摄时允许主观（灵感），隔几天后切换客观模式问\"它自身能传达思想吗\"；找懂行导师/同伴互评。不适用于：具体技术调参。trigger: 怎么评价自己的照片/进步/找谁点评/最严厉评论家/self critique。",
+      "tags": "[self-critique, growth, feedback]"
+    },
+    {
+      "id": "simplicity-anti-rules",
+      "slug": "simplicity-anti-rules",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"画面复杂模糊/问构图规则/总是同一招\"时调用。先简单（意图可一句话说清），后复杂；构图无公式（1/3 法则等是束缚），每次独立判断避免程式化。不适用于：视线路径设计（用 composition-guides-eyes）。trigger: 画面太复杂/1/3法则/构图规则/程式化/每次都要这样吗/simplicity/rules。",
+      "tags": "[simplicity, anti-rules, judgment]"
+    },
+    {
+      "id": "visualization-four-steps",
+      "slug": "visualization-four-steps",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"拍出来总不是想要的样子/怎么把想法变成照片/构图前该想什么\"时调用。四步：以摄影方式观看察见→构图→构思最终照片效果→为最终效果设计操作策略；预/后视觉化是两条可切换路线。不适用于：纯构图规则、器材操作。trigger: 拍出来不对/预想/最终效果/视觉化/怎么想清楚再拍/visualization/previsualization。",
+      "tags": "[visualization, workflow, previsualization]"
+    },
+    {
+      "id": "zone-system",
+      "slug": "zone-system",
+      "source_book": "art-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户处理大光比场景、问\"曝光/显影怎么控制影调和反差/高光阴影怎么保留\"时调用。分区系统：曝光定影调落点、显影/后期定反差；数码用直方图+向右曝光+HDR 对应。按目标影调处理，不按场景固有反差。不适用于：光的质量（用 light-quality-vs-quantity）。trigger: 大光比/分区曝光/高光阴影/曝光显影/直方图/向右曝光/HDR/zone system。",
+      "tags": "[zone-system, exposure, development, digital]"
+    },
+    {
+      "id": "ambient-vs-flash",
+      "slug": "ambient-vs-flash",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"闪光跟环境光怎么平衡/要闪光做主光/压暗现场光\"时调用。先决定态度：悄悄混入（填充）还是制伏它（压暗环境光、闪光做主光）。不适用于：光质/滤色片。trigger: 现场光太乱/闪光做主光/压暗环境/填充还是主光/ambient vs flash。",
+      "tags": "[ambient, flash, dominance]"
+    },
+    {
+      "id": "angle-first-lighting",
+      "slug": "angle-first-lighting",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"现场乱不知道灯往哪放/布光顺序\"时调用。先定机位/构图（画面里要有什么），再决定灯位——灯是配合画面目标的工具。不适用于：具体光质。trigger: 灯往哪放/先构图还是先布光/现场很乱/布光顺序/angle first。",
+      "tags": "[workflow, angle, lighting-order]"
+    },
+    {
+      "id": "big-soft-light",
+      "slug": "big-soft-light",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"小灯太硬/怎么柔化/多灯合成大光源\"时调用。柔光第一原理=光源面积：柔光屏/墙/伞/天光板把光\"摊大\"；多灯打向同一反射/透射面合成大光源。不适用于：灯数组织（用 flash-ladder）。trigger: 太硬/柔光/柔光屏/天光板/4支灯变一个/soft light/source size。",
+      "tags": "[soft-light, source-size, big-source]"
+    },
+    {
+      "id": "exposure-compensation-workflow",
+      "slug": "exposure-compensation-workflow",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"曝光补偿加多少/相机灯补偿打架/快速调曝光\"时调用。补偿没有公式，从+1开始试，凭直觉+屏幕反馈迭代；改变曝光时眼睛不离开取景器（盲操作）。不适用于：光质。trigger: 补偿多少/背景亮主体暗/机身灯补偿/取景器/exposure compensation。",
+      "tags": "[exposure, compensation, workflow]"
+    },
+    {
+      "id": "failure-log-method",
+      "slug": "failure-log-method",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"外拍失败/怎么从错误中学习/记录布光\"时调用。把每次拍摄（尤其失败）记成\"问题→方案→结果→教训\"，失败=素材库。不适用于：具体布光技术。trigger: 全失败了/怎么复盘/记录经验/外拍蠢事/failure log。",
+      "tags": "[failure-log, learning, practice]"
+    },
+    {
+      "id": "flash-ladder",
+      "slug": "flash-ladder",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"布光从哪学起/要不要加第二支灯/多灯怎么组织\"时调用。按单灯（找位置/离机/直闪）→双灯（主光+填充/轮廓/背景）→多灯（分组 A/B/C）逐级训练，先把单灯练成本能。不适用于：具体光质（用 big-soft-light）。trigger: 先学什么/加第二支灯/多灯分组/布光进阶/flash basics。",
+      "tags": "[flash, ladder, progression]"
+    },
+    {
+      "id": "flash-placement-decision",
+      "slug": "flash-placement-decision",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"要不要离机/没灯架能拍吗/直闪丑\"时调用。离机（哪怕几英寸）通常优于机顶直闪；但条件不允许时直闪也比没有强（坏照片>没照片）。不适用于：光质柔化。trigger: 离机/机顶直闪/没灯架/直闪/off-camera/direct flash。",
+      "tags": "[flash, placement, pragmatic]"
+    },
+    {
+      "id": "gel-color-balance",
+      "slug": "gel-color-balance",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"给灯加颜色/冷暖对比/背景冷主体暖/滤色片\"时调用。用滤色片（CTO/CTB/绿+戏剧色）给不同灯位分配颜色，冷暖并置产生层次；随身带\"转换系+戏剧系\"。不适用于：色彩叙事（跨书）。trigger: 给灯加色/冷暖对比/CTO/滤色片/背景变蓝/gels/warm cool。",
+      "tags": "[gels, color, warm-cool]"
+    },
+    {
+      "id": "high-speed-sync",
+      "slug": "high-speed-sync",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"正午拍人像/大光圈浅景深+闪光/高速同步\"时调用。高速同步=闪光脉冲穿过高速快门，压暗太阳/获得浅景深；代价=功率大减需更近/更大光圈/多灯。不适用于：运动光轨（用 rear-curtain-sync）。trigger: 正午/压暗太阳/大光圈+闪光/高速同步/HSS/midday sun。",
+      "tags": "[hss, midday, shallow-depth]"
+    },
+    {
+      "id": "ittl-cls-multiflash",
+      "slug": "ittl-cls-multiflash",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"多灯怎么自动协同/指令灯/机顶内闪有用吗/灯的曝光\"时调用。i-TTL=相机从自身视角统管所有灯（主厨模型）；CLS=无线多灯分组；机顶内闪只用来引闪不当光源。不适用于：光质/灯数。trigger: 多灯同步/i-TTL/CLS/指令灯/内闪/无线引闪/multi-flash TTL。",
+      "tags": "[ittl, cls, multiflash]"
+    },
+    {
+      "id": "light-four-elements",
+      "slug": "light-four-elements",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"这灯拍出来不对劲但说不出哪里不对/布光问题\"时调用。按质感（软硬/扩散）、色彩（色温/滤片）、方向（灯位/角度）、曝光（功率/光圈/快门/ISO）四维度定位。不适用于：具体单灯/多灯方案（用其他 skill）。trigger: 光不对/太硬/偏色/灯位/怎么调/light not right/hard light。",
+      "tags": "[light, diagnosis, four-elements]"
+    },
+    {
+      "id": "light-shaping-control",
+      "slug": "light-shaping-control",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"光太散/让光只照一处/束光筒遮光板\"时调用。在灯前放束光筒/束光格/遮光板把光\"收住\"，让光指哪打哪（保持光子的队形）。不适用于：柔光摊大（用 big-soft-light）。trigger: 光太散/只照一处/束光筒/遮光板/挡光/snoot/barn doors。",
+      "tags": "[light-shaping, control, attachments]"
+    },
+    {
+      "id": "rear-curtain-sync",
+      "slug": "rear-curtain-sync",
+      "source_book": "hotshoe-diary",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"拍运动+闪光/光轨怎么跟主体/前后帘区别\"时调用。闪光在曝光结束时触发，运动光带\"跟在\"主体后面更自然；作者默认后帘。不适用于：静止场景。trigger: 后帘/前帘/运动闪光/光轨/车流光带/rear curtain。",
+      "tags": "[rear-curtain, motion, sync]"
+    },
+    {
+      "id": "amateur-spirit",
+      "slug": "amateur-spirit",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"爱好变职业会毁掉吗/拍照没热情/谋生与表达\"时调用。业余=为乐趣而做；职业身份不改变业余精神；在谋生与个人表达间找交集。不适用于：具体技术。trigger: 没热情/爱好变职业/为乐趣/谋生与表达/amateur spirit。",
+      "tags": "[amateur, joy, passion]"
+    },
+    {
+      "id": "break-rules-flexibility",
+      "slug": "break-rules-flexibility",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"1/3法则/构图规则/没等到想要的光\"时调用。构图没有公式（1/3法则荒谬）；每条构图独一无二；灵活适应意外条件（别闭眼）。不适用于：具体技术。trigger: 构图规则/1/3法则/没等到光/破规则/rules/flexibility。",
+      "tags": "[no-rules, flexibility, composition]"
+    },
+    {
+      "id": "criticism-ladder",
+      "slug": "criticism-ladder",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"作品怎么进步/找谁点评/遇到导游式教学\"时调用。成长路径=亲友鼓励→专业导师（指出问题+打开通路）→同行互评；好导师≠导游。不适用于：具体技术。trigger: 找谁点评/怎么进步/导师/工作坊/批评/criticism/instructor。",
+      "tags": "[criticism, mentorship, growth]"
+    },
+    {
+      "id": "detective-seeing",
+      "slug": "detective-seeing",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"为什么我拍的没别人好/怎么培养摄影眼/看到什么\"时调用。把物体看成光值/线条/形状/关系（侦探式观看）；视觉是习得的，摄影眼可训练。不适用于：判断决策（用 photographic-judgment）。trigger: 摄影眼/看不到/看见什么/怎么培养/see vs look/learned vision。",
+      "tags": "[seeing, perception, training]"
+    },
+    {
+      "id": "expressive-goals",
+      "slug": "expressive-goals",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"该拍写实还是抽象/风格怎么定\"时调用。先定义表达目标（我想说什么/让观众感到什么），风格（写实/抽象）由此推导；无目标选风格=盲目跟风。不适用于：具体技术。trigger: 写实还是抽象/风格怎么定/想表达什么/expressive goals/realism vs abstraction。",
+      "tags": "[goals, style, expression]"
+    },
+    {
+      "id": "greatness-by-reaction",
+      "slug": "greatness-by-reaction",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"没有名山大川/名人可拍，还能出好片吗/什么算好照片\"时调用。伟大取决于光/形式/物体唤起观众强烈反应，与题材名气无关（《移民母亲》）。不适用于：具体技术。trigger: 没题材可拍/什么算好照片/普通人能出好片吗/great photograph/reaction。",
+      "tags": "[greatness, reaction, subject]"
+    },
+    {
+      "id": "interest-discovery",
+      "slug": "interest-discovery",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"不知道拍什么/没方向/想找自己的路\"时调用。列 3 位最爱摄影师+理由，尝试多种题材找到兴奋点；兴趣是摄影眼与创意的起点。不适用于：创意障碍（用 creativity 类）。trigger: 不知道拍什么/找方向/兴趣/3位摄影师/interest。",
+      "tags": "[interest, discovery, direction]"
+    },
+    {
+      "id": "intuition-development",
+      "slug": "intuition-development",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"怎么有摄影直觉/没灵感/创意怎么培养\"时调用。直觉=长期观察+理解+兴趣+投入的产物，不是天赋彩票；创意需要准备（贝多芬/爱因斯坦）。不适用于：具体技术。trigger: 摄影直觉/没灵感/创意怎么培养/直觉是天赋吗/intuition/preparation。",
+      "tags": "[intuition, mastery, preparation]"
+    },
+    {
+      "id": "photo-as-creation",
+      "slug": "photo-as-creation",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户被质疑照片\"不真实\"/问\"照片算创作还是记录\"时调用。照片（尤其风光）=艺术创作，不是场景拷贝（亚当斯《月出》反转影调）；别用\"像不像\"当判据。不适用于：具体技术。trigger: 像不像/不真实/创作还是记录/did it look like that/realism。",
+      "tags": "[creation, truth, realism]"
+    },
+    {
+      "id": "photographic-judgment",
+      "slug": "photographic-judgment",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"拍一堆没几张能用/拍前要判断什么/值不值得拍\"时调用。按快门前过五问（机位/光/焦距/焦点/曝光）+总判断\"值不值得拍\"；开头没判断，结尾是灾难。不适用于：具体曝光参数（用 zone-system）。trigger: 值不值得拍/判断/拍前想什么/开头判断/judgment/worth it。",
+      "tags": "[judgment, pre-shot, decision]"
+    },
+    {
+      "id": "pixels-free-vs-time",
+      "slug": "pixels-free-vs-time",
+      "source_book": "essence-of-photography",
+      "stage": "storyboard_visual",
+      "stage_cn": "视觉摄影",
+      "trigger": "用户\"数码随便拍要不要多拍/乱拍后选片痛苦\"时调用。拍摄免费但时间不免费；乱拍=时间黑洞；\"像素免费\"的正当用途=视觉实验（先判断后拍，实验可自由试错）。不适用于：具体技术。trigger: 像素免费/多拍/乱拍/选片痛苦/实验/pixels free/time is money。",
+      "tags": "[pixels-free, time, experiment]"
+    }
+  ]
+}

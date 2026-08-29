@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# 密钥与环境（绝不提交）
+.env
+.env.*
+*.pem
+*.key
+
+# 运行时产物
+data/
+archive/
+_live_out/
+.pytest_tmp*/
+pytest_tmp*/
+
+# 历史/实验/备份目录（非唯一权威源码，不纳入提交）
+_瀑布流_提示词模块/
+_增量包解压/
+_方法论_v1.1/
+对齐备份_*/
+_对齐备份_*/
+_打包_*/
+UI对比/
+修复输出/
+_实验_*/
+_test_*/
+_*_探索/
+
+# 临时脚本与输出
+_tmp_*.py
+_tmp_*.json
+fix_*.py
+step*.py
+add_*.py
+gen_*.py
+*.log

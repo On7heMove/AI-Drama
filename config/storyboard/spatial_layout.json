@@ -1,0 +1,87 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "spatial_layout",
+  "description": "空间层级布局（2026-08-18，豆包+实测收敛）：仪式/典礼类场景用五层空间关系写死站位（前景中央跪地者/两侧贵族虚化/后方阴影隐藏威胁/更后主礼人不抢镜），显式轴侧恒定+绝对禁止清单，避免面对面模板套错、180°越轴、层级混乱。",
+  "data": {
+    "ceremony_triggers": [
+      "典礼",
+      "仪式",
+      "封爵",
+      "册封",
+      "加冕",
+      "大典",
+      "授勋",
+      "跪"
+    ],
+    "hidden_marker": [
+      "兜帽",
+      "阴影",
+      "怨毒",
+      "隐",
+      "暗处",
+      "窥视",
+      "藏在"
+    ],
+    "officiant_marker": [
+      "主礼人",
+      "主持",
+      "神父",
+      "祭司",
+      "大祭司",
+      "圣职"
+    ],
+    "kneeler_side_zh": "伊索尔德居左、罗伊娜居右，身体朝右，视线看向右后方（望向珍妮芙所在阴影）",
+    "template_zh": {
+      "front_center": "前景中央：{kneelers}并肩跪在红色绒毯上（{kneelers_side}）",
+      "side_mid": "两侧中景：贵族分列左右，虚化站定，不抢主体",
+      "back_shadow": "后方人群阴影：{hidden}站在画面右侧人群后方，黑色兜帽长衣、脸藏阴影、不露清晰正脸，视线从右后方射向中央跪地二人",
+      "far_altar": "更远处高台/圣坛前：{officiant}位于后景中央，暂不抢镜",
+      "axis": "镜头全程保持同一轴侧（入口一侧：殿门内→中央跪地者→右后阴影），轴侧恒定、禁止翻到祭坛侧往回拍、禁止180°越轴",
+      "forbidden": [
+        "禁止{hidden}站在{kneelers}旁边",
+        "禁止{kneelers}与{hidden}左右互换",
+        "禁止{hidden}出现在前景中央",
+        "禁止{officiant}抢主视觉",
+        "禁止{kneelers}与{hidden}面对面站在同一平面",
+        "禁止跪地二人拍成远景群像"
+      ]
+    },
+    "template_en": {
+      "front_center": "foreground center: {kneelers} kneel side by side on the red carpet ({kneelers_side_en})",
+      "side_mid": "midground sides: nobles line up left and right, blurred, not stealing focus",
+      "back_shadow": "shadowed rear crowd: {hidden} stands behind the crowd on the right, black hooded cloak, face hidden in shadow, gaze from the right-rear toward the two kneeling women at center",
+      "far_altar": "farther altar: {officiant} at the rear center, not yet claiming focus",
+      "axis": "camera stays on the same axis side throughout (entrance side: doorway -> kneeling pair -> right-rear shadow); axis constant; never flip to the altar side; no 180-degree axis crossing",
+      "forbidden": [
+        "do not place {hidden} beside {kneelers}",
+        "do not swap {kneelers} and {hidden} left-right",
+        "do not put {hidden} in the foreground center",
+        "do not let {officiant} steal the main focus",
+        "do not face {kneelers} and {hidden} on the same plane",
+        "do not shoot the kneeling pair as a distant wide group"
+      ]
+    },
+    "template_zh_scene": {
+      "front_center": "前景中央：{kneelers}{kneel_phrase}红色绒毯上，面朝{facing}、背对{back}",
+      "side_mid": "两侧中景：贵族分列左右，虚化站定，不抢主体",
+      "back_shadow": "后方人群阴影：{hidden}位于跪地者背后方向（人群侧），黑色兜帽长衣、脸藏阴影、不露清晰正脸，视线射向中央跪地二人",
+      "far_altar": "更远处高台/圣坛前：{officiant}位于后景中央，暂不抢镜",
+      "axis": "镜头位于{camera_side}，观众看到跪地者的后背/侧背；镜头全程保持在{camera_side}这一侧，轴侧恒定",
+      "forbidden": [
+        "前景中央只保留跪地者，其余角色（含{hidden}）一律位于跪地者背后方向",
+        "镜头始终在{camera_side}，观众始终看到跪地者的后背/侧背"
+      ]
+    },
+    "template_en_scene": {
+      "front_center": "foreground center: {kneelers} {kneel_phrase_en} the red carpet, facing {facing_en}, backs to {back_en}",
+      "side_mid": "midground sides: nobles line up left and right, blurred, not stealing focus",
+      "back_shadow": "shadowed rear crowd: {hidden} stands behind the kneelers (crowd side), black hooded cloak, face hidden, gaze toward the kneeling pair at center",
+      "far_altar": "farther altar: {officiant} at the rear center, not yet claiming focus",
+      "axis": "camera on the {camera_side_en}; the audience sees the kneelers' backs / side-backs; camera stays on that same side throughout, axis constant",
+      "forbidden": [
+        "foreground center holds only the kneelers; {hidden} stays behind the kneelers (crowd side)",
+        "camera stays on the {camera_side_en}; audience keeps seeing the kneelers' backs / side-backs"
+      ]
+    }
+  }
+}

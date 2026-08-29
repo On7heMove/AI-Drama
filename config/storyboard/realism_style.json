@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "realism_style",
+  "description": "真人风风格锁定（2026-08-14 修订）：真实自然的人物/表演/日常真实生活质感；区别于实拍电影效果——不要胶片颗粒/电影感/戏剧化打光；负面排除 AI 感与电影感。",
+  "data": {
+    "style_lock_9_16": "真人风，真实自然的人物与表演，日常真实生活质感，9:16",
+    "style_lock_16_9": "真人风，真实自然的人物与表演，日常真实生活质感，横屏16:9",
+    "style_lock_2.39:1": "真人风，真实自然的人物与表演，电影遮幕画幅，2.39:1 变形宽银幕",
+    "style_lock_2.35:1": "真人风，真实自然的人物与表演，电影遮幕画幅，2.35:1 变形宽银幕",
+    "style_lock_21:9": "真人风，真实自然的人物与表演，超宽画幅，21:9 影院超宽",
+    "style_lock_1.85:1": "真人风，真实自然的人物与表演，宽银幕画幅，1.85:1",
+    "style_lock_4:3": "真人风，真实自然的人物与表演，经典画幅，4:3",
+    "style_lock_1:1": "真人风，真实自然的人物与表演，方形画幅，1:1",
+    "style_lock_en_9_16": "real-person realism, authentic natural people and performance, everyday real-life texture, vertical 9:16",
+    "style_lock_en_16_9": "real-person realism, authentic natural people and performance, everyday real-life texture, 16:9 widescreen",
+    "style_lock_en_2.39:1": "real-person realism, authentic natural people and performance, cinemascope 2.39:1 anamorphic widescreen",
+    "style_lock_en_2.35:1": "real-person realism, authentic natural people and performance, cinemascope 2.35:1 anamorphic widescreen",
+    "style_lock_en_21:9": "real-person realism, authentic natural people and performance, ultrawide 21:9 cinematic",
+    "style_lock_en_1.85:1": "real-person realism, authentic natural people and performance, widescreen 1.85:1",
+    "style_lock_en_4:3": "real-person realism, authentic natural people and performance, classic 4:3",
+    "style_lock_en_1:1": "real-person realism, authentic natural people and performance, square 1:1",
+    "negative_zh": ["动画感", "CG感", "塑料质感", "过度磨皮", "网红滤镜", "卡通", "手办感", "电影感", "胶片颗粒", "戏剧化打光"],
+    "negative_en": ["animated look", "CGI look", "plastic skin", "over-smoothed filter", "cartoon", "doll-like", "cinematic film grain", "dramatic grading"]
+  }
+}

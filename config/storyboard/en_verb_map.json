@@ -1,0 +1,1637 @@
+{
+  "schema_version": "0.2",
+  "pack_id": "en_verb_map",
+  "description": "中英动作动词对照表（v0.2）：英文动词携带力度/速度/方向/结果/声响；每词带中文触发器，供 verb_selector 自动选词。产品决策：横屏 16:9 优先；具体场景由生成器按上下文自动判断。",
+  "data": {
+    "selection_mode": "automatic_from_context",
+    "selection_algorithm": "生成器自动选词：从剧本/节拍/角色状态/事件提取上下文信号 → 判定词族（受伤行走需 行走+伤情 双信号）→ 在词族内按动词触发器命中唯一最准动词。",
+    "aspect_ratio_decision": "2026-08-13：默认横屏 16:9",
+    "families": {
+      "移动-受伤行走": {
+        "default": "limp",
+        "decision_rules": [
+          {
+            "when": "站不住、只能手脚并用爬",
+            "verb": "crawl"
+          },
+          {
+            "when": "有同伴搀扶/架着、半拖半走",
+            "verb": "be half-carried"
+          },
+          {
+            "when": "拖着自己/拖伤腿挪动",
+            "verb": "drag oneself"
+          },
+          {
+            "when": "体力不支被绊/踩空、短暂失衡",
+            "verb": "stumble"
+          },
+          {
+            "when": "失血/头晕/全身虚弱、摇摇晃晃像要倒",
+            "verb": "stagger"
+          },
+          {
+            "when": "伤在单侧腿/脚、能自主走、一步深一步浅",
+            "verb": "limp"
+          },
+          {
+            "when": "剧痛、迈不开步、脚踝/髋/膝重伤、硬撑",
+            "verb": "hobble"
+          },
+          {
+            "when": "被外力掀飞/重击后重重砸向地面",
+            "verb": "crash down"
+          },
+          {
+            "when": "撑墙/拖腿、脚不离地",
+            "verb": "shuffle"
+          },
+          {
+            "when": "每次发力突然向一侧猛倾",
+            "verb": "lurch"
+          }
+        ],
+        "verbs": [
+          {
+            "verb": "crawl",
+            "zh": "爬",
+            "triggers": [
+              "爬"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "balance": "站不住",
+            "sound": "摩擦",
+            "mood": "极限",
+            "scene": "完全无法行走",
+            "example": "She crawls across the floor, strength gone."
+          },
+          {
+            "verb": "be half-carried",
+            "zh": "被人架着半拖走",
+            "triggers": [
+              "搀",
+              "架着",
+              "扶着"
+            ],
+            "force": "大",
+            "speed": "慢-中",
+            "balance": "借力",
+            "sound": "拖步",
+            "mood": "重伤失去自主",
+            "scene": "有同伴搀扶/架着",
+            "example": "He drags his feet, half-carried by his partner."
+          },
+          {
+            "verb": "drag oneself",
+            "zh": "拖着自己挪",
+            "triggers": [
+              "拖着自己",
+              "拖着腿",
+              "拖着脚",
+              "拖着身",
+              "拖着"
+            ],
+            "force": "大",
+            "speed": "很慢",
+            "balance": "随时停",
+            "sound": "拖拽",
+            "mood": "濒临极限",
+            "scene": "撑墙/撑栏杆、接近爬行",
+            "example": "He drags himself toward the exit."
+          },
+          {
+            "verb": "stumble",
+            "zh": "绊/趔趄",
+            "triggers": [
+              "绊",
+              "踩空",
+              "趔趄"
+            ],
+            "force": "小",
+            "speed": "突停",
+            "balance": "短暂失衡",
+            "sound": "绊倒声",
+            "mood": "体力不支",
+            "scene": "踩空/被障碍物绊",
+            "example": "She stumbles over the debris."
+          },
+          {
+            "verb": "stagger",
+            "zh": "踉跄摇晃",
+            "triggers": [
+              "踉跄"
+            ],
+            "force": "中",
+            "speed": "慢-中",
+            "balance": "失衡像要倒",
+            "sound": "虚浮",
+            "mood": "失血/头晕/虚弱",
+            "scene": "全身虚弱、随时会倒",
+            "example": "He staggers, one hand pressed to his wound."
+          },
+          {
+            "verb": "limp",
+            "zh": "一瘸一拐",
+            "triggers": [
+              "一瘸一拐",
+              "瘸"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "balance": "单侧着力不均",
+            "sound": "深浅不一",
+            "mood": "受伤但能走",
+            "scene": "腿/脚伤，可自主走",
+            "example": "He limps, favoring his left leg."
+          },
+          {
+            "verb": "hobble",
+            "zh": "疼痛蹒跚",
+            "triggers": [
+              "剧痛",
+              "迈不开步",
+              "脚踝",
+              "膝盖",
+              "髋"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "受限",
+            "sound": "短促",
+            "mood": "剧痛/硬撑",
+            "scene": "脚踝/髋/膝重伤",
+            "example": "She hobbles down the corridor, every step a grimace."
+          },
+          {
+            "verb": "crash down",
+            "zh": "被砸向地面/重摔",
+            "triggers": [
+              "掀飞",
+              "重摔",
+              "重重倒地",
+              "砸向",
+              "砸在"
+            ],
+            "force": "大",
+            "speed": "突发",
+            "balance": "无自主",
+            "sound": "沉重撞击",
+            "mood": "受外力/重创",
+            "scene": "被掀飞/被击倒后重落地",
+            "example": "He crashes down, dust bursting up around him."
+          },
+          {
+            "verb": "shuffle",
+            "zh": "拖着脚走",
+            "triggers": [
+              "撑墙",
+              "扶墙",
+              "沿墙",
+              "脚不离地"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "不稳",
+            "sound": "拖沓摩擦",
+            "mood": "虚弱/勉强",
+            "scene": "撑墙挪动",
+            "example": "He shuffles along the wall, feet barely lifting."
+          },
+          {
+            "verb": "lurch",
+            "zh": "猛地一晃",
+            "triggers": [
+              "一晃",
+              "猛倾",
+              "踉跄一晃"
+            ],
+            "force": "突发",
+            "speed": "突快",
+            "balance": "突然倾斜",
+            "sound": "撞击",
+            "mood": "失衡",
+            "scene": "每次发力晃一下、扶墙",
+            "example": "He lurches forward, catching himself."
+          }
+        ]
+      },
+      "移动-常规与速度": {
+        "default": "walk",
+        "verbs": [
+          {
+            "verb": "walk",
+            "zh": "走",
+            "triggers": [
+              "走"
+            ],
+            "force": "中",
+            "speed": "中",
+            "balance": "稳",
+            "sound": "正常",
+            "mood": "中性",
+            "scene": "常规行走",
+            "example": "She walks toward the door."
+          },
+          {
+            "verb": "stride",
+            "zh": "大步走",
+            "triggers": [
+              "大步",
+              "阔步"
+            ],
+            "force": "中",
+            "speed": "快",
+            "balance": "稳",
+            "sound": "有力",
+            "mood": "自信/急切",
+            "scene": "坚定前行/赶路",
+            "example": "He strides across the hall."
+          },
+          {
+            "verb": "stop",
+            "zh": "停下/停在",
+            "triggers": [
+              "停在",
+              "停下",
+              "停住"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "稳",
+            "sound": "刹车/停步",
+            "mood": "观察/到达",
+            "scene": "车/人停下",
+            "example": "The car stops in the clearing."
+          },
+          {
+            "verb": "trudge",
+            "zh": "沉重跋涉",
+            "triggers": [
+              "跋涉",
+              "沉重地走",
+              "艰难地走"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "balance": "稳但重",
+            "sound": "沉重",
+            "mood": "疲惫/艰难",
+            "scene": "长途/负重/泥地",
+            "example": "They trudge through the mud."
+          },
+          {
+            "verb": "plod",
+            "zh": "拖着步子走",
+            "triggers": [
+              "拖沓",
+              "缓慢地走"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "balance": "稳",
+            "sound": "沉闷",
+            "mood": "疲惫/无精打采",
+            "scene": "疲惫行走",
+            "example": "He plods along the empty road."
+          },
+          {
+            "verb": "march",
+            "zh": "列队行进",
+            "triggers": [
+              "列队",
+              "行军",
+              "齐步"
+            ],
+            "force": "中",
+            "speed": "中",
+            "balance": "规整",
+            "sound": "整齐",
+            "mood": "纪律/气势",
+            "scene": "队伍/军队",
+            "example": "The soldiers march past."
+          },
+          {
+            "verb": "jog",
+            "zh": "慢跑",
+            "triggers": [
+              "慢跑"
+            ],
+            "force": "中",
+            "speed": "中快",
+            "balance": "稳",
+            "sound": "轻快",
+            "mood": "日常/锻炼",
+            "scene": "小步慢跑",
+            "example": "She jogs along the riverbank."
+          },
+          {
+            "verb": "sprint",
+            "zh": "冲刺",
+            "triggers": [
+              "冲刺",
+              "飞奔",
+              "狂奔"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "balance": "前倾",
+            "sound": "急促",
+            "mood": "紧急/极限",
+            "scene": "赛跑/逃命",
+            "example": "He sprints for the door."
+          },
+          {
+            "verb": "dash",
+            "zh": "冲",
+            "triggers": [
+              "冲",
+              "急冲"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "balance": "前倾",
+            "sound": "快速脚步",
+            "mood": "紧急",
+            "scene": "逃跑/赶时间",
+            "example": "She dashes across the street."
+          },
+          {
+            "verb": "dart",
+            "zh": "一闪而过",
+            "triggers": [
+              "一闪",
+              "倏地",
+              "嗖地"
+            ],
+            "force": "小",
+            "speed": "极快",
+            "balance": "灵活",
+            "sound": "轻快",
+            "mood": "急促/躲闪",
+            "scene": "躲藏/抄近路",
+            "example": "He darts behind the crates."
+          },
+          {
+            "verb": "creep",
+            "zh": "匍匐潜行",
+            "triggers": [
+              "匍匐",
+              "爬行前进"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "低姿态",
+            "sound": "极轻",
+            "mood": "潜行/紧张",
+            "scene": "躲避/接近",
+            "example": "She creeps along the corridor."
+          },
+          {
+            "verb": "tiptoe",
+            "zh": "踮脚走",
+            "triggers": [
+              "踮脚",
+              "踮着脚"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "轻",
+            "sound": "几乎无声",
+            "mood": "小心/怕被发现",
+            "scene": "不想被发现",
+            "example": "He tiptoes past the sleeping guard."
+          },
+          {
+            "verb": "sneak",
+            "zh": "蹑手蹑脚",
+            "triggers": [
+              "蹑手蹑脚",
+              "潜",
+              "偷偷"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "balance": "轻",
+            "sound": "几乎无声",
+            "mood": "谨慎/潜行",
+            "scene": "潜入/躲开注意",
+            "example": "He sneaks out the back door."
+          },
+          {
+            "verb": "wade",
+            "zh": "涉水/趟过",
+            "triggers": [
+              "涉水",
+              "趟过",
+              "涉过"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "balance": "费力",
+            "sound": "水声",
+            "mood": "艰难",
+            "scene": "水中/泥中行进",
+            "example": "They wade through the floodwater."
+          },
+          {
+            "verb": "clamber",
+            "zh": "攀爬",
+            "triggers": [
+              "攀",
+              "扒着爬"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "balance": "手脚并用",
+            "sound": "摩擦",
+            "mood": "费力",
+            "scene": "攀爬岩壁/障碍",
+            "example": "He clambers over the wall."
+          },
+          {
+            "verb": "scramble",
+            "zh": "慌乱爬行/抢爬",
+            "triggers": [
+              "慌乱地爬",
+              "挣扎着爬"
+            ],
+            "force": "大",
+            "speed": "快而乱",
+            "balance": "不稳",
+            "sound": "碰撞",
+            "mood": "慌乱",
+            "scene": "紧急攀爬/逃离",
+            "example": "She scrambles up the slope."
+          },
+          {
+            "verb": "climb",
+            "zh": "爬上",
+            "triggers": [
+              "爬上",
+              "攀登"
+            ],
+            "force": "中",
+            "speed": "中",
+            "balance": "稳定",
+            "sound": "摩擦",
+            "mood": "目标明确",
+            "scene": "爬上高处",
+            "example": "He climbs onto the roof."
+          }
+        ]
+      },
+      "手部-拿取": {
+        "default": "take up",
+        "verbs": [
+          {
+            "verb": "pick up",
+            "zh": "拾起",
+            "triggers": [
+              "拾起"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "—",
+            "mood": "中性",
+            "scene": "从地面/腿上拾取",
+            "example": "He picks up the scattered bullets."
+          },
+          {
+            "verb": "take up",
+            "zh": "拿起",
+            "triggers": [
+              "拿起"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "正常",
+            "mood": "中性",
+            "scene": "常规拿物",
+            "example": "She takes up the key from the table."
+          },
+          {
+            "verb": "pick up",
+            "zh": "捡起",
+            "triggers": [
+              "捡起",
+              "拾起"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "轻",
+            "mood": "中性",
+            "scene": "从地面/桌上拾取",
+            "example": "He picks up the fallen letter."
+          },
+          {
+            "verb": "grasp",
+            "zh": "握住/抓稳",
+            "triggers": [
+              "握住",
+              "握紧",
+              "抓住"
+            ],
+            "force": "中-大",
+            "speed": "中",
+            "sound": "—",
+            "mood": "把握/掌控",
+            "scene": "抓稳/掌握",
+            "example": "He grasps the rope firmly."
+          },
+          {
+            "verb": "grip",
+            "zh": "紧握不放",
+            "triggers": [
+              "紧握",
+              "攥紧"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "sound": "收紧",
+            "mood": "紧张/用力",
+            "scene": "用力握住",
+            "example": "She grips the railing, knuckles white."
+          },
+          {
+            "verb": "grab",
+            "zh": "抓/夺",
+            "triggers": [
+              "抓起",
+              "抓",
+              "一把抓"
+            ],
+            "force": "大",
+            "speed": "快",
+            "sound": "急促",
+            "mood": "急切/紧张",
+            "scene": "抢时间/抓取",
+            "example": "He grabs the phone off the desk."
+          },
+          {
+            "verb": "clutch",
+            "zh": "紧攥护住",
+            "triggers": [
+              "攥",
+              "紧抱",
+              "护在"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "sound": "收紧",
+            "mood": "紧张/不舍/依赖",
+            "scene": "护住某物",
+            "example": "She clutches the letter to her chest."
+          },
+          {
+            "verb": "snatch",
+            "zh": "一把夺过",
+            "triggers": [
+              "夺",
+              "抢过"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "sound": "抢夺声",
+            "mood": "蛮横/突发",
+            "scene": "夺走/抢",
+            "example": "She snatches the document from his hand."
+          },
+          {
+            "verb": "fumble",
+            "zh": "慌乱摸索",
+            "triggers": [
+              "摸索",
+              "慌乱地翻",
+              "手忙脚乱地找"
+            ],
+            "force": "小",
+            "speed": "乱",
+            "sound": "碰撞",
+            "mood": "慌张/笨拙",
+            "scene": "黑暗中找东西/手抖",
+            "example": "He fumbles for the flashlight."
+          },
+          {
+            "verb": "cradle",
+            "zh": "小心托着",
+            "triggers": [
+              "托着",
+              "捧着"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "sound": "轻",
+            "mood": "珍视/小心",
+            "scene": "捧住脆弱/珍贵物",
+            "example": "She cradles the tiny bird."
+          },
+          {
+            "verb": "pinch",
+            "zh": "捏",
+            "triggers": [
+              "捏",
+              "捻"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "sound": "轻",
+            "mood": "精细",
+            "scene": "指尖捏取",
+            "example": "He pinches the herb between his fingers."
+          },
+          {
+            "verb": "tap",
+            "zh": "轻敲/轻点",
+            "triggers": [
+              "轻敲",
+              "轻点",
+              "叩"
+            ],
+            "force": "小",
+            "speed": "快",
+            "sound": "敲击",
+            "mood": "催促/示意",
+            "scene": "敲桌面/屏幕",
+            "example": "She taps the table impatiently."
+          }
+        ]
+      },
+      "视线-看": {
+        "default": "look",
+        "verbs": [
+          {
+            "verb": "look",
+            "zh": "看",
+            "triggers": [
+              "看向",
+              "看"
+            ],
+            "force": "中",
+            "speed": "中",
+            "duration": "中",
+            "mood": "中性",
+            "scene": "一般看",
+            "example": "He looks toward the door."
+          },
+          {
+            "verb": "glance",
+            "zh": "瞥一眼",
+            "triggers": [
+              "瞥",
+              "瞄"
+            ],
+            "force": "轻",
+            "speed": "快",
+            "duration": "短",
+            "mood": "随意/快速确认",
+            "scene": "顺带一瞥",
+            "example": "She glances at the clock."
+          },
+          {
+            "verb": "peer",
+            "zh": "眯眼细看",
+            "triggers": [
+              "眯眼",
+              "细看",
+              "辨认",
+              "凑近看"
+            ],
+            "force": "轻",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "辨认/怀疑",
+            "scene": "光线暗/看不清",
+            "example": "He peers into the darkness."
+          },
+          {
+            "verb": "stare",
+            "zh": "盯着看",
+            "triggers": [
+              "盯着",
+              "凝视",
+              "愣住"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "duration": "长",
+            "mood": "震惊/发呆/直视",
+            "scene": "被吸引/出神",
+            "example": "She stares at the empty chair."
+          },
+          {
+            "verb": "glare",
+            "zh": "怒视",
+            "triggers": [
+              "怒视",
+              "瞪"
+            ],
+            "force": "大",
+            "speed": "快",
+            "duration": "中",
+            "mood": "愤怒/敌意",
+            "scene": "对峙",
+            "example": "He glares at his rival."
+          },
+          {
+            "verb": "gaze",
+            "zh": "凝望",
+            "triggers": [
+              "凝望",
+              "深情地看"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "duration": "长",
+            "mood": "深情/思考",
+            "scene": "望着远方/某人",
+            "example": "She gazes out the window."
+          },
+          {
+            "verb": "scan",
+            "zh": "扫视",
+            "triggers": [
+              "扫视",
+              "环视",
+              "搜寻"
+            ],
+            "force": "中",
+            "speed": "中",
+            "duration": "中",
+            "mood": "搜寻/警觉",
+            "scene": "找人/找物/警戒",
+            "example": "She scans the crowd for him."
+          },
+          {
+            "verb": "survey",
+            "zh": "环顾打量",
+            "triggers": [
+              "打量",
+              "环顾"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "评估/警惕",
+            "scene": "观察环境",
+            "example": "He surveys the room."
+          },
+          {
+            "verb": "lock eyes",
+            "zh": "四目相对",
+            "triggers": [
+              "对视",
+              "四目相对"
+            ],
+            "force": "中",
+            "speed": "—",
+            "duration": "长",
+            "mood": "对峙/深情/默契",
+            "scene": "关键对视",
+            "example": "They lock eyes across the room."
+          },
+          {
+            "verb": "squint",
+            "zh": "眯缝着眼",
+            "triggers": [
+              "眯缝",
+              "眯起眼"
+            ],
+            "force": "轻",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "刺眼/疑惑",
+            "scene": "强光/远处",
+            "example": "She squints at the bright light."
+          },
+          {
+            "verb": "avoid eye contact",
+            "zh": "回避目光",
+            "triggers": [
+              "回避目光",
+              "不敢看"
+            ],
+            "force": "轻",
+            "speed": "快",
+            "duration": "短",
+            "mood": "心虚/羞怯",
+            "scene": "逃避对视",
+            "example": "He avoids eye contact, staring at the floor."
+          }
+        ]
+      },
+      "面部-表情": {
+        "default": "show a guarded expression",
+        "verbs": [
+          {
+            "verb": "frown",
+            "zh": "皱眉",
+            "triggers": [
+              "皱眉"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "困惑/不满",
+            "scene": "思考/不悦",
+            "example": "She frowns at the news."
+          },
+          {
+            "verb": "scowl",
+            "zh": "沉着脸",
+            "triggers": [
+              "沉着脸",
+              "拉下脸"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "duration": "长",
+            "mood": "不悦/阴沉",
+            "scene": "不满/威胁",
+            "example": "He scowls at the interruption."
+          },
+          {
+            "verb": "grimace",
+            "zh": "龇牙忍痛",
+            "triggers": [
+              "龇牙",
+              "忍痛"
+            ],
+            "force": "中",
+            "speed": "快",
+            "duration": "短",
+            "mood": "疼痛/厌恶",
+            "scene": "受伤/难闻",
+            "example": "She grimaces as the wound is dressed."
+          },
+          {
+            "verb": "smirk",
+            "zh": "得意地笑",
+            "triggers": [
+              "得意地笑",
+              "坏笑"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "得意/嘲讽",
+            "scene": "占上风",
+            "example": "He smirks, knowing he has won."
+          },
+          {
+            "verb": "sneer",
+            "zh": "冷笑/讥笑",
+            "triggers": [
+              "冷笑",
+              "讥笑"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "轻蔑/敌意",
+            "scene": "看不起对方",
+            "example": "She sneers at his excuse."
+          },
+          {
+            "verb": "grin",
+            "zh": "咧嘴笑",
+            "triggers": [
+              "咧嘴笑",
+              "露出笑容"
+            ],
+            "force": "中",
+            "speed": "快",
+            "duration": "中",
+            "mood": "开心/得意",
+            "scene": "高兴",
+            "example": "He grins from ear to ear."
+          },
+          {
+            "verb": "pout",
+            "zh": "噘嘴",
+            "triggers": [
+              "噘嘴"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "不满/撒娇",
+            "scene": "生气/委屈",
+            "example": "She pouts, arms crossed."
+          },
+          {
+            "verb": "narrow one's eyes",
+            "zh": "眯起眼睛打量",
+            "triggers": [
+              "眯起眼睛",
+              "眯眼看"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "duration": "中",
+            "mood": "怀疑/审视",
+            "scene": "怀疑对方",
+            "example": "He narrows his eyes at the stranger."
+          }
+        ]
+      },
+      "身体姿态-起身倒下": {
+        "default": "rise slowly",
+        "verbs": [
+          {
+            "verb": "stand",
+            "zh": "矗立/站立",
+            "triggers": [
+              "矗立",
+              "站着",
+              "站立"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "—",
+            "mood": "中性",
+            "scene": "建筑物/人静立",
+            "example": "The cabin stands in the dark woods."
+          },
+          {
+            "verb": "rise slowly",
+            "zh": "缓缓起身",
+            "triggers": [
+              "缓缓起身",
+              "慢慢起身",
+              "缓缓站起"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "疲惫/郑重",
+            "scene": "受伤/沉重起身",
+            "example": "He rises slowly, steadying himself."
+          },
+          {
+            "verb": "bolt up",
+            "zh": "猛地坐起/弹起",
+            "triggers": [
+              "弹起",
+              "惊坐起",
+              "猛地坐起"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "mood": "惊醒/警觉",
+            "scene": "从床上/地上弹起",
+            "example": "She bolts up in bed."
+          },
+          {
+            "verb": "push oneself up",
+            "zh": "撑起身体",
+            "triggers": [
+              "撑起",
+              "撑地起身"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "mood": "艰难",
+            "scene": "用手撑地起身",
+            "example": "He pushes himself up on one arm."
+          },
+          {
+            "verb": "stand up",
+            "zh": "站起身",
+            "triggers": [
+              "站起身",
+              "站起来",
+              "起身"
+            ],
+            "force": "中",
+            "speed": "中",
+            "mood": "中性",
+            "scene": "一般起身",
+            "example": "She stands up from the chair."
+          },
+          {
+            "verb": "kneel",
+            "zh": "跪下",
+            "triggers": [
+              "跪下",
+              "跪倒"
+            ],
+            "force": "中",
+            "speed": "中",
+            "mood": "恳求/虔诚/投降",
+            "scene": "下跪",
+            "example": "He kneels before the altar."
+          },
+          {
+            "verb": "crouch",
+            "zh": "蹲伏",
+            "triggers": [
+              "蹲伏",
+              "猫着腰"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "隐蔽/警觉",
+            "scene": "躲避/潜行",
+            "example": "She crouches behind the wall."
+          },
+          {
+            "verb": "squat",
+            "zh": "蹲下",
+            "triggers": [
+              "蹲下",
+              "蹲着"
+            ],
+            "force": "小",
+            "speed": "中",
+            "mood": "中性",
+            "scene": "蹲下",
+            "example": "He squats down to check the tracks."
+          },
+          {
+            "verb": "lean",
+            "zh": "倚靠",
+            "triggers": [
+              "倚",
+              "靠在",
+              "扶着站"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "疲惫/依赖",
+            "scene": "靠墙/扶手",
+            "example": "She leans against the door frame."
+          },
+          {
+            "verb": "slump",
+            "zh": "瘫坐/塌下",
+            "triggers": [
+              "瘫坐",
+              "塌下",
+              "软倒"
+            ],
+            "force": "小",
+            "speed": "快",
+            "mood": "崩溃/疲惫",
+            "scene": "失去力气坐下",
+            "example": "He slumps into the chair."
+          },
+          {
+            "verb": "collapse",
+            "zh": "瘫倒/垮下",
+            "triggers": [
+              "瘫倒",
+              "垮下",
+              "昏倒",
+              "倒在",
+              "倒向"
+            ],
+            "force": "大",
+            "speed": "突发",
+            "mood": "力竭/崩溃",
+            "scene": "失去支撑倒下",
+            "example": "He collapses against the door."
+          },
+          {
+            "verb": "sink",
+            "zh": "缓缓坐下/沉下",
+            "triggers": [
+              "滑坐",
+              "缓缓坐下",
+              "跌坐"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "疲惫/沮丧",
+            "scene": "无力坐下",
+            "example": "She sinks onto the floor."
+          },
+          {
+            "verb": "topple",
+            "zh": "轰然倒下",
+            "triggers": [
+              "轰然",
+              "翻倒",
+              "倾倒"
+            ],
+            "force": "大",
+            "speed": "中",
+            "mood": "失衡/重物",
+            "scene": "整体翻倒",
+            "example": "The stack topples over."
+          },
+          {
+            "verb": "crash down",
+            "zh": "被砸向地面/重摔",
+            "triggers": [
+              "重摔",
+              "砸向",
+              "砸在",
+              "掀飞",
+              "重重倒地"
+            ],
+            "force": "大",
+            "speed": "突发",
+            "mood": "受外力/重创",
+            "scene": "被外力砸地",
+            "example": "He crashes down, dust bursting up."
+          },
+          {
+            "verb": "slam to the ground",
+            "zh": "重重摔在地上",
+            "triggers": [
+              "摔在地上",
+              "摔倒在地"
+            ],
+            "force": "大",
+            "speed": "突发",
+            "mood": "暴力/重创",
+            "scene": "被外力砸地",
+            "example": "The blast slams him to the ground."
+          },
+          {
+            "verb": "keel over",
+            "zh": "栽倒",
+            "triggers": [
+              "栽倒",
+              "一头栽下"
+            ],
+            "force": "大",
+            "speed": "突发",
+            "mood": "昏厥/重创",
+            "scene": "突然栽倒",
+            "example": "He keels over, unconscious."
+          },
+          {
+            "verb": "double over",
+            "zh": "痛得弯腰",
+            "triggers": [
+              "痛得弯腰",
+              "捂住肚子弯下"
+            ],
+            "force": "中",
+            "speed": "快",
+            "mood": "剧痛",
+            "scene": "腹痛/受击",
+            "example": "She doubles over in pain."
+          }
+        ]
+      },
+      "物体交互-扔放": {
+        "default": "set down",
+        "verbs": [
+          {
+            "verb": "rip",
+            "zh": "撕开",
+            "triggers": [
+              "撕开",
+              "扯开",
+              "撕裂"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "—",
+            "mood": "中性",
+            "scene": "撕扯衣物/布料",
+            "example": "He rips her dress open."
+          },
+          {
+            "verb": "set down",
+            "zh": "放下",
+            "triggers": [
+              "放下"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "轻",
+            "mood": "中性",
+            "scene": "常规放置",
+            "example": "She sets the cup down."
+          },
+          {
+            "verb": "place gently",
+            "zh": "轻轻放",
+            "triggers": [
+              "轻轻放",
+              "轻放",
+              "小心翼翼放"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "sound": "几乎无声",
+            "mood": "珍视/小心",
+            "scene": "易碎/重要物",
+            "example": "He places the vial gently on the table."
+          },
+          {
+            "verb": "toss",
+            "zh": "随手抛",
+            "triggers": [
+              "随手抛",
+              "抛给",
+              "扔给"
+            ],
+            "force": "中",
+            "speed": "快",
+            "sound": "轻响",
+            "mood": "随意/不在乎",
+            "scene": "随手一扔",
+            "example": "She tosses the keys onto the counter."
+          },
+          {
+            "verb": "hurl",
+            "zh": "用力掷",
+            "triggers": [
+              "用力掷",
+              "狠狠扔",
+              "猛掷"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "sound": "撞击",
+            "mood": "愤怒/爆发",
+            "scene": "摔东西",
+            "example": "He hurls the glass against the wall."
+          },
+          {
+            "verb": "slam down",
+            "zh": "重重拍下",
+            "triggers": [
+              "重重拍",
+              "拍在",
+              "摔在",
+              "砸在桌上"
+            ],
+            "force": "大",
+            "speed": "快",
+            "sound": "砰",
+            "mood": "愤怒/强调",
+            "scene": "拍桌/摔文件",
+            "example": "She slams the report down on the desk."
+          },
+          {
+            "verb": "shove",
+            "zh": "猛推",
+            "triggers": [
+              "猛推",
+              "一把推开",
+              "撞开"
+            ],
+            "force": "大",
+            "speed": "快",
+            "sound": "碰撞",
+            "mood": "粗暴/急切",
+            "scene": "推开障碍/人",
+            "example": "He shoves the box aside."
+          },
+          {
+            "verb": "push",
+            "zh": "推",
+            "triggers": [
+              "推开",
+              "推"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "摩擦",
+            "mood": "中性",
+            "scene": "推开/推动",
+            "example": "She pushes the door open."
+          },
+          {
+            "verb": "pull",
+            "zh": "拉",
+            "triggers": [
+              "拉开",
+              "拉出",
+              "拽",
+              "拽出"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "摩擦",
+            "mood": "中性/用力",
+            "scene": "拉开门/抽出",
+            "example": "He pulls the drawer open."
+          },
+          {
+            "verb": "drag",
+            "zh": "拖拽",
+            "triggers": [
+              "拖拽",
+              "拖走",
+              "拖着"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "sound": "拖拽",
+            "mood": "费力",
+            "scene": "拖重物/拖人",
+            "example": "They drag the body across the floor."
+          },
+          {
+            "verb": "hoist",
+            "zh": "举起/扛起",
+            "triggers": [
+              "扛起",
+              "举起",
+              "抬起"
+            ],
+            "force": "大",
+            "speed": "慢",
+            "sound": "用力",
+            "mood": "发力",
+            "scene": "举起重物",
+            "example": "He hoists the sack onto his shoulder."
+          },
+          {
+            "verb": "drop",
+            "zh": "松手落下",
+            "triggers": [
+              "松手",
+              "掉落",
+              "脱手"
+            ],
+            "force": "小",
+            "speed": "突发",
+            "sound": "落地",
+            "mood": "意外/失手",
+            "scene": "东西掉落",
+            "example": "She drops the glass, startled."
+          },
+          {
+            "verb": "slide",
+            "zh": "滑推",
+            "triggers": [
+              "滑过去",
+              "推过去"
+            ],
+            "force": "中",
+            "speed": "快",
+            "sound": "滑动",
+            "mood": "利落",
+            "scene": "把东西滑给对方",
+            "example": "He slides the envelope across the desk."
+          },
+          {
+            "verb": "stack",
+            "zh": "堆叠",
+            "triggers": [
+              "堆叠",
+              "叠起",
+              "码放"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "轻微碰撞",
+            "mood": "有条理",
+            "scene": "码放物品",
+            "example": "She stacks the crates by the door."
+          }
+        ]
+      },
+      "状态变化-落下散开": {
+        "default": "settle",
+        "verbs": [
+          {
+            "verb": "settle",
+            "zh": "缓缓落定",
+            "triggers": [
+              "落定",
+              "沉降",
+              "尘埃落定"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "安静",
+            "scene": "尘埃/雪/纸片落定",
+            "example": "Dust settles on the floor."
+          },
+          {
+            "verb": "spill",
+            "zh": "洒出/溢出",
+            "triggers": [
+              "洒",
+              "溢出",
+              "泼"
+            ],
+            "force": "中",
+            "speed": "中",
+            "mood": "意外/失控",
+            "scene": "液体/颗粒洒出",
+            "example": "Coffee spills across the desk."
+          },
+          {
+            "verb": "seep",
+            "zh": "渗出/渗透",
+            "triggers": [
+              "渗出",
+              "渗"
+            ],
+            "force": "小",
+            "speed": "极慢",
+            "mood": "隐秘/蔓延",
+            "scene": "血/水慢慢渗出",
+            "example": "Blood seeps through the bandage."
+          },
+          {
+            "verb": "scatter",
+            "zh": "四散",
+            "triggers": [
+              "四散",
+              "散落",
+              "散开"
+            ],
+            "force": "中",
+            "speed": "快",
+            "mood": "混乱",
+            "scene": "碎片/人群/纸散开",
+            "example": "Papers scatter in the wind."
+          },
+          {
+            "verb": "dissipate",
+            "zh": "消散",
+            "triggers": [
+              "消散",
+              "飘散"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "渐逝",
+            "scene": "烟/雾/情绪消散",
+            "example": "The smoke dissipates into the night."
+          },
+          {
+            "verb": "drift",
+            "zh": "飘浮移动",
+            "triggers": [
+              "飘",
+              "漂浮"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "mood": "轻盈/无方向",
+            "scene": "烟/叶/雪飘动",
+            "example": "Leaves drift across the courtyard."
+          },
+          {
+            "verb": "swirl",
+            "zh": "旋转翻涌",
+            "triggers": [
+              "旋转",
+              "打旋",
+              "翻涌"
+            ],
+            "force": "中",
+            "speed": "中",
+            "mood": "动态",
+            "scene": "水流/烟雾旋转",
+            "example": "Dust swirls around her feet."
+          },
+          {
+            "verb": "billow",
+            "zh": "翻卷涌起",
+            "triggers": [
+              "翻卷",
+              "涌起",
+              "翻滚"
+            ],
+            "force": "大",
+            "speed": "中",
+            "mood": "强烈",
+            "scene": "浓烟/云/布翻卷",
+            "example": "Smoke billows from the window."
+          },
+          {
+            "verb": "drip",
+            "zh": "滴落",
+            "triggers": [
+              "滴落",
+              "滴下",
+              "滴水"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "sound": "滴答",
+            "mood": "安静/渗人",
+            "scene": "水滴/血滴",
+            "example": "Water drips from the ceiling."
+          },
+          {
+            "verb": "trickle",
+            "zh": "细流",
+            "triggers": [
+              "细流",
+              "缓缓流下"
+            ],
+            "force": "小",
+            "speed": "慢",
+            "sound": "细水声",
+            "mood": "微弱",
+            "scene": "少量液体流",
+            "example": "Blood trickles down his arm."
+          },
+          {
+            "verb": "ooze",
+            "zh": "黏稠渗出",
+            "triggers": [
+              "黏稠渗出",
+              "慢慢渗"
+            ],
+            "force": "小",
+            "speed": "极慢",
+            "mood": "黏腻/诡异",
+            "scene": "黏液/胶状物",
+            "example": "Dark liquid oozes from the crack."
+          },
+          {
+            "verb": "leak",
+            "zh": "泄漏",
+            "triggers": [
+              "泄漏",
+              "漏出"
+            ],
+            "force": "中",
+            "speed": "慢",
+            "sound": "滴漏",
+            "mood": "危险/失控",
+            "scene": "气体/液体泄漏",
+            "example": "Gas leaks from the pipe."
+          },
+          {
+            "verb": "pour",
+            "zh": "倾泻",
+            "triggers": [
+              "倾泻",
+              "倒出",
+              "涌出"
+            ],
+            "force": "大",
+            "speed": "快",
+            "sound": "哗啦",
+            "mood": "强烈",
+            "scene": "液体大量倒出",
+            "example": "Water pours over the edge."
+          },
+          {
+            "verb": "flow",
+            "zh": "流淌",
+            "triggers": [
+              "流淌",
+              "流过"
+            ],
+            "force": "中",
+            "speed": "中",
+            "sound": "水声",
+            "mood": "连续",
+            "scene": "液体/人群流动",
+            "example": "The river flows past the village."
+          },
+          {
+            "verb": "crumble",
+            "zh": "碎裂塌落",
+            "triggers": [
+              "碎裂",
+              "塌落",
+              "崩落"
+            ],
+            "force": "中",
+            "speed": "慢-中",
+            "sound": "碎裂",
+            "mood": "衰败",
+            "scene": "墙/石/土崩裂",
+            "example": "The old wall crumbles into dust."
+          },
+          {
+            "verb": "crack",
+            "zh": "裂开",
+            "triggers": [
+              "裂开",
+              "开裂"
+            ],
+            "force": "中",
+            "speed": "突发",
+            "sound": "咔嚓",
+            "mood": "紧张",
+            "scene": "冰/玻璃/地面裂开",
+            "example": "The ice cracks beneath his feet."
+          },
+          {
+            "verb": "shatter",
+            "zh": "粉碎四溅",
+            "triggers": [
+              "粉碎",
+              "碎成",
+              "炸裂"
+            ],
+            "force": "大",
+            "speed": "极快",
+            "sound": "巨响",
+            "mood": "破坏",
+            "scene": "玻璃/陶瓷粉碎",
+            "example": "The window shatters into a thousand pieces."
+          }
+        ]
+      }
+    }
+  }
+}

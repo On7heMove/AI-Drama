@@ -1,0 +1,752 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "cinema_spec",
+  "description": "视频提示词摄影技术参数配置包（本地映射，确定性）：全局规格/光学/灯光/曝光/色彩五大参数族 + 剧情要素→参数映射表。输入键全部来自既有引擎输出（scene_type=SceneClassifier、scale=shot_selector 景别键、time/interior/era=ParsedScene、emotion=emotion_infer、光源词=剧本原文）；镜头/调度/构图/转场由 shot_language/shot_selector 提供，本包不重复。",
+  "source": {
+    "learned_at": "2026-08-20",
+    "method": "联网检索专业摄影资料 + 对齐用户标准《初入江湖》第一卷字段深度",
+    "basis": [
+      {
+        "item": "色温",
+        "value": "钨丝3200K / 日光5600K / 烛光1800-2000K；真实月光≈日光，但电影常用6500-8000K冷调艺术处理",
+        "source": "Practical Cinematography（专业手册）",
+        "evidence": "官方手册"
+      },
+      {
+        "item": "T值基准",
+        "value": "电影摄影主流布光档 T2.8；镜头最佳成像约开大2档；不建议主镜头收至T8而特写开T2.2",
+        "source": "wolfcrow《Best Aperture for Filmmaking》/ cinematography.com 从业讨论",
+        "evidence": "行业经验/统计"
+      },
+      {
+        "item": "照度",
+        "value": "满月0.25lux / 客厅50 / 办公室500 / 演播室1000 / 阴天户外15000；Technicolor 时代布光 150-400fc（约1600-4300lux）",
+        "source": "Amazon Lumberyard 环境照度表 / SMPE Journal",
+        "evidence": "行业参考表"
+      },
+      {
+        "item": "光比",
+        "value": "1:1-2:1 柔和开放平静 / 4:1 戏剧但可读 / 8:1+ 严峻压抑；低光调高光比制造悬疑",
+        "source": "光比教材（nolanx lighting continuity / 大学电影教材）",
+        "evidence": "教材/行业经验"
+      }
+    ]
+  },
+  "data": {
+    "version": "0.1",
+    "global": {
+      "note": "全片统一规格（L0，每剧一次声明；画幅/分辨率可被交付配置覆盖）",
+      "aspect_ratio": {
+        "default": "16:9",
+        "options": [
+          "9:16",
+          "16:9",
+          "2.39:1",
+          "2.35:1",
+          "21:9",
+          "1.85:1",
+          "4:3",
+          "1:1"
+        ],
+        "note": "短剧默认 16:9 横屏；9:16 竖屏、电影遮幕/变形宽银幕 2.39:1、2.35:1，超宽 21:9，宽银幕 1.85:1，经典 4:3，方形 1:1 可选"
+      },
+      "resolution": {
+        "shoot": "8K",
+        "deliver": "4K",
+        "note": "8K拍摄4K成片（对齐《初入江湖》标准）"
+      },
+      "frame_rate": {
+        "fps": 24,
+        "note": "电影标准24fps"
+      },
+      "shutter_angle": 180,
+      "iso": {
+        "day": 800,
+        "night": 3200,
+        "note": "基础感光度：日景800，夜景3200（详见 exposure.iso_by_condition）"
+      },
+      "log": {
+        "default": "LogC",
+        "options": [
+          "LogC",
+          "S-Log3",
+          "V-Log"
+        ]
+      },
+      "film_sim": {
+        "default": "Kodak Vision3 5219",
+        "options": [
+          "Kodak Vision3 5219",
+          "Kodak Vision3 5207"
+        ],
+        "note": "5219=钨丝卷（夜/暖光）；5207=日光卷（日景）"
+      },
+      "codec": {
+        "default": "ProRes 422 HQ"
+      },
+      "lens_set": {
+        "default": "ARRI Signature Prime / Cooke S4 / Panavision Primo",
+        "note": "主镜头组（对齐《初入江湖》标准）"
+      }
+    },
+    "optics": {
+      "note": "光学参数按景别映射（全画幅等效焦距）；T值按景别控景深，对齐《初入江湖》特写T2.8/中景T4/全景T4-5.6/远景T5.6-8 与 wolfcrow T2.8 主流档",
+      "scale_to_focal_mm": {
+        "extreme_long": [
+          16,
+          24
+        ],
+        "long": [
+          24,
+          35
+        ],
+        "full": [
+          24,
+          35
+        ],
+        "medium": [
+          35,
+          50
+        ],
+        "medium_two": [
+          35,
+          50
+        ],
+        "medium_close": [
+          50,
+          50
+        ],
+        "over_shoulder": [
+          50,
+          85
+        ],
+        "closeup": [
+          50,
+          85
+        ],
+        "big_closeup": [
+          85,
+          100
+        ],
+        "extreme_closeup": [
+          100,
+          135
+        ],
+        "insert": [
+          85,
+          100
+        ],
+        "pov": [
+          24,
+          35
+        ],
+        "empty": [
+          24,
+          35
+        ]
+      },
+      "scale_to_tstop": {
+        "extreme_closeup": [
+          1.8,
+          2.8
+        ],
+        "big_closeup": [
+          1.8,
+          2.8
+        ],
+        "closeup": [
+          2.0,
+          2.8
+        ],
+        "insert": [
+          2.8,
+          4
+        ],
+        "over_shoulder": [
+          2.8,
+          4
+        ],
+        "medium_close": [
+          2.8,
+          4
+        ],
+        "medium": [
+          2.8,
+          4
+        ],
+        "medium_two": [
+          2.8,
+          4
+        ],
+        "full": [
+          4,
+          5.6
+        ],
+        "long": [
+          5.6,
+          8
+        ],
+        "extreme_long": [
+          5.6,
+          8
+        ],
+        "pov": [
+          4,
+          5.6
+        ],
+        "empty": [
+          5.6,
+          8
+        ]
+      },
+      "depth_of_field": {
+        "note": "景深意图：特写浅（主体眼鼻清晰、背景虚化）/ 中景中 / 全景深（前后景清晰）",
+        "shallow": [
+          "extreme_closeup",
+          "big_closeup",
+          "closeup"
+        ],
+        "medium": [
+          "insert",
+          "over_shoulder",
+          "medium_close",
+          "medium",
+          "medium_two"
+        ],
+        "deep": [
+          "full",
+          "long",
+          "extreme_long",
+          "pov",
+          "empty"
+        ]
+      },
+      "lens_character": {
+        "note": "焦段视觉特征（提示词用词），随书籍学习迭代",
+        "16": "超广角，透视夸张，环境压迫",
+        "24": "广角，空间纵深，全景叙事",
+        "35": "标准广角，人眼邻近视角，纪实感",
+        "50": "标准镜头，人眼透视，中性真实",
+        "85": "人像中长焦，压缩感，浅景深",
+        "100": "中长焦，特写压缩，背景虚化",
+        "135": "长焦特写，强烈压缩，浅景深"
+      }
+    },
+    "lighting": {
+      "note": "灯光基础映射：键=time×interior（ParsedScene.time：晨/日/昏/夜；interior：内/外）。色温/照度/方向/光质为基线；scene_type 与 emotion 叠加光比；剧情光源词命中则覆盖为特殊光。",
+      "time_interior_to_baseline": {
+        "日+外": {
+          "color_temp_k": [
+            5400,
+            5600
+          ],
+          "illuminance_lux": [
+            5000,
+            25000
+          ],
+          "direction": "顶侧自然光",
+          "quality": "直射硬光+阴影软光混合",
+          "shadow": "浓"
+        },
+        "日+内": {
+          "color_temp_k": [
+            3200,
+            5600
+          ],
+          "illuminance_lux": [
+            500,
+            2000
+          ],
+          "direction": "窗侧光",
+          "quality": "软",
+          "shadow": "淡"
+        },
+        "晨+外": {
+          "color_temp_k": [
+            3200,
+            4500
+          ],
+          "illuminance_lux": [
+            1000,
+            5000
+          ],
+          "direction": "低角度暖光",
+          "quality": "软",
+          "shadow": "长而淡"
+        },
+        "晨+内": {
+          "color_temp_k": [
+            3200,
+            4500
+          ],
+          "illuminance_lux": [
+            300,
+            1000
+          ],
+          "direction": "低角度窗光",
+          "quality": "软",
+          "shadow": "长而淡"
+        },
+        "昏+外": {
+          "color_temp_k": [
+            2000,
+            3500
+          ],
+          "illuminance_lux": [
+            500,
+            2000
+          ],
+          "direction": "低角度暖橙光",
+          "quality": "软",
+          "shadow": "长而浓"
+        },
+        "昏+内": {
+          "color_temp_k": [
+            3200,
+            4500
+          ],
+          "illuminance_lux": [
+            300,
+            1000
+          ],
+          "direction": "暖光混合窗光",
+          "quality": "软",
+          "shadow": "淡"
+        },
+        "夜+外": {
+          "color_temp_k": [
+            6500,
+            8000
+          ],
+          "illuminance_lux": [
+            10,
+            500
+          ],
+          "direction": "顶侧冷光(月光)",
+          "quality": "硬",
+          "shadow": "浓",
+          "note": "真实月光≈日光，电影艺术处理常用6500-8000K冷调（Practical Cinematography）"
+        },
+        "夜+内": {
+          "color_temp_k": [
+            2800,
+            3200
+          ],
+          "illuminance_lux": [
+            50,
+            300
+          ],
+          "direction": "顶灯/台灯/烛光",
+          "quality": "软硬混合",
+          "shadow": "中"
+        },
+        "未知": {
+          "color_temp_k": [
+            5400,
+            5600
+          ],
+          "illuminance_lux": [
+            300,
+            800
+          ],
+          "direction": "中性前侧光",
+          "quality": "软",
+          "shadow": "淡"
+        }
+      },
+      "scene_type_ratio": {
+        "dialogue": [
+          2,
+          3
+        ],
+        "action": [
+          4,
+          4
+        ],
+        "emotion": [
+          2,
+          2
+        ],
+        "suspense": [
+          8,
+          8
+        ],
+        "reveal": [
+          4,
+          4
+        ],
+        "fantasy": [
+          3,
+          3
+        ],
+        "establishing": [
+          3,
+          3
+        ],
+        "transition": [
+          2,
+          3
+        ],
+        "unknown": [
+          3,
+          3
+        ]
+      },
+      "emotion_ratio_adjust": {
+        "悲痛": {
+          "ratio": [
+            2,
+            2
+          ],
+          "tint": "冷调偏移",
+          "quality": "柔光"
+        },
+        "恐惧": {
+          "ratio": [
+            8,
+            8
+          ],
+          "tint": "冷调",
+          "quality": "硬光"
+        },
+        "震惊": {
+          "ratio": [
+            4,
+            4
+          ],
+          "tint": "中性",
+          "quality": "中性"
+        },
+        "怨毒": {
+          "ratio": [
+            6,
+            6
+          ],
+          "tint": "冷调",
+          "quality": "硬光侧光"
+        },
+        "狂喜": {
+          "ratio": [
+            2,
+            2
+          ],
+          "tint": "暖调",
+          "quality": "柔光"
+        },
+        "隐忍": {
+          "ratio": [
+            3,
+            3
+          ],
+          "tint": "中性",
+          "quality": "中性"
+        },
+        "温馨": {
+          "ratio": [
+            1.5,
+            2
+          ],
+          "tint": "暖调",
+          "quality": "柔光"
+        },
+        "压迫": {
+          "ratio": [
+            8,
+            8
+          ],
+          "tint": "冷调",
+          "quality": "硬光"
+        },
+        "未知": {
+          "ratio": [
+            3,
+            3
+          ],
+          "tint": "中性",
+          "quality": "中性"
+        }
+      },
+      "source_triggers": {
+        "霓虹": {
+          "keywords": [
+            "霓虹",
+            "霓虹灯",
+            "广告牌",
+            "霓虹光"
+          ],
+          "light": {
+            "color_temp_k": [
+              4500,
+              6500
+            ],
+            "illuminance_lux": [
+              300,
+              800
+            ],
+            "quality": "硬光",
+            "special": "彩色频闪"
+          }
+        },
+        "月光": {
+          "keywords": [
+            "月光",
+            "月色",
+            "月亮"
+          ],
+          "light": {
+            "color_temp_k": [
+              6500,
+              8000
+            ],
+            "illuminance_lux": [
+              10,
+              200
+            ],
+            "quality": "硬光",
+            "special": "冷调月光"
+          }
+        },
+        "烛光": {
+          "keywords": [
+            "烛光",
+            "蜡烛",
+            "烛火"
+          ],
+          "light": {
+            "color_temp_k": [
+              1800,
+              3200
+            ],
+            "illuminance_lux": [
+              5,
+              200
+            ],
+            "quality": "软光",
+            "special": "暖光闪烁"
+          }
+        },
+        "火光": {
+          "keywords": [
+            "火焰",
+            "火光",
+            "篝火",
+            "燃烧",
+            "火把"
+          ],
+          "light": {
+            "color_temp_k": [
+              2000,
+              3200
+            ],
+            "illuminance_lux": [
+              100,
+              500
+            ],
+            "quality": "硬光",
+            "special": "低角度暖光闪烁"
+          }
+        },
+        "闪电": {
+          "keywords": [
+            "闪电",
+            "雷光",
+            "电光"
+          ],
+          "light": {
+            "color_temp_k": [
+              6500,
+              6500
+            ],
+            "illuminance_lux": [
+              3000,
+              10000
+            ],
+            "quality": "硬光",
+            "special": "瞬时强光峰值"
+          }
+        },
+        "裂缝": {
+          "keywords": [
+            "裂缝",
+            "裂缝光",
+            "白光",
+            "强光"
+          ],
+          "light": {
+            "color_temp_k": [
+              6500,
+              6500
+            ],
+            "illuminance_lux": [
+              2000,
+              3000
+            ],
+            "quality": "硬光",
+            "special": "瞬时强光（裂缝/白闪）"
+          }
+        },
+        "荧光": {
+          "keywords": [
+            "日光灯",
+            "荧光灯",
+            "灯管"
+          ],
+          "light": {
+            "color_temp_k": [
+              4000,
+              5000
+            ],
+            "illuminance_lux": [
+              300,
+              800
+            ],
+            "quality": "顶光",
+            "special": "偏绿冷白"
+          }
+        },
+        "全息": {
+          "keywords": [
+            "全息",
+            "光屏",
+            "数据光",
+            "虚拟屏"
+          ],
+          "light": {
+            "color_temp_k": [
+              4500,
+              6500
+            ],
+            "illuminance_lux": [
+              500,
+              2000
+            ],
+            "quality": "硬光",
+            "special": "彩色光点缀"
+          }
+        },
+        "note": "剧情光源词命中→覆盖基础光（复用 emotion_infer.json triggers 机制）；未命中→回退 time×interior 基线"
+      }
+    },
+    "exposure": {
+      "note": "曝光参数：快门角度180°标准（运动模糊自然）；ISO按日/夜；照度低时优先开大光圈（T值下探），日景过曝优先加ND",
+      "shutter_angle": 180,
+      "iso_by_condition": {
+        "日+外": 800,
+        "日+内": [
+          800,
+          1600
+        ],
+        "晨+外": 800,
+        "晨+内": [
+          800,
+          1600
+        ],
+        "昏+外": [
+          800,
+          1600
+        ],
+        "昏+内": [
+          1600,
+          3200
+        ],
+        "夜+外": [
+          1600,
+          3200
+        ],
+        "夜+内": [
+          1600,
+          3200
+        ]
+      },
+      "nd_filter": {
+        "note": "日景过曝时优先加ND，保持T值/快门不变",
+        "default": "ND 0.6-1.2（日外）"
+      },
+      "motion_blur": {
+        "note": "180°快门=自然运动模糊；升格(>24fps)时保持180°以缩短单帧曝光（升格档复用 speed_control）"
+      }
+    },
+    "color": {
+      "note": "色彩分级：对比度/饱和/色调按场景类型；胶片模拟按 global.film_sim",
+      "scene_type_grade": {
+        "dialogue": {
+          "contrast": "中",
+          "saturation": "自然",
+          "tint": "中性"
+        },
+        "action": {
+          "contrast": "高",
+          "saturation": "高",
+          "tint": "暖冷对比"
+        },
+        "emotion": {
+          "contrast": "中",
+          "saturation": "自然",
+          "tint": "按情绪微调"
+        },
+        "suspense": {
+          "contrast": "高",
+          "saturation": "低",
+          "tint": "冷蓝"
+        },
+        "reveal": {
+          "contrast": "高",
+          "saturation": "自然",
+          "tint": "中性"
+        },
+        "fantasy": {
+          "contrast": "中",
+          "saturation": "柔",
+          "tint": "冷调/柔焦区分时空"
+        },
+        "establishing": {
+          "contrast": "中",
+          "saturation": "自然",
+          "tint": "中性"
+        },
+        "transition": {
+          "contrast": "中",
+          "saturation": "自然",
+          "tint": "中性"
+        }
+      }
+    },
+    "runtime_bounds": {
+      "note": "本地裁决值域：任何来源（含未来 LLM 提议）的参数必须落在此范围，非法回退 fallback",
+      "color_temp_k": [
+        1800,
+        10000
+      ],
+      "illuminance_lux": [
+        1,
+        100000
+      ],
+      "ratio": [
+        1.0,
+        16.0
+      ],
+      "focal_mm": [
+        12,
+        200
+      ],
+      "tstop": [
+        1.2,
+        16
+      ],
+      "iso": [
+        100,
+        12800
+      ],
+      "fallback": {
+        "focal_mm": 35,
+        "tstop": 2.8,
+        "color_temp_k": 5600,
+        "illuminance_lux": 500,
+        "ratio": 3,
+        "quality": "软光",
+        "direction": "前侧光",
+        "shadow": "淡"
+      }
+    }
+  }
+}

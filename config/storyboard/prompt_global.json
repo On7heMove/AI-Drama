@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "prompt_global",
+  "description": "全局提示词配置（三层架构 L0）：风格锁定/人物形象/负面基线，每部剧生成一次，跨段复用。",
+  "data": {
+    "style_lock": {
+      "zh_9_16": "真人风，真实自然的人物与表演，日常真实生活质感，9:16",
+      "zh_16_9": "真人风，真实自然的人物与表演，日常真实生活质感，横屏16:9",
+      "en_9_16": "real-person realism, authentic natural people and performance, everyday real-life texture, vertical 9:16",
+      "en_16_9": "real-person realism, authentic natural people and performance, everyday real-life texture, 16:9 widescreen"
+    },
+    "negative_baseline": {
+      "zh": [
+        "变形",
+        "手部畸形",
+        "多余肢体",
+        "穿模",
+        "模糊"
+      ],
+      "en": [
+        "deformation",
+        "malformed hands",
+        "extra limbs",
+        "clipping",
+        "blur"
+      ]
+    },
+    "negative_style": {
+      "zh": [
+        "动画感",
+        "CG感",
+        "塑料质感",
+        "过度磨皮",
+        "网红滤镜",
+        "卡通",
+        "手办感",
+        "电影感",
+        "胶片颗粒",
+        "戏剧化打光"
+      ],
+      "en": [
+        "animated look",
+        "CGI look",
+        "plastic skin",
+        "over-smoothed filter",
+        "cartoon",
+        "doll-like",
+        "cinematic film grain",
+        "dramatic grading"
+      ]
+    },
+    "negative_platform": {
+      "zh": "",
+      "en": ""
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": "0.2",
+  "pack_id": "scene_header",
+  "description": "场景头配置（三层架构 L1）：空间布局/时间/光线/色调/轴线，每场景一次声明，结构化方位词替代自然语言段落；中英双语。",
+  "data": {
+    "scenes": {
+      "s1_cathedral": {
+        "name": "中央教堂（封爵大典）",
+        "name_en": "Grand Cathedral (Investiture Ceremony)",
+        "time": "白昼",
+        "time_en": "daytime",
+        "lighting": "晨光透过彩窗在石砖地面投下斑斓光斑；暖金烛光与冷白晨光混合",
+        "lighting_en": "morning light through stained glass casting dappled patterns on the stone floor; warm candlelight blended with cool daylight",
+        "tone": "高对比，暖金/冷白混合",
+        "tone_en": "high contrast, warm gold / cool white blend",
+        "spatial": {
+          "front_center": "罗伊娜、伊索尔德并肩跪在红色绒毯上，面朝圣坛/主礼人、背对人群入口侧",
+          "mid_sides": "贵族分列左右，虚化站定，不抢主体",
+          "back_shadow": "珍妮芙位于人群阴影，黑兜帽、脸藏阴影、不露清晰正脸",
+          "back_high": "主礼人位于后景高台/圣坛前，暂不抢镜",
+          "camera_side": "入口侧（殿门内），观众看到跪地者后背/侧背",
+          "axis_lock": "镜头全程保持入口侧，轴侧恒定，禁止180度越轴"
+        },
+        "spatial_en": {
+          "front_center": "Rowena and Isolde kneel side by side on the red carpet, facing the altar/officiant, backs to the crowd-side entrance",
+          "mid_sides": "nobles line both sides, blurred, not stealing focus",
+          "back_shadow": "Genevieve in the crowd shadow, black hood, face hidden, no clear frontal face",
+          "back_high": "the officiant at the rear altar, not yet claiming focus",
+          "camera_side": "entrance side (inside the hall), audience sees the kneelers' backs / side-backs",
+          "axis_lock": "camera stays on the entrance side throughout, axis constant, no 180-degree flip"
+        }
+      },
+      "s2_thorn_garden": {
+        "name": "荆棘园（救白狼）",
+        "name_en": "Thorn Garden (Rescuing the White Wolf)",
+        "time": "夜",
+        "time_en": "night",
+        "lighting": "冷蓝月光；荆棘剪影；白狼毛色反月光",
+        "lighting_en": "cold blue moonlight; thorn silhouettes; the wolf's fur catching moonlight",
+        "tone": "冷调低饱和，暗光",
+        "tone_en": "cool low saturation, dim light",
+        "spatial": {
+          "front_center": "罗伊娜与白狼相对",
+          "environment": "黑色荆棘如铁网蔓延，月光下剪影",
+          "camera_side": "侧面/高机位俯瞰",
+          "axis_lock": "保持180度轴线，人物相对站位恒定"
+        },
+        "spatial_en": {
+          "front_center": "Rowena and the White Wolf face each other",
+          "environment": "black thorns spread like an iron net, silhouetted in moonlight",
+          "camera_side": "side / high-angle overhead",
+          "axis_lock": "keep the 180-degree axis; character positions constant"
+        }
+      }
+    }
+  }
+}

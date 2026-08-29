@@ -1,0 +1,38 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "action_detail",
+  "description": "动作细节补全层（2026-08-18）：剧本原文是信息骨架，SD 需要导演级补全（持械方式/角度/部位/物理链/被作用者反应链/旁观者反应/时序）才能收敛。v0.1 先做透'刺杀/贯穿'模板族；补全结果进可见【画面·连续动作】，忠实原文、只增不删。",
+  "data": {
+    "templates": {
+      "stab": {
+        "name": "刺杀/贯穿",
+        "triggers": [
+          "贯穿",
+          "刺入",
+          "刺中",
+          "刺进",
+          "捅",
+          "一剑"
+        ],
+        "parts": {
+          "physics_zh": "{actor}右手紧握剑柄，自{target}背后左肩胛下方斜向上刺入，剑身没入身体至护手；血自背后伤口涌出、浸染衣袍后侧",
+          "victim_zh": "{target}身体猛地前弓僵直，头缓缓转向背后，身体保持面朝圣坛的跪姿，眼神痛苦与难以置信",
+          "bystander_zh": "{bystanders}惊惶退避、倒吸冷气",
+          "physics_en": "{actor} grips the hilt in the right hand, drives the blade upward from behind into {target}'s left shoulder blade, the blade sinking to the guard; blood wells from the back wound and soaks the back of the gown",
+          "victim_en": "{target} jerks forward rigid, head slowly turns back over the shoulder, body stays kneeling facing the altar, eyes in pain and disbelief",
+          "bystander_en": "{bystanders} recoil, gasping"
+        },
+        "phys_check": [
+          "没入",
+          "背后"
+        ],
+        "blood_check": [
+          "伤口",
+          "涌出"
+        ]
+      }
+    },
+    "llm_refine_threshold": 2,
+    "note": "后续扩展：劈砍/斩、掐/推倒、跪倒/栽倒、耳语 等模板族"
+  }
+}

@@ -1,0 +1,421 @@
+{
+ "version": "0.1.0",
+ "count": 25,
+ "integration_points": [
+  "agent触发",
+  "本地校验层(B段)",
+  "本地渲染层(E段参数映射)"
+ ],
+ "skills": [
+  {
+   "slug": "audiovisual-added-value",
+   "title_zh": "audiovisual-added-value",
+   "source_book": "《视听：幻觉的构建》 米歇尔·希翁",
+   "description": "用户问'先闻其声再看其人'为什么有冲击、J/L-Cut 怎么切、音画同步点设在哪，或审查声音轴判断声音是否在增值/误导时调用：增值=声音赋予影像表现力且显得'本来就在画面里'，底层机制是同步整合（synchresis），同步点是声画交汇的支点。不适用于：纯对白清晰度（production-track-first）、静默设计（silence-and-sound-omission）。关键 trigger：'先闻其声' '声音先于画面' 'J-Cut' 'L-Cut' '音画同步' '增值' 'added value' 'synchresis' '音画关系' '审查声音轴'。",
+   "input_fields": [
+    "声音事件与视觉事件交汇候选",
+    "情绪意图"
+   ],
+   "output_fields": [
+    "主同步点(2-3个)",
+    "J/L进出方式",
+    "关声重看校验"
+   ],
+   "params_mapping": "先闻其声→J型; 拖尾连贯→L型; 增值校验→关声重看"
+  },
+  {
+   "slug": "confrontation-shot-techniques",
+   "title_zh": "confrontation-shot-techniques",
+   "source_book": "《大师镜头·第2卷：拍出一流对话场景的100个技巧》 克里斯托弗·肯沃斯",
+   "description": "为\"表面平静实则对峙\"的场景定镜头参数与分镜提示词时使用：两人有未说破的冲突、权力失衡、故作镇定，或需把隔阂物化。手法：切特写揭示压抑表情、环拍制造角色静止、长焦浅景深孤立一人、障碍物隔开双方、亲密感双人同框。不适用：外显打斗/追逐（用 fight-shot-techniques）、多人群戏调度、纯信息对白。trigger：\"对峙/冲突/紧张气氛/故作镇定/被冷落/越轴/机位高度/障碍物\"（confrontation, tension, unspoken conflict, power imbalance）。",
+   "input_fields": [
+    "冲突形态(谁怕谁/谁瞒谁)",
+    "权力差",
+    "隔阂来源"
+   ],
+   "output_fields": [
+    "机位清单(景别/焦距/机位高度/运动/构图)",
+    "分镜提示词",
+    "克制性检查"
+   ],
+   "params_mapping": "微冲突→特写+长焦浅景深; 故作镇定→环拍; 权力差→机位高度; 隔阂→障碍物; 亲密→双人同框"
+  },
+  {
+   "slug": "contrast-affinity",
+   "title_zh": "contrast-affinity",
+   "source_book": "《以眼说话：影像视觉原理及应用》 Bruce A. Block（佐证：《摄影的艺术》/《The Essence of Photography》 Bruce Barnbaum）",
+   "description": "当用户要控制一场戏的视觉张力档位（压抑/平静 vs 爆发/紧张），或问\"画面冲突感不够/太跳/太闷\"时使用；不用于决定机位景别或剪辑点。trigger: \"对比/反差/统一/亲和/压抑/爆发/张力\"，\"tension/contrast/too flat/mood\"。Controls visual tension via contrast/affinity across seven visual elements (space, line, shape, tone, color, movement, rhythm), synced to story tension.",
+   "input_fields": [
+    "目标情绪档位(压抑/爆发)",
+    "7个视觉元素当前值"
+   ],
+   "output_fields": [
+    "对比/亲和调整项",
+    "张力档位结论"
+   ],
+   "params_mapping": "压抑→降对比; 爆发→升对比"
+  },
+  {
+   "slug": "coverage-necessity",
+   "title_zh": "coverage-necessity",
+   "source_book": "《Film Directing: Cinematic Motion》(2e) Steven D. Katz",
+   "description": "当用户要决定\"这场戏要不要多机位覆盖/主镜头够不够/怎么控制素材成本\"时使用；不用于空间选型本身或剪辑点定位。trigger: \"要不要多机位/覆盖/主镜头够不够/素材够不够/一天几页/补特写\"，\"coverage/master shot/more angles\"。Cost-risk check: coverage grows geometrically (angles × takes + matching risk); keep coverage only when expressions or editing need it, else a long master wins.",
+   "input_fields": [
+    "场景表演密度(表情/动作)",
+    "剪辑需求",
+    "成本预算(机位/生成数)"
+   ],
+   "output_fields": [
+    "覆盖必要性结论",
+    "最小机位集合",
+    "成本-风险核算"
+   ],
+   "params_mapping": "表演瞬间密集→多机位覆盖; 低成本→核算后定下限"
+  },
+  {
+   "slug": "cut-is-a-blink",
+   "title_zh": "cut-is-a-blink",
+   "source_book": "《眨眼之间：电影剪辑的奥秘（第2版）》 沃尔特·默奇",
+   "description": "当用户给对白/对话戏找不到切点、正反打逐字切说话人、或问\"这个镜头该在什么时候切\"时使用：把每镜头当作一个想法主张，切点放在听者\"思维停顿/眨眼\"处，在观众正要索要之前一点点给出。不适用于：无对白的动作段落（节奏优先）、单镜头长镜头的内部调度。trigger：什么时候切/找不到切点/逐字切/正反打节奏/思维停顿、when to cut/cut point/blink/thinking pause/reaction cut。AI 生成场景无真实眨眼时，用表情变化与语气落点做代理信号。",
+   "input_fields": [
+    "对白台词/动作节拍",
+    "说话者与听者表情序列"
+   ],
+   "output_fields": [
+    "切点位置(秒/帧)",
+    "镜头长度列表"
+   ],
+   "params_mapping": "正反打→按思维停顿/眨眼定位切点"
+  },
+  {
+   "slug": "dialogue-camera-system",
+   "title_zh": "dialogue-camera-system",
+   "source_book": "《电影语言的语法》 丹尼尔·阿里洪",
+   "description": "当用户给对话/对峙/多人交谈场景定机位、设计分镜提示词、问\"三人对话摆几个机位/要不要越轴\"时使用：先定关系线→选一侧→摆三角形机位（外反拍/内反拍/平行），保持演员画面位置匹配。不适用于：单人独白、动作/追逐段（无对话轴线）、FPV/穿越机自由三维运镜。trigger：机位/景别/外反拍/内反拍/越轴/轴线/关系线、camera position/over-the-shoulder/reverse shot/axis/180-degree line。默认守轴线；情感冲突时可由 editing-six-principles 裁决例外。",
+   "input_fields": [
+    "参与人数",
+    "关系(对抗/亲密)",
+    "空间尺度"
+   ],
+   "output_fields": [
+    "轴线/关系线",
+    "机位清单(外反拍/内反拍/平行/三角)",
+    "越轴方案"
+   ],
+   "params_mapping": "对话(2-3人)→三角形机位+内外反拍; 对抗→可设计越轴"
+  },
+  {
+   "slug": "dialogue-six-tasks",
+   "title_zh": "dialogue-six-tasks",
+   "source_book": "《对白：文字、舞台、银幕的言语行为艺术》罗伯特·麦基（Robert McKee）",
+   "description": "审查或重写对白、判断一场戏为什么\"没戏\"、逐句拆解对白节拍时调用。核心判据：对白是行动——每句台词都必须是带着欲望、意向的内在行动，并对照六任务（内在行动/节拍加强场景/陈述与暗示传信息/个性化/拉住注意/保持真实）逐项打分。trigger：\"台词像说明书\"\"对白没戏/太平\"\"信息交换\"\"一句句拆节拍\"；英文 \"dialogue feels flat\"、\"what is each line doing\"、\"beat-by-beat breakdown\"。不用于：纯措辞润色、翻译、配音稿等语言层任务。贴合仓库场景：短剧对白审查、对白节拍解构、判断一句台词该不该留。",
+   "input_fields": [
+    "对白文本",
+    "场景节拍"
+   ],
+   "output_fields": [
+    "六任务逐项打分",
+    "缺内在行动的句子",
+    "改写建议"
+   ],
+   "params_mapping": "对白平/说明书→补内在行动+按六任务重排"
+  },
+  {
+   "slug": "director-three-questions",
+   "title_zh": "director-three-questions",
+   "source_book": "《导演功课》 大卫·马梅",
+   "description": "在给任何一场戏做分镜/生成镜头提示词之前先调用：需要想清楚\"这场戏的概念、主角要什么、该省略什么\"再定机位与台词。三问=摄影机摆哪里、跟演员说什么、戏的概念是什么；配套省略决策（镜头=省略）、场=小规模电影、概念测试（拿掉它故事还成立吗）、蒙太奇并置（用镜头组说话）。不适用：概念已明确、只需具体镜头参数（直接调 confrontation-shot-techniques / fight-shot-techniques 等家族 skill）、纯技术规格。trigger：\"分镜/镜头取舍/这场戏关于什么/省略/并置/导演三问\"（storyboard, what is this scene about, omission, juxtaposition, director's three questions）。",
+   "input_fields": [
+    "一场戏的概念/主角要什么",
+    "候选镜头清单"
+   ],
+   "output_fields": [
+    "三问答案(机位/台词/概念)",
+    "省略决策(删哪些镜头)",
+    "分镜方向"
+   ],
+   "params_mapping": "任何戏→先问概念再定机位/台词/取舍"
+  },
+  {
+   "slug": "editing-six-principles",
+   "title_zh": "editing-six-principles",
+   "source_book": "《眨眼之间：电影剪辑的奥秘（第2版）》 沃尔特·默奇",
+   "description": "当用户在设计分镜提示词、在两个切法间取舍、审查剪辑点或审片，且出现\"空间连贯 vs 情绪冲击\"类冲突时使用：按情感>故事>节奏>视线>二维>三维裁决，先保情感与故事，可牺牲空间连贯并用覆盖/交代镜头补救。不适用于：无情绪目标的纯参数调优、纯技术规格（帧率/编码）问题。trigger：哪个切法/剪辑点取舍/连贯性/越轴/情感优先、cut decision/continuity vs emotion/which cut wins。审片只会说\"空间没错\"、说不出\"感受对不对\"时也触发。",
+   "input_fields": [
+    "候选切法列表(2-3个)",
+    "情感目标(一句话)",
+    "各切法的六原则打分"
+   ],
+   "output_fields": [
+    "裁决结论:胜出切法",
+    "被牺牲原则的补救(覆盖/交代镜头)",
+    "审片检查项"
+   ],
+   "params_mapping": "冲突(连续vs情绪)→裁决后输出切法+补救镜头"
+  },
+  {
+   "slug": "fight-shot-techniques",
+   "title_zh": "fight-shot-techniques",
+   "source_book": "《大师j镜头——低成本拍大片的100个高级技巧》 克里斯托弗·肯沃斯",
+   "description": "为打斗/重击/击倒场景定镜头参数与分镜提示词时使用，尤其低成本、无替身、AI 生成需要\"以假乱真\"的重拳与击倒。核心：长焦借位（拳落点藏头后）、跟拳（机位随出拳移动+中心取景）、单演员跟随（不把两人当整体）、双视角分开拍（施暴者低角度+受害者长焦）、击倒（机位降到眼高+借位移）。不适用：非身体冲突的对峙（用 confrontation-shot-techniques）、追逐场面、真实格斗教学。trigger：\"打斗/重拳/击倒/借位/长焦/跟拍/双视角\"（fight, punch, knockout, telephoto, fake hit, follow camera）。",
+   "input_fields": [
+    "动作类型(重拳/扭打/击倒)",
+    "成本约束(无替身/AI)"
+   ],
+   "output_fields": [
+    "借位方案(落点藏头后)",
+    "机位运动(跟拳/降眼高)",
+    "双视角分拍清单",
+    "分镜提示词"
+   ],
+   "params_mapping": "重击→长焦借位+跟拳+中心取景; 击倒→机位降眼高借位移"
+  },
+  {
+   "slug": "gap-creation",
+   "title_zh": "gap-creation",
+   "source_book": "《故事：材质、结构、风格和银幕剧作的原理》 Robert McKee",
+   "description": "给短剧单集场景加张力/反转：角色行动得到的反应太平、\"敲门门就开\"\"求助就被帮\"时调用。方法：在预期与结果之间撬开鸿沟，让反应偏离预期，主角被迫采取更困难更冒险的第二个行动，节拍逐级升级。不适用于：信息型对白整理、结构大检查（用 scene-analysis-five-steps）。关键 trigger：\"这段太顺了\"\"反转不够\"\"怎么让求助/谈判有张力\"\"让反应出乎意料\"\"too predictable / no conflict / needs a twist\"。",
+   "input_fields": [
+    "主角行动",
+    "预期反应",
+    "当前节拍"
+   ],
+   "output_fields": [
+    "鸿沟点",
+    "偏离反应设计",
+    "第二步更冒险行动"
+   ],
+   "params_mapping": "太顺/无张力→让反应偏离预期并升级"
+  },
+  {
+   "slug": "inciting-incident",
+   "title_zh": "inciting-incident",
+   "source_book": "《故事：材质、结构、风格和银幕剧作的原理》 Robert McKee",
+   "description": "设计/校验短剧第 1 集开场钩子：开场事件够不够格当激励事件——必须打破主人公生活平衡、激起恢复平衡的欲望、是动态充分发展的事件、且必须被观众亲眼看到（上银幕，不能只靠台词转述）。不适用于：常规悬念设计（悬念≠激励事件）、整剧三幕布局（用 three-act-plot-points）。关键 trigger：\"第一集钩子怎么设计\"\"开场太弱\"\"激励事件放哪\"\"网文改编开篇\"\"inciting incident / cold open hook / weak opening event\"。",
+   "input_fields": [
+    "第一集/开场事件",
+    "主角欲望",
+    "后续铺陈"
+   ],
+   "output_fields": [
+    "激励事件四要件判定",
+    "上银幕方案",
+    "防弃剧调整"
+   ],
+   "params_mapping": "开场弱→打破平衡+上银幕+动态充分"
+  },
+  {
+   "slug": "motivation-principle",
+   "title_zh": "motivation-principle",
+   "source_book": "《电影艺术形式与风格》大卫·波德维尔 & 克莉丝汀·汤普森（David Bordwell & Kristin Thompson）",
+   "description": "判断画面元素（空镜、装饰性镜头、道具、光线、镜头运动）为什么出现、审查分镜中每个元素是否都有叙事动机时调用。核心判据：电影是人为构造物，任何元素都需要\"在此出现的逻辑解释\"（动机）；无动机的元素删掉或补理由（烛光给看脸的理由、人物移动给镜头运动的理由）。trigger：\"这个空镜要留吗\"\"这个镜头有什么用\"\"为什么出现这个道具\"\"装饰性镜头\"；英文 \"motivation\"、\"motif\"、\"is this shot necessary\"。不用于：纯艺术/实验影像、梦境幻觉段落、纪录片。贴合仓库场景：AI 短剧分镜中随机/装饰性元素的核验与删改。",
+   "input_fields": [
+    "分镜元素清单(空镜/道具/运镜)",
+    "叙事上下文"
+   ],
+   "output_fields": [
+    "每个元素的动机判定",
+    "删/补理由建议"
+   ],
+   "params_mapping": "装饰性元素→无动机删或补理由"
+  },
+  {
+   "slug": "production-track-first",
+   "title_zh": "production-track-first",
+   "source_book": "《Practical Art of Motion Picture Sound》 David L. Yewdall",
+   "description": "用户讨论现场收音、对白清晰度、底噪或'后期再修'时调用：production track 是声音设计的脊梁，好现场声=后期扩展蓝图，声音占体验一半；'后期再修'要花两倍代价。不适用于：无实拍素材的纯后期设计（sound-design-workflow）、纯静默留白（silence-and-sound-omission）。关键 trigger：'后期再修' '现场声轨' '收音' '对白听不清' '底噪' 'production track' 'fix it in post' 'room tone' 'wild track' '审查声音轴'。",
+   "input_fields": [
+    "素材来源(实拍/AI生成)",
+    "对白清晰度问题",
+    "后期修复需求"
+   ],
+   "output_fields": [
+    "现场声轨检查项(room tone/wild track)",
+    "后期代价评估",
+    "补录建议"
+   ],
+   "params_mapping": "实拍→现场声轨优先; AI→人声清晰硬约束"
+  },
+  {
+   "slug": "scene-analysis-five-steps",
+   "title_zh": "scene-analysis-five-steps",
+   "source_book": "《故事：材质、结构、风格和银幕剧作的原理》 Robert McKee",
+   "description": "短剧场景质检与解构：判断某场戏有没有存在的必要、为什么平、该怎么改时调用。把任一场景跑五步——确定冲突、标注开篇价值、分解节拍、标注结尾价值、定位转折点；任一环节缺失即无效（是节拍/过渡而非场景）。不适用于：整集/整剧宏观节奏审查（用 three-act-plot-points）、只做对白潜文本润色。关键 trigger：\"这个场景要不要删\"\"这集为什么平\"\"拆解这场戏\"\"scene feels flat / does this scene earn its place / break down this scene\"。",
+   "input_fields": [
+    "场景文本",
+    "节拍列表"
+   ],
+   "output_fields": [
+    "五步分析(冲突/开篇价值/节拍/结尾价值/转折)",
+    "平的原因",
+    "改法"
+   ],
+   "params_mapping": "场景平/无效→五步定位缺失项"
+  },
+  {
+   "slug": "scene-space-staging",
+   "title_zh": "scene-space-staging",
+   "source_book": "《Film Directing: Cinematic Motion》(2e) Steven D. Katz",
+   "description": "当用户要给一场戏选\"机位与空间关系\"的顶层方案（密闭/开阔/多人对话怎么调度、摄影机在动作内还是外）时使用；不用于决定\"谁的视点\"或剪辑策略。trigger: \"机位怎么摆/调度/密闭空间/开阔空间/大场面/多人场景\"，\"staging/blocking/camera position\"。Three basic stagings: camera outside-inward, camera in the action looking outward, or outside combining opposing views, ranked by technical difficulty.",
+   "input_fields": [
+    "空间尺度(密闭/开阔)",
+    "人数",
+    "动作类型"
+   ],
+   "output_fields": [
+    "顶层调度方案(机位在内/外)",
+    "机位关系",
+    "分镜提示词"
+   ],
+   "params_mapping": "密闭→景别收紧+机位受限; 开阔→建立镜+运动轴; 多人→分层站位"
+  },
+  {
+   "slug": "scene-value-turn",
+   "title_zh": "scene-value-turn",
+   "source_book": "《故事：材质、结构、风格和银幕剧作的原理》 Robert McKee",
+   "description": "判断\"什么才算一个场景\"、做单集场景结构与节奏曲线审查：场景=相对连续时空+冲突+至少一个可感知价值层面发生转折；无转折=节拍/过渡，需合并或删除。按节拍→场景→序列→幕层级拆解与组装单集。不适用于：整剧大纲布局（用 three-act-plot-points）、镜头呈现侧设计。关键 trigger：\"这场戏算不算场景\"\"价值没变\"\"转折不够\"\"scene without a turn / no value change / too many filler scenes\"。",
+   "input_fields": [
+    "场景文本(连续时空+冲突)",
+    "开篇/结尾价值"
+   ],
+   "output_fields": [
+    "是否算场景的判定",
+    "转折点位置",
+    "合并/删除建议"
+   ],
+   "params_mapping": "无价值转折→判定为节拍/过渡"
+  },
+  {
+   "slug": "silence-and-sound-omission",
+   "title_zh": "silence-and-sound-omission",
+   "source_book": "《声音设计：电影中语言、音乐和音响的表现力》 David Sonnenschein + 《Practical Art of Motion Picture Sound》 David L. Yewdall",
+   "description": "用户想让某段'全静音'、问'这里要不要加环境声'、需要留白/静默设计或 room tone 垫底、审查声音轴时发现声轨真空或铺太满时调用：绝对静默不存在，静默须按戏剧需要设计，每场景先铺一条基线声（room tone），再用'精选声音省略'制造张力。不适用于：正常配乐选择（sound-design-workflow）、对白清晰度（production-track-first）。关键 trigger：'全静音' '静默' '无声' '留白' '环境声要不要' 'room tone' 'silence' 'quiet' 'sound omission' '紧张到极致' '审查声音轴'。",
+   "input_fields": [
+    "戏剧静默点(反转前/惊吓前)",
+    "基线声素材"
+   ],
+   "output_fields": [
+    "静默设计(时长/位置)",
+    "room tone垫底方案",
+    "声音省略清单"
+   ],
+   "params_mapping": "紧张极致→设计静默+room tone垫底+留空隙"
+  },
+  {
+   "slug": "sound-design-workflow",
+   "title_zh": "sound-design-workflow",
+   "source_book": "《声音设计：电影中语言、音乐和音响的表现力》 David Sonnenschein",
+   "description": "用户给场景/分镜设计声音、定 BGM 卡点、排音效清单或审查声音轴时调用：从剧本出发用心耳预听该有的声音（物体/动作/环境/情绪/过场五类），画声音图第一稿，随剪辑迭代第二、三稿，再预混/终混。不适用于：只问单个音效音色、纯后期混音参数、已有成片微调单点声音（改用 audiovisual-added-value）。关键 trigger：\"给这个场景配声音\" \"BGM 卡点\" \"音效怎么排\" \"声音设计\" \"sound design\" \"BGM hit points\" \"score this scene\" \"soundscape\" \"审查声音轴\"。",
+   "input_fields": [
+    "剧本/分镜脚本",
+    "情绪节拍",
+    "BGM卡点需求"
+   ],
+   "output_fields": [
+    "五类声音清单",
+    "三稿声音图",
+    "BGM进点/音效层级",
+    "预混/终混方案"
+   ],
+   "params_mapping": "按情绪节拍→声音事件图→同步点→预混"
+  },
+  {
+   "slug": "subtext",
+   "title_zh": "subtext",
+   "source_book": "《对白：文字、舞台、银幕的言语行为艺术》罗伯特·麦基（Robert McKee）／佐证《故事》第15章 解说",
+   "description": "审查对白是否直白（写在鼻子上）、把角色真实意图藏到台词之下、检查言外之意时调用。核心判据：潜文本=台词之下真正执行的行动；任何对白在回答\"潜文本中真正的行动是什么\"之前不算完成；好对白多暗示、不明说、永远拥有潜文本。trigger：\"台词太直白\"\"把心里话都说出来了\"\"言外之意\"\"他在掩饰什么\"；英文 \"subtext\"、\"under the line\"、\"too on-the-nose\"。不用于：独白/画外音直述、喜剧直给式笑点、儿童向对白。贴合仓库场景：短剧对白潜文本审查与改写。",
+   "input_fields": [
+    "对白文本",
+    "角色真实欲望/关系"
+   ],
+   "output_fields": [
+    "潜文本行动检视",
+    "太直白处",
+    "含蓄改写"
+   ],
+   "params_mapping": "太直白→把真实意图藏到台词之下"
+  },
+  {
+   "slug": "three-act-plot-points",
+   "title_zh": "three-act-plot-points",
+   "source_book": "《电影剧本写作基础》 悉德·菲尔德",
+   "description": "短剧整剧/分集骨架设计：按三幕（建置→对抗→结局）+两个情节点（把故事转向另一方向的事件）检查大纲、防弃剧。建置幕须完成主人公+戏剧前提+情境交代；动笔前先定结局、明确主角需求。页码按集数比例缩放。不适用于：单场戏微调（用 scene-value-turn）、纯对白打磨。关键 trigger：\"三幕结构\"\"情节点放哪\"\"前几集怎么防弃剧\"\"结尾怎么写\"\"three-act / plot point / setup-confrontation-resolution\"。",
+   "input_fields": [
+    "整剧/分集大纲",
+    "集数",
+    "结尾"
+   ],
+   "output_fields": [
+    "三幕划分",
+    "两个情节点位置",
+    "建置幕三要素检查"
+   ],
+   "params_mapping": "长剧/分集→按比例缩放三幕+情节点"
+  },
+  {
+   "slug": "time-compression",
+   "title_zh": "time-compression",
+   "source_book": "《电影语言的语法》 丹尼尔·阿里洪",
+   "description": "当用户要把漫长过程/谈判/等待/重复动作压缩进有限时长（如 90 秒内）、或问\"中间过程怎么省\"时使用：保留段落首尾，中间只挑有意义的片段直接剪接，不用光学转换。不适用于：需要展示酝酿/渐变的过程戏、信息量不足需补内容的场景。trigger：压缩时间/过程太长/谈判戏/等待戏/90秒/跳切/省略中间、time compression/skip/condense/ellipsis/montage。与 visual-pause 互补：顿歇是插入，压缩是删减。",
+   "input_fields": [
+    "过程戏首尾",
+    "中间有意义片段"
+   ],
+   "output_fields": [
+    "保留片段",
+    "省略段",
+    "直接剪接方案"
+   ],
+   "params_mapping": "漫长过程→保留首尾+跳切压缩中间"
+  },
+  {
+   "slug": "viewpoint-system",
+   "title_zh": "viewpoint-system",
+   "source_book": "《电影镜头设计：从构思到银幕》（插图第2版） Steven D. Katz",
+   "description": "当用户要为一场戏决定\"从谁的视点看/观众知道多少/认同谁\"，或设计信息差悬念（悬疑/反转）时使用；不用于决定剪辑点或声音。trigger: \"视点/视角/谁的视点/观众该知道多少/代入感/全知/信息差\"，\"point of view/POV/omniscient/whose eyes\"。Viewpoint maps shot size = emotional distance and identification; choose viewpoint before camera position.",
+   "input_fields": [
+    "叙事意图(悬疑/反转/代入)",
+    "观众应知信息",
+    "主角与对象关系"
+   ],
+   "output_fields": [
+    "视点档位(第一/受限第三/全知)",
+    "景别=情感距离",
+    "视点一致性检查"
+   ],
+   "params_mapping": "信息差悬念→受限第三人称; 认同→贴拍/第一人称"
+  },
+  {
+   "slug": "visual-pause",
+   "title_zh": "visual-pause",
+   "source_book": "《电影语言的语法》 丹尼尔·阿里洪",
+   "description": "当用户处理连续长对白/信息密集对话、观众疲劳、或问\"对话高潮之间插什么/怎么让长戏有呼吸\"时使用：砍掉过渡性语言，把对话压成高潮序列，用\"视觉顿歇\"（插入/交代镜头，与戏有关但不抢高潮）隔开各要点。不适用于：需要保持连续临场感的一场到底、纯装饰性空镜需求。trigger：对白太长/插镜头/交代镜头/视觉顿歇/观众疲劳/长对话节奏、visual pause/insert shot/cutaway/breathing room/dialogue fatigue。顿歇必须提前铺垫与人物关系，防止离题。",
+   "input_fields": [
+    "长对白要点(2-4个高潮)",
+    "可用的插入/交代元素"
+   ],
+   "output_fields": [
+    "顿歇镜头列表",
+    "插入时机",
+    "铺垫要求"
+   ],
+   "params_mapping": "对话疲劳/高潮密集→插入与戏相关的顿歇镜头"
+  },
+  {
+   "slug": "visual-progression",
+   "title_zh": "visual-progression",
+   "source_book": "《以眼说话：影像视觉原理及应用》 Bruce A. Block",
+   "description": "当用户要为一场戏设计\"由弱到强\"的视觉递进（片头/开场渐进、打斗升级、追逐提速、惊悚积累）并让画面强度与叙事节拍同步时使用；不用于单纯构图美观或色彩风格咨询。trigger: \"渐进/递进/升级/层层加码/越来越强\"，\"escalation/progression/build-up/intensify\"。Maps simple-to-complex visual progression (point→line→plane→volume; density/motion) onto the story's intensity curve.",
+   "input_fields": [
+    "情绪强度曲线(3-5节拍)",
+    "视觉复杂度载体"
+   ],
+   "output_fields": [
+    "每节拍的复杂度档位",
+    "分镜提示词",
+    "同步性校验"
+   ],
+   "params_mapping": "强度递升→点线面体/人数密度逐级加码"
+  }
+ ]
+}

@@ -1,0 +1,592 @@
+{
+  "schema_version": "0.1",
+  "description": "cangjie 蒸馏技能注册表：已蒸馏书籍 → 业务块 → 生成环节 → 注入/校验形态",
+  "updated": "2026-08-24",
+  "skills": [
+    {
+      "id": "mckee-story",
+      "source": "故事（麦基·中文版）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "outline",
+        "episode"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "save-the-cat",
+      "source": "救猫咪合集（斯奈德）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline",
+        "outline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "hero-with-a-thousand-faces",
+      "source": "千面英雄（坎贝尔）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline",
+        "outline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "writers-journey",
+      "source": "作家之路（佛格勒·OCR）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline",
+        "outline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "screenplay",
+      "source": "电影剧本写作基础（菲尔德）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "outline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "dialogue",
+      "source": "对白（麦基·中文版）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "episode"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified",
+      "note": "对白模块占位，实际逻辑后补"
+    },
+    {
+      "id": "directing",
+      "source": "导演功课（马梅·OCR）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "episode"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "man-without-a-country",
+      "source": "冯内古特",
+      "business": [
+        "script",
+        "prompt"
+      ],
+      "stages": [
+        "storyline",
+        "outline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified",
+      "note": "故事形状（Man-in-Hole/Icarus）同时约束剧本与提示词节奏"
+    },
+    {
+      "id": "shapes-of-stories",
+      "source": "The Shapes of Stories（Elkins）",
+      "business": [
+        "script",
+        "prompt"
+      ],
+      "stages": [
+        "storyline",
+        "outline",
+        "quality"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "flow",
+      "source": "心流+发现心流（契克森米哈赖）",
+      "business": [
+        "script",
+        "prompt"
+      ],
+      "stages": [
+        "quality"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "wired-for-story",
+      "source": "Wired for Story（Cron）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline",
+        "outline",
+        "episode"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "flicker",
+      "source": "Flicker（Zacks）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "affective-computing",
+      "source": "Affective Computing（Picard）",
+      "business": [
+        "script",
+        "prompt"
+      ],
+      "stages": [
+        "quality"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "computational-narrative-intelligence",
+      "source": "CNI（Riedl）",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline"
+      ],
+      "form": {
+        "skill_json": true,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "bell-plot-structure",
+      "source": "这样写出好故事：玩转情节与结构",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "outline"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "bell-dialogue",
+      "source": "这样写出好故事：人物对话",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "episode"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "bell-description",
+      "source": "这样写出好故事：描写与背景",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "harvard-nonfiction",
+      "source": "哈佛非虚构写作课",
+      "business": [
+        "script"
+      ],
+      "stages": [
+        "storyline"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "verified"
+    },
+    {
+      "id": "master-shots-low-budget",
+      "source": "大师镜头·低成本拍大片",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "distilling"
+    },
+    {
+      "id": "katz-cinematic-motion",
+      "source": "Film Directing Cinematic Motion",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": false
+      },
+      "status": "distilling"
+    },
+    {
+      "id": "master-shots-2",
+      "source": "大师镜头第2卷·对话场景",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "master-shots-3",
+      "source": "大师镜头第三卷",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "katz-film-directing",
+      "source": "电影镜头设计（卡茨）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "grammar-of-film-language",
+      "source": "电影语言的语法（阿里洪）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "grammar-of-editing",
+      "source": "剪辑的语法",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "invisible-cut",
+      "source": "看不见的剪辑（奥斯廷）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "blink-of-an-eye",
+      "source": "眨眼之间（默奇）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "dancyger-editing",
+      "source": "电影与视频剪辑技术（丹西格）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "sound-design",
+      "source": "声音设计（Sonnenschein）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "chion-audiovision",
+      "source": "视听幻觉的构建（希翁）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "practical-motion-sound",
+      "source": "Practical Art of Motion Picture Sound",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "sound-design-expressive",
+      "source": "Sound Design: Expressive Power",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "film-color",
+      "source": "电影色彩学",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "art-of-photography",
+      "source": "摄影的艺术",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "cinematography-theory",
+      "source": "电影摄影理论与实践",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "hotshoe-diary",
+      "source": "热靴日记（麦克纳利）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "eyes-words",
+      "source": "以眼说话（布洛克）",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    },
+    {
+      "id": "essence-of-photography",
+      "source": "The Essence of Photography",
+      "business": [
+        "prompt"
+      ],
+      "stages": [
+        "storyboard"
+      ],
+      "form": {
+        "skill_json": false,
+        "skill_md": true
+      },
+      "status": "completed"
+    }
+  ]
+}

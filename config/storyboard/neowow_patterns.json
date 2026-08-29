@@ -1,0 +1,366 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "neowow_prompt_patterns",
+  "description": "Neowow 平台 AI 短剧提示词模式库（v0.1）：从 work-4-prompts.txt（51 条提示词）提炼的结构公式与可复用模式；产品方向优先横屏 16:9。对齐 config/storyboard/shot_language.json 与 docs/storyboard-shot-language.md，随语料扩充迭代。",
+  "data": {
+    "source": {
+      "platform": "Neowow（万物生画布）",
+      "url": "https://neowow.cn/neo-tv",
+      "corpus": "D:\\zzw\\投喂数据\\work-4-prompts.txt",
+      "entries": 51,
+      "chars": 175174,
+      "learned_at": "2026-08-13",
+      "aspect_ratio": "16:9 优先（语料 16:9/anamorphic:88，9:16:8）"
+    },
+    "aspect_ratio_decision": "产品决策 2026-08-13：以后优先横屏 16:9；语料直接复用，无需竖屏适配层",
+    "overall_structure": [
+      "总纲句：时长 + 镜头形式 + 风格 + 画质",
+      "参考资产锚定：@[id] 首帧/尾帧/视觉DNA",
+      "场景空间关系/场景物理设置：机位位置 + 空间布局 + 景深层次 + 画面边界",
+      "时间轴分段：秒级（0-2s/2-4s…）或阶段级（开篇/中段/末段）",
+      "硬切接口：HARD CUT n / 动作只完成一半就黑屏硬切",
+      "音效/声音设计：逐秒 + 拟声词 + 分层（环境/事件/对白/bgm）+ 关键音效必须严格生成",
+      "画面节奏：快-慢-快 / 慢-停-切焦-停-急-停 + 情绪命门",
+      "视觉风格/光影/色调：胶片质感 + 王家卫调性 + 光向/光比/色值/光柱/尘埃",
+      "约束（XX铁律）/ 负面（NOT 清单）",
+      "对白/表演风格：真实克制 / 反差 / 细节真实"
+    ],
+    "patterns": {
+      "camera": [
+        {
+          "id": "A1",
+          "name": "一镜到底+硬切接口",
+          "definition": "整段一个长镜头，动作进行到一半黑屏硬切，给后续段落留接口",
+          "trigger": "单场景连续动作 / 长镜头",
+          "example": "下床动作进行到一半时画面突然黑屏硬切（动作没拍完，给后续段落留接口）"
+        },
+        {
+          "id": "A2",
+          "name": "固定机位+手持呼吸感",
+          "definition": "机位不动，仅保留自然手持微晃；明确区分不是机位移动",
+          "trigger": "情绪戏 / 静场",
+          "example": "固定镜头带极轻微的手持呼吸感（不是机位移动，是手持自然的微小晃动）"
+        },
+        {
+          "id": "A3",
+          "name": "脏构图前景",
+          "definition": "前景用虚焦物（桌面/剪影/布袋）遮挡，营造景深与窥视感",
+          "trigger": "需要悬念/窥视感的场景",
+          "example": "前景是一个虚焦的布袋子剪影占据画面左侧约三分之一"
+        },
+        {
+          "id": "A4",
+          "name": "机位铁律",
+          "definition": "显式声明禁项：无变焦/无dolly/无环绕/无位移",
+          "trigger": "所有长镜头",
+          "example": "无变焦+无dolly+无环绕+只有handheld微抖"
+        },
+        {
+          "id": "A5",
+          "name": "入画/出画铁律",
+          "definition": "人物必须从画面边缘入/出，绝不从深处或中央出现/消失",
+          "trigger": "多人连续出入画场景",
+          "example": "所有迎面而来的人物必须从画面下方边缘或左右下角擦入（从摄影机背后走出）…绝不从画面深处冒出或画面中央出现"
+        },
+        {
+          "id": "A6",
+          "name": "画面边界约束",
+          "definition": "明说画面里看不到什么，约束取景范围",
+          "trigger": "固定机位/一镜到底",
+          "example": "画面里看不到地面、看不到天花板、看不到门，只有这一面墙和前景的袋子剪影"
+        },
+        {
+          "id": "A7",
+          "name": "Dutch angle 倾斜镜头",
+          "definition": "荷兰角倾斜 + 明确度数 + 用途",
+          "trigger": "追逐/不安/危机",
+          "example": "Dutch angle荷兰角倾斜镜头…倾斜约12-15度…加重追逐戏的不安感"
+        },
+        {
+          "id": "A8",
+          "name": "rack focus 焦点切换",
+          "definition": "慢速焦点切换作为本段核心视觉动作，配合揭示节奏",
+          "trigger": "揭示/悬念/焦点转移",
+          "example": "镜头焦点从对面墙壁缓慢平滑地向前景拉近…这次焦点切换是慢速平滑的rack focus"
+        },
+        {
+          "id": "A9",
+          "name": "平行横向跟拍",
+          "definition": "机位与主体同速、主体锁画面中央、wide shot 距离不变",
+          "trigger": "行进/追逐/变装",
+          "example": "严格的平行侧面横向跟拍+相机与船保持完全相同速度+船永远锁死画面正中央"
+        },
+        {
+          "id": "A10",
+          "name": "空镜首尾收束",
+          "definition": "首/尾用空镜回到初始构图，形成段落闭环",
+          "trigger": "段落式长镜头",
+          "example": "第9到10秒：纯空镜…画面回到初始构图"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "B1",
+          "name": "秒级分段",
+          "definition": "按秒区间分镜头内容（0-2s/2-4s…），每段一镜一义",
+          "trigger": "所有视频提示词",
+          "example": "【0-2秒】【2-4秒】【4-6秒】…"
+        },
+        {
+          "id": "B2",
+          "name": "阶段分段",
+          "definition": "开篇/中段/末段三段式组织",
+          "trigger": "3段式结构",
+          "example": "【开篇阶段】【中段阶段】【末段阶段】"
+        },
+        {
+          "id": "B3",
+          "name": "动作只完成一半就硬切",
+          "definition": "关键动作不做完，硬切留接口给后续段落",
+          "trigger": "需要悬念/连续性",
+          "example": "下床动作必须只完成一半就硬切，不要拍完整"
+        },
+        {
+          "id": "B4",
+          "name": "延迟揭示节奏",
+          "definition": "空镜→慢速焦点→静止聚焦构成连续延迟揭示，作为情绪命门",
+          "trigger": "悬念/揭示高潮",
+          "example": "第9到10秒的1秒空镜+第10到11秒的慢速rack focus+第11到12秒的1秒静止聚焦=连续3秒的延迟揭示节奏，是这段戏的情绪命门"
+        }
+      ],
+      "sound": [
+        {
+          "id": "C1",
+          "name": "关键音效必须严格生成",
+          "definition": "逐秒列音效 + 拟声词（唰/叮当/砰/咔哒/吱呀），标记必须严格生成",
+          "trigger": "有标志性音效的场景",
+          "example": "整段视频包含3次清晰可辨的标志性音效，每次音效都对应一个具体动作瞬间"
+        },
+        {
+          "id": "C2",
+          "name": "音效节奏对比",
+          "definition": "同类音效做重/轻/回收对比，不可混淆",
+          "trigger": "重复性音效（门/脚步）",
+          "example": "第9秒'砰'=出门（重、闷）／第12秒'咔哒+吱呀+气流'=回来（轻、有层次）／第14秒'砰'=再次出门（回收）"
+        },
+        {
+          "id": "C3",
+          "name": "声音分层",
+          "definition": "环境层/事件层/对白层/bgm 分开写",
+          "trigger": "所有",
+          "example": "背景层：风声…事件层：脚步…"
+        },
+        {
+          "id": "C4",
+          "name": "仅动作+环境音，不要bgm",
+          "definition": "显式排除背景音乐",
+          "trigger": "纪实/动作场景",
+          "example": "仅生成动作音效与环境音效+不要bgm+sound design only ambient and action sounds NO background music"
+        },
+        {
+          "id": "C5",
+          "name": "对白与动作同步",
+          "definition": "台词与动作入画同帧",
+          "trigger": "对白+动作同帧",
+          "example": "台词与手入画完全同步"
+        },
+        {
+          "id": "C6",
+          "name": "音画同步负面",
+          "definition": "防止音画不同步",
+          "trigger": "所有",
+          "example": "NOT 音画不同步"
+        }
+      ],
+      "style": [
+        {
+          "id": "D1",
+          "name": "王家卫调性",
+          "definition": "Wong Kar-wai + Christopher Doyle 掌镜质感 + 褪色油画暖调",
+          "trigger": "文艺/情绪向",
+          "example": "Wong Kar-wai《2046》Christopher Doyle 50mm prime使用风格"
+        },
+        {
+          "id": "D2",
+          "name": "胶片质感",
+          "definition": "35mm Kodak Vision3 film grain（heavy/light）",
+          "trigger": "所有",
+          "example": "heavy 35mm Kodak Vision3 film grain"
+        },
+        {
+          "id": "D3",
+          "name": "画幅",
+          "definition": "标准 16:9（anamorphic 宽银幕）；9:16 仅保留为可选项",
+          "trigger": "所有",
+          "example": "anamorphic widescreen 16:9"
+        },
+        {
+          "id": "D4",
+          "name": "光影公式",
+          "definition": "主光方向+光比+色值(#hex)+光柱/尘埃+氛围",
+          "trigger": "需要明确光影的场景",
+          "example": "光线:#F5C870金色夕阳从画面右上方低角度侧光…空气中可见金色光柱条纹+atmospheric haze"
+        },
+        {
+          "id": "D5",
+          "name": "色调",
+          "definition": "低饱和暖调 / 冷调霓虹 / 冷暖对比；压低对比度避免死黑死白",
+          "trigger": "按情绪",
+          "example": "冷调霓虹氛围…压低对比度，没有过曝高光也没有纯黑死阴影"
+        }
+      ],
+      "performance": [
+        {
+          "id": "E1",
+          "name": "表演真实克制",
+          "definition": "日常真实反应，不是影视剧式夸张表演",
+          "trigger": "所有表演",
+          "example": "是真实人吃了一惊的反应（不是影视剧那种夸张表演）"
+        },
+        {
+          "id": "E2",
+          "name": "反差表演",
+          "definition": "核心反差作为看点（冷脸使命感 vs 喧闹日常）",
+          "trigger": "需要人物张力",
+          "example": "丹眉的冷脸使命感是这段戏的核心反差"
+        },
+        {
+          "id": "E3",
+          "name": "细节真实",
+          "definition": "生理细节（眼皮浮肿/头发翘起）增加真实感",
+          "trigger": "近景/特写表演",
+          "example": "睡眼惺忪表情迷茫，头发因为刚睡醒有些翘起来凌乱，眼皮浮肿"
+        },
+        {
+          "id": "E4",
+          "name": "一镜一义",
+          "definition": "每段一个主体、一个动作、一个信息点",
+          "trigger": "所有",
+          "example": "通篇铁律"
+        }
+      ],
+      "constraints": [
+        {
+          "id": "F1",
+          "name": "XX铁律",
+          "definition": "机位/表情/形态/位置/纵深等逐条声明不可违背",
+          "trigger": "关键对象一致性",
+          "example": "机位铁律…9条腿铁律…沙艇位置铁律…钩索铁律…画面纵深铁律"
+        },
+        {
+          "id": "F2",
+          "name": "NOT 负面清单",
+          "definition": "按场景列负面词（速度/风格/对象/字幕水印）",
+          "trigger": "所有",
+          "example": "NOT slow motion+NOT speed ramping+实时正常速度+NOT cartoon+NOT chibi+无字幕+无水印"
+        },
+        {
+          "id": "F3",
+          "name": "首帧/尾帧严格匹配",
+          "definition": "首尾帧与参考资产严格一致",
+          "trigger": "有参考资产的生成",
+          "example": "首帧严格匹配@[…]。整段视频持续保持@图片1的色调、光线、构图"
+        },
+        {
+          "id": "F4",
+          "name": "视觉DNA锁定",
+          "definition": "用视觉DNA描述参考资产延续（色调/光线/构图）",
+          "trigger": "有参考资产的生成",
+          "example": "首帧锁定@[… ]的视觉DNA（同一个出租屋卧室…）"
+        }
+      ]
+    },
+    "negative_terms": {
+      "common": [
+        "变形",
+        "手部畸形",
+        "音画不同步",
+        "慢动作",
+        "多余角色入画",
+        "字幕",
+        "水印"
+      ],
+      "scene_extended": [
+        "speed ramping",
+        "静态镜头",
+        "cyberpunk neon",
+        "modern vehicles",
+        "modern weapons",
+        "clear blue sky",
+        "green vegetation",
+        "polished sci-fi materials",
+        "futuristic soldiers",
+        "illustrated",
+        "cartoon",
+        "chibi"
+      ]
+    },
+    "output_schema": {
+      "blocks": [
+        "总纲",
+        "锚定",
+        "空间",
+        "机位",
+        "时间轴",
+        "硬切",
+        "音效",
+        "节奏",
+        "光线",
+        "风格",
+        "约束负面",
+        "表演对白"
+      ],
+      "aspect_ratio": "16:9",
+      "duration_rule": "按秒分段；单镜建议 3-15s"
+    },
+    "golden_samples": [
+      {
+        "entry": 2,
+        "title": "晨起10s一镜到底+硬切接口",
+        "file": "golden_samples/neowow_02.txt",
+        "covers": [
+          "时间轴",
+          "硬切接口",
+          "关键音效",
+          "手持呼吸感",
+          "首帧锚定",
+          "表演真实克制"
+        ]
+      },
+      {
+        "entry": 4,
+        "title": "布袋rack focus延迟揭示",
+        "file": "golden_samples/neowow_04.txt",
+        "covers": [
+          "场景空间关系",
+          "rack focus",
+          "延迟揭示节奏",
+          "关键音效逐秒",
+          "音效节奏对比"
+        ]
+      },
+      {
+        "entry": 21,
+        "title": "剧组通道跟拍+入出画铁律",
+        "file": "golden_samples/neowow_21.txt",
+        "covers": [
+          "入画/出画铁律",
+          "平行跟拍",
+          "表演反差",
+          "声音分层",
+          "画面边界约束"
+        ]
+      }
+    ],
+    "language_policy": {
+      "mode": "bilingual_parallel",
+      "decision": "产品需求（2026-08-13）：提示词输出中英双语两套，分开给出、一起交付，不做中英混排",
+      "zh_version": "中文完整版：完整描述画面/动作/镜头/声音/约束；剧情与表演用中文，技术词可保留通用中文译法",
+      "en_version": "英文完整版：与中文版内容等价；动作动词按 en_verb_map.json 选最精准词",
+      "equivalence": "两套内容等价、结构一致（同一块顺序），一起交付，由使用者按目标平台选用",
+      "verb_map": "config/storyboard/en_verb_map.json",
+      "golden_samples": "config/storyboard/golden_samples/",
+      "verb_selection": "automatic_from_context：具体场景（伤在哪/伤势/平衡/支撑/速度/情绪）由生成器从剧本上下文自动判断，不依赖人工逐镜输入；依据 en_verb_map.json 的 decision_rules 选词。"
+    }
+  }
+}

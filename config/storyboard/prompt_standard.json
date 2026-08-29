@@ -1,0 +1,162 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "prompt_standard",
+  "description": "好提示词标准（2026-08-18 合并落盘，单一事实源）：生成器按此生产，校验器按此验收，新错误先在此注册一条（含检查+修复），再同步实现。分层：L1平台硬约束/L2结构完备/L3语义正确/L4 SD脾气/L5文风。",
+  "data": {
+    "layers": {
+      "L1_platform": {
+        "name": "平台硬约束",
+        "items": {
+          "dur_within_15s": {
+            "name": "单段时长≤15s",
+            "fix": "按 scene_segment 贪心分段，单段不超 SD 硬上限"
+          },
+          "negative_platform_only": {
+            "name": "负面词仅平台约束槽",
+            "fix": "否定词只留 无字幕/无水印/无片头Logo（机制3：否定召唤）"
+          }
+        }
+      },
+      "L2_structure": {
+        "name": "结构完备（必备行）",
+        "items": {
+          "has_style": {
+            "name": "风格锁定行",
+            "fix": "【风格锁定】必带"
+          },
+          "has_character": {
+            "name": "人物形象行",
+            "fix": "【人物形象】场景级角色形象卡，跨段一致"
+          },
+          "has_camera": {
+            "name": "镜头连续行",
+            "fix": "【镜头·连续】机位/景别/角度/运动"
+          },
+          "has_timeline": {
+            "name": "时间轴行",
+            "fix": "【x-y秒】"
+          },
+          "has_visual": {
+            "name": "画面连续动作行",
+            "fix": "【画面·连续动作】"
+          },
+          "has_blocking": {
+            "name": "站位轴线行",
+            "fix": "【站位·轴线】"
+          },
+          "has_staging": {
+            "name": "调度行",
+            "fix": "【调度】"
+          },
+          "has_tone": {
+            "name": "色调行",
+            "fix": "【色调】"
+          },
+          "has_light": {
+            "name": "光线行",
+            "fix": "【光线】"
+          },
+          "has_edit": {
+            "name": "剪辑行",
+            "fix": "【剪辑】"
+          },
+          "has_sound": {
+            "name": "声音行",
+            "fix": "【声音】"
+          },
+          "has_speed": {
+            "name": "速度行",
+            "fix": "【速度】"
+          },
+          "has_emotion": {
+            "name": "情绪行",
+            "fix": "【情绪】"
+          },
+          "has_negative": {
+            "name": "负面行",
+            "fix": "【负面】"
+          }
+        }
+      },
+      "L3_semantic": {
+        "name": "语义正确（内容正确性）",
+        "items": {
+          "char_presence": {
+            "name": "角色在场一致",
+            "fix": "场景级跪地者须出现在站位跪地主体（防伊索尔德丢失）"
+          },
+          "char_role_stable": {
+            "name": "角色身份稳定",
+            "fix": "隐藏威胁者不得被误判为跪地者（防珍妮芙跪地）"
+          },
+          "action_timeline": {
+            "name": "动作时序",
+            "fix": "过程链插到结果词前（防先贯穿后补刺入）"
+          },
+          "spatial_causality": {
+            "name": "空间因果一致",
+            "fix": "背后刺入须同时锁 镜头看到后背+威胁在背后"
+          },
+          "no_chest_tip": {
+            "name": "无胸前透出诱导",
+            "fix": "背后刺入不写'胸前透出'，改'血自背后伤口涌出'"
+          },
+          "turn_body_lock": {
+            "name": "转体锁定",
+            "fix": "回头须配'头转向背后，身体保持面朝圣坛跪姿'"
+          },
+          "no_ambiguous_pronoun": {
+            "name": "指代消解（无歧义代词）",
+            "fix": "画面/镜头/站位/状态行禁止残留 她/他/它，替换为该镜明确角色名（如'看她回头'→'看罗伊娜回头'）"
+          },
+          "passive_has_carrier": {
+            "name": "被动抽象须物理载体",
+            "fix": "画面'被押/被带/被救'等被动词必须带施加者+接触点+被动反应（如'两名守卫架着罗伊娜双臂推入园中，她踉跄回头'），否则SD退化成自主动作"
+          }
+        }
+      },
+      "L4_sd_temperament": {
+        "name": "SD脾气（后台生成约束）",
+        "items": {
+          "one_camera_move": {
+            "name": "一镜一运镜",
+            "fix": "单镜只给一种运镜（官方：叠加推拉摇移增不稳）"
+          },
+          "key_people_le4": {
+            "name": "同框重点人物≤4",
+            "fix": "参考/重点人物超4稳定性下降，须拆镜或降级群演"
+          },
+          "action_degree": {
+            "name": "动作三原则",
+            "fix": "部位+幅度/速度/力度；慢小连贯优先；惯性衔接"
+          }
+        }
+      },
+      "L5_style": {
+        "name": "文风（画面语言）",
+        "items": {
+          "no_metaphor": {
+            "name": "无比喻句",
+            "fix": "画面只写客观物理主体+动作+结果（SD易误解析比喻）"
+          },
+          "visual_pure": {
+            "name": "画面纯视觉",
+            "fix": "画面行不含声音词/听觉词（声音只进【声音】行）"
+          },
+          "physics_ok": {
+            "name": "物理合理",
+            "fix": "织物=撕开非绷断等基础物理"
+          },
+          "dialogue_faithful": {
+            "name": "台词忠实原文",
+            "fix": "对白逐字忠实剧本原文，不放大纲内容"
+          },
+          "en_no_zh": {
+            "name": "英文段无中文",
+            "fix": "英文段除对白专有名词外不得含中文（防LLM翻译静默回退）"
+          }
+        }
+      }
+    }
+  }
+}

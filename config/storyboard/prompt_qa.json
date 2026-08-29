@@ -1,0 +1,28 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "prompt_qa",
+  "description": "提示词质检机制（产线二必达项量具）：成条提示词确定性校验——抽象审美词→视觉锚点 / 负面通道 / 时间轴分段 / 合规硬词 / 镜头词汇 / 多主体编号 / 要素完整。与 sd_manual/visual_guard 互补（sd_manual 合并待后续）。",
+  "data": {
+    "abstract_to_anchor": {
+      "紧张": {"dimensions": ["光线", "机位", "运动"], "anchors_zh": ["低色温", "暗光高反差", "快速手持", "近景/特写"], "anchors_en": ["low color temperature", "dim high-contrast lighting", "fast handheld", "close-up"]},
+      "压抑": {"dimensions": ["光线", "构图", "色调"], "anchors_zh": ["低明度", "冷色调", "密闭构图", "俯视压迫"], "anchors_en": ["low brightness", "cool tones", "enclosed framing", "high-angle pressure"]},
+      "唯美": {"dimensions": ["光线", "景别", "色调"], "anchors_zh": ["柔和光", "浅景深", "高明度", "逆光轮廓"], "anchors_en": ["soft light", "shallow depth of field", "high brightness", "backlit silhouette"]},
+      "温馨": {"dimensions": ["光线", "色调", "环境"], "anchors_zh": ["暖色温", "柔和光", "家庭环境细节"], "anchors_en": ["warm color temperature", "soft light", "domestic environment details"]},
+      "诡异": {"dimensions": ["光线", "色调", "构图"], "anchors_zh": ["冷绿调", "侧光硬影", "失衡构图", "微距特写"], "anchors_en": ["cold green tone", "hard side light", "unbalanced composition", "macro close-up"]},
+      "庄重": {"dimensions": ["机位", "构图", "光线"], "anchors_zh": ["对称构图", "低机位仰拍", "顶光", "慢镜头"], "anchors_en": ["symmetrical composition", "low-angle tilt-up", "overhead light", "slow motion"]},
+      "悲伤": {"dimensions": ["光线", "色调", "景别"], "anchors_zh": ["冷调", "暗光", "中近景", "雨/泪光细节"], "anchors_en": ["cool tones", "dim light", "medium close-up", "rain or tear detail"]},
+      "热血": {"dimensions": ["光线", "运动", "构图"], "anchors_zh": ["高饱和", "逆光", "快速推镜", "动态构图"], "anchors_en": ["high saturation", "backlight", "fast push-in", "dynamic composition"]}
+    },
+    "negative_defaults": {
+      "zh": "无字幕、无水印、无片头Logo、无真实人脸",
+      "en": "no subtitles, no watermark, no opening logo, no realistic faces"
+    },
+    "blocked_terms": ["周迅", "哈利波特", "漫威", "奥特曼", "迪士尼", "宫崎骏", "龙珠", "蜘蛛侠", "钢铁侠"],
+    "camera_vocab": ["低视角环绕", "右摇90度", "右摇180度", "急停", "怼脸拍摄", "一镜到底", "主观视角", "鱼眼镜头", "超广角建立镜头", "低机位轻微仰拍", "侧逆光体积光", "跟踪镜头", "推拉摇移"],
+    "required_sections": {
+      "timeline": {"keyword": "秒", "name": "时间轴分段", "hint": "0-3秒/3-6秒… 分段叙事"},
+      "camera": {"keywords": ["景别", "机位", "角度", "运动", "镜头"], "name": "镜头语言", "hint": "景别/机位/角度/运动 至少一项"},
+      "light": {"keywords": ["光", "色温", "明度"], "name": "光线", "hint": "光线/色温/明度 至少一项"}
+    }
+  }
+}

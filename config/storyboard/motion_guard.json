@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "motion_guard",
+  "description": "镜头活性长效机制（2026-08-14）：防 PPT 感——静止镜头（固定机位）单镜时长上限；连续固定镜告警；长镜必须有运镜或画面内运动。",
+  "data": {
+    "static_max_sec": 3.5,
+    "consecutive_static_max": 2,
+    "static_movements": ["固定", "固定机位", "locked", "static"],
+    "active_movements": ["缓推", "急推", "缓拉", "急拉", "跟拍", "横移", "摇", "环绕", "升降", "手持", "手持晃动", "甩镜"],
+    "note": "固定机位=靠人物动作/表演撑住，单镜≤3.5s；长镜(>3.5s)必须给运镜（缓推/缓拉/跟拍/手持）或强烈画面内运动，否则像PPT"
+  }
+}

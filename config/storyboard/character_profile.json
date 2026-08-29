@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.1",
+  "pack_id": "character_profile",
+  "description": "场景级角色形象卡（2026-08-18）：从剧本原文人物设定提炼，跨段一致锁定三人形象（性别/发型/体态/衣着/气质），每段注入提示词，供SD生成一致性+人工验证。忠实原文，不编造未设定细节。",
+  "source": "《暴君狼王的替嫁新娘》人物设定（docx 段落9-37）",
+  "data": {
+    "profiles": {
+      "罗伊娜": {
+        "gender": "女",
+        "zh": "罗伊娜：女性，浅金色长发，眉眼精致，气质温婉坚韧，身形纤细修长，皮肤白皙；封爵大典着白金礼服",
+        "en": "Rowena: female, pale-gold long hair, delicate features, gentle yet resolute, slender tall figure, fair skin; wears a white-gold gown at the ceremony"
+      },
+      "伊索尔德": {
+        "gender": "男",
+        "zh": "伊索尔德：男性，伯爵之子，面容英俊，穿考究深色贵族礼服，眉宇轻浮傲慢，眼神游移，身形高挑",
+        "en": "Isolde: male, a count's son, handsome face, ornate dark noble attire, smug arrogant brow, shifting eyes, tall figure"
+      },
+      "珍妮芙": {
+        "gender": "女",
+        "zh": "珍妮芙：女性，容貌艳丽，身材妖娆，眼神带嫉妒与算计；行刺时穿漆黑兜帽长衣、脸藏阴影",
+        "en": "Genevieve: female, striking face, alluring figure, envious calculating eyes; when assassinating, wears a black hooded cloak, face in shadow"
+      }
+    }
+  }
+}
