@@ -1,0 +1,4 @@
+{"data": {"scene_focus": {"threshold": 0.7, "severity": "error"},
+          "scene_duration": {"min_sec": 30, "max_sec": 90, "severity": "error"},
+          "episode_duration": {"min_sec": 150, "max_sec": 240, "severity": "error"},
+          "emotion_vector": {"severity": "fatal"}}}

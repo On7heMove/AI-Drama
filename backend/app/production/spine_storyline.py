@@ -2,7 +2,7 @@
 """app.production.spine_storyline：骨架 -> 故事线（backend 合并补齐）。
 
 storyline_from_spine(plan, brief) -> StoryLine
-从 ChapterPlan 提取主题/前提/四线/人物弧光；字段缺失时保守兜底，不抛异常。
+plan 可为 dict 或 pydantic 对象（SpinePlan）；字段缺失时保守兜底。
 """
 from __future__ import annotations
 
@@ -19,25 +19,49 @@ _CHANGE_LINE = {
 }
 
 
-def storyline_from_spine(plan: dict, brief: StoryBrief) -> StoryLine:
-    plan = plan or {}
-    theme = plan.get("theme") or ""
-    premise = plan.get("premise") or plan.get("premise_text") or brief.synopsis[:120]
+def _g(obj, key, default=""):
+    if isinstance(obj, dict):
+        return obj.get(key, default)
+    return getattr(obj, key, default)
+
+
+def _items(obj, key):
+    v = _g(obj, key, None)
+    if v is None:
+        return []
+    if isinstance(v, list):
+        return v
+    try:
+        return list(v)
+    except TypeError:
+        return []
+
+
+def storyline_from_spine(plan, brief: StoryBrief) -> StoryLine:
+    theme = _g(plan, "theme") or ""
+    premise = _g(plan, "premise") or _g(plan, "premise_text") or brief.synopsis[:120]
 
     lines: list[Line] = []
-    for chg in plan.get("required_changes") or []:
-        cid = chg.get("change_id", "")
-        ctype = chg.get("change_type", "")
+    for chg in _items(plan, "required_changes"):
+        if isinstance(chg, dict):
+            cid = chg.get("change_id", "")
+            ctype = chg.get("change_type", "")
+            subject = chg.get("subject", "")
+            before, after = chg.get("before", ""), chg.get("after", "")
+        else:
+            cid = getattr(chg, "change_id", "")
+            ctype = getattr(chg, "change_type", "")
+            subject = getattr(chg, "subject", "")
+            before, after = getattr(chg, "before", ""), getattr(chg, "after", "")
         name, kind = _CHANGE_LINE.get(ctype, (ctype or cid, "支线"))
         lines.append(Line(
-            name=name, kind=kind,
-            carrier=chg.get("subject", "") or "",
+            name=name, kind=kind, carrier=subject or "",
             start_ep=1,
-            summary="%s：%s -> %s" % (cid, chg.get("before", ""), chg.get("after", "")),
+            summary="%s：%s -> %s" % (cid, before, after),
         ))
 
     characters: list[CharacterArc] = []
-    for ch in plan.get("characters") or []:
+    for ch in _items(plan, "characters"):
         if isinstance(ch, dict):
             characters.append(CharacterArc(
                 name=str(ch.get("name") or ch.get("character_id") or ""),
@@ -45,18 +69,23 @@ def storyline_from_spine(plan: dict, brief: StoryBrief) -> StoryLine:
                 goal=str(ch.get("goal") or ""),
                 flaw=str(ch.get("flaw") or ""),
             ))
+        elif hasattr(ch, "name"):
+            characters.append(CharacterArc(
+                name=str(getattr(ch, "name", "") or getattr(ch, "character_id", "")),
+                role=str(getattr(ch, "role", "")),
+                goal=str(getattr(ch, "goal", "")),
+                flaw=str(getattr(ch, "flaw", "")),
+            ))
 
     peaks = []
-    for p in plan.get("emotional_peaks") or []:
+    for p in _items(plan, "emotional_peaks"):
         if isinstance(p, dict) and p.get("ep"):
             peaks.append({"ep": int(p["ep"]), "type": p.get("type", "")})
+        elif hasattr(p, "ep"):
+            peaks.append({"ep": int(getattr(p, "ep")), "type": getattr(p, "type", "")})
 
     return StoryLine(
-        brief=brief,
-        theme=theme,
-        premise=premise,
-        world_rules=list(plan.get("world_rules") or []),
-        lines=lines,
-        characters=characters,
-        emotional_peaks=peaks,
+        brief=brief, theme=theme, premise=premise,
+        world_rules=[str(x) for x in _items(plan, "world_rules")],
+        lines=lines, characters=characters, emotional_peaks=peaks,
     )
