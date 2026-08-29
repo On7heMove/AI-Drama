@@ -21,16 +21,19 @@ RULE_FILES = {
     "beat_structures": "beat_structures.json",
     "arc_shapes": "arc_shapes.json",
     "thresholds": "thresholds.json",
+    # 8-28 cangjie 蒸馏库（save-the-cat + mckee，33 条）：生成链主注入
+    "skills_v2": "skills_v2.json",
 }
 
 # stage 注册表：每个 stage 注入哪些规则集（顺序=展示顺序）
 STAGE_REGISTRY: dict[str, dict] = {
-    "build_spine": {"rules": ["conflict_types", "beat_structures", "arc_shapes"], "negatives": True, "max_items": 12},
-    "storyline": {"rules": ["arc_shapes", "hook_types"], "negatives": True, "max_items": 10},
-    "outline": {"rules": ["beat_structures", "hook_types", "conflict_types"], "negatives": True, "max_items": 12},
-    "episode": {"rules": ["hook_types", "beat_structures", "thresholds"], "negatives": True, "max_items": 12},
+    # 8-28 蒸馏（skills_v2）为各生成环节主注入；旧 beat_structures 不再主注入（保留文件）
+    "build_spine": {"rules": ["skills_v2", "conflict_types", "arc_shapes"], "negatives": True, "max_items": 18},
+    "storyline": {"rules": ["skills_v2", "hook_types"], "negatives": True, "max_items": 18},
+    "outline": {"rules": ["skills_v2", "hook_types", "conflict_types"], "negatives": True, "max_items": 20},
+    "episode": {"rules": ["skills_v2", "hook_types", "thresholds"], "negatives": True, "max_items": 20},
     "quality": {"rules": [], "negatives": False, "max_items": 0},
-    "l2l3": {"rules": ["conflict_types", "hook_types", "arc_shapes", "thresholds"], "negatives": True, "max_items": 14},
+    "l2l3": {"rules": ["skills_v2"], "negatives": True, "max_items": 18},
 }
 
 _CACHE: dict[str, list[dict]] = {}

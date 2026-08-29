@@ -1,0 +1,357 @@
+[
+  {
+    "id": "action-reaction-opposite",
+    "name": "action-reaction-opposite",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH07 故事材质·从里面写到外面",
+    "desc": "用户写一场戏发现“太顺”“太俗”“像套路”，尤其写求复合/表白/谈判/审讯等预期明显的情节时使用。方法：先进入人物主观视点，问“如果我是这个人物会怎么办”，写出一个真诚的动作；再跳出来客观审视，问“那一反应的对立面是什么”，让预期反应绝不发生、撬开鸿沟，逼人物加大风险进入下一拍。不适用于：反情节/荒诞派里刻意取消因果的写法、只写自然写实纪录片的场景、纯信息查询。关键触发词：求复合/表白/太俗/对立面/动作反应/inside out/opposite reaction/beat。",
+    "stages": [
+      "episode"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "antagonist-negation",
+    "name": "antagonist-negation",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH14 反面人物塑造原理",
+    "desc": "用户主诉“反派只是更坏的人、抢钱打人，故事总差一口气”，或问“反派怎么写才够强/够狠/够复杂”“怎么让高潮有分量”时调用。核心操作：先找押上台面的首要价值，沿“相反价值→矛盾价值→负面之负面”逐级自检对抗力量是否推到“质与量双重更坏”的终点，并核对对抗力量是否与主人公相称。不适用于写反派外貌/武力设定、纯善恶说教、只谈主角魅力的任务。关键触发词：反派 / 对抗力量 / 不够坏 / 差一口气 / 负面之负面 / antagonist / forces of antagonism / negation of the negation。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "character-truth",
+    "name": "character-truth",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH05 结构与人物",
+    "desc": "用户问“这角色为什么立不住/像纸片人”“观众为什么不信他说的话”时使用。方法：区分人物塑造（可观察素质的总和=面具）与人物真相（压力下选择才暴露的本性），设计越来越难的两难选择把人物逼到极限，让真相显形；压力越大，揭示越深。不适用于：纯信息查询、只需功能型配角（无需隐藏维度）、纯人设/外貌设定清单。关键触发词：人物立不住/纸片人/人设/压力下选择/人物真相/character truth/characterization/pressure/choice。",
+    "stages": [
+      "episode",
+      " outline"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "controlling-idea",
+    "name": "controlling-idea",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH06 结构与意义",
+    "desc": "用户写长篇/短剧觉得“每集都有爽点但整体像散装”，或问“这故事到底想表达什么”“主题是什么”时使用。方法：从结局高潮回溯，用“价值+原因”一句话提炼主控思想（如“正义战胜邪恶，因为主角的暴力更胜罪犯”），再用这句话当剪刀删掉无关内容；同时保证反思想与思想同等火力，否则沦为说教。不适用于：反情节/无因果的散文式叙事、只想要一个词标签（如“爱情”）而不求闭环的故事、纯信息查询。关键触发词：主题/主旨/中心思想/theme/controlling idea/premise/meaning。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "crisis-climax-resolution",
+    "name": "crisis-climax-resolution",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH13 危机、高潮和结局",
+    "desc": "用户主诉“大结局反转很炸但看完就这”“不知道高潮该落在哪”“结尾收不住/拖沓”，或问“危机和高潮有什么区别”“结局怎么写才不烂尾”时调用。核心操作：先定高潮的不可逆价值剧变（意生情），再倒推危机必须是“有意而为的静态两难时刻”，结局只做收束；并核对“不可避免又出乎意料”。不适用于只写中间桥段、纯开放式反情节结尾、或只问单场戏。关键触发词：危机 / 高潮 / 结局 / 意生情 / 烂尾 / 就这 / climax / crisis / resolution / 不可避免又出乎意料。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "dilemma",
+    "name": "dilemma",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH10 场景设计；CH13 危机、高潮和结局",
+    "desc": "用户要写关键选择/危机选择，主诉是“选择不够难、一眼看穿、没悬念”，或想把“救不救、接不接受”这类善恶是非选择升级成真两难时调用。核心操作：把选择改成“两善取一”或“两恶取轻”，再引入第三方 C 构成 A/B/C 三角，使结局可闭合、人物真相可揭示。不适用于日常琐碎选择、纯信息判断、只借选择讲人物弧光（后者用 character-truth）。关键触发词：两难 / 两善 / 两恶 / 难以抉择 / 三角关系 / dilemma / choice between two goods / lesser of two evils / no-win。",
+    "stages": [
+      "episode",
+      " outline"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "exposition-as-ammunition",
+    "name": "exposition-as-ammunition",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH15 解说；CH18 文本",
+    "desc": "用户写“两人坐下来聊背景/设定”觉得信息必要但很闷，或问“怎么把背景交代得不无聊”“这段解说能不能删”时调用。核心操作：把解说改写成“人物用已知信息当弹药去争取欲望”，扣押信息、把秘密留到最后，先造需求再闪回，能视觉表达就不写对白。不适用于纯信息查询、只想快速给观众科普设定的非戏剧文本。关键触发词：解说 / 背景介绍 / 信息量 / 展示不要告诉 / 太闷 / exposition / info dump / show don't tell / 闪回。",
+    "stages": [
+      "episode"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "gap",
+    "name": "gap",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH07 故事材质·鸿沟",
+    "desc": "用户问“为什么冲突很激烈观众却觉得平淡”“这段是行动还是活动”时使用。方法：检查人物行动时“主观期望”与“客观结果”之间是否裂开鸿沟——期望=结果就是活动（散文），期望≠结果才是行动（戏剧）；每次鸿沟都逼人物加大风险、更深挖自己、采取下一个更难的行动。不适用于：纯信息查询、反情节/非因果叙事里刻意不设因果、记录式流水账（后者恰是本 skill 要诊断的对象）。关键触发词：鸿沟/期望与结果/行动与活动/冲突平淡/gap/expectation vs result/action vs activity。",
+    "stages": [
+      "episode"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "inciting-incident",
+    "name": "inciting-incident",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH08 激励事件",
+    "desc": "用户在写或改故事开头，问“开头钩子够不够”“前几集为什么留不住人”“激励事件该放哪”时使用。检查清单：是否打破主人公的生活平衡→是否激发自觉（及不自觉）欲望→是否提出戏剧大问题（结果会如何）→是否投射必备场景→主情节是否落在前四分之一（短剧压缩到更早）且必须在银幕上发生。不适用于：纯信息查询、次情节激励事件（可不在银幕）、只求开头噱头而不建立因果的故事。关键触发词：激励事件/开头钩子/打破平衡/inciting incident/hook/setup。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "scene-value-turn",
+    "name": "scene-value-turn",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH02 结构图谱；CH11 场景分析",
+    "desc": "用户在审稿/改稿时怀疑某场戏“没戏”“平淡”“可删”，或问“这段到底算不算一个场景”“怎么判断这场戏有没有转折”时使用。核心判据：先标出“押上台面的价值”的开头正负与结尾正负，二者相同即“非事件”，应删除或插入转折；再按五步法（确定冲突→标开篇价值→拆节拍→标结尾价值比较→定位转折点）逐场诊断。不适用于：反情节/散文式/纯氛围片段的审美判断、地点切换而非价值变化的镜头统计、纯信息查询。关键触发词：场景/戏/转折/价值负荷/非事件/scene/turning point/value change。",
+    "stages": [
+      "episode",
+      " quality-script"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "story-triangle",
+    "name": "story-triangle",
+    "source": "《故事》 罗伯特·麦基（Robert McKee） · CH02 结构图谱",
+    "desc": "用户要给自己或别人的作品“定位形式”，问“这算商业片还是艺术片”“我的故事太散/太开放怎么办”“怎么选开放还是闭合结局”，或做项目立项时不知道先搭哪种骨架时调用。核心操作：把作品按七组轴（闭合/开放、外/内冲突、单一/多重主人公、主动/被动、线性/非线性、因果/巧合、连贯/非连贯现实）逐项打标，标到故事三角的大情节/小情节/反情节坐标上；并反直觉地先精通大情节再叠分支。不适用于纯信息查询、单场戏分析、不涉及形式定位的写对白。关键触发词：大情节 / 小情节 / 反情节 / 形式定位 / 商业还是艺术 / 开放式结局 / archplot / miniplot / antiplot。",
+    "stages": [
+      "storyline"
+    ],
+    "book": "《故事》 罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "background-four-dimensions",
+    "name": "background-four-dimensions",
+    "source": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee） · 第 3 章 结构与背景",
+    "desc": "当用户把世界观铺得过大却越写越卡，或需要界定故事的时代、期限、地点、冲突层面与创作边界时调用；不用于纯背景资料查询或把背景仅当场景美术。触发词：世界观太大/越写越卡/背景怎么设定/冲突层面/限制即自由。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "idea-counter-idea",
+    "name": "idea-counter-idea",
+    "source": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee） · 第 6 章 结构与意义·思想VS反思想",
+    "desc": "用户写说教、主旋律或论文式故事，或问主题怎么不苍白、反派观点怎么写强时调用；不用于金句、口号或无需主题论证的日常文案。触发词：说教/主控思想/主题/反思想/正反论证/给对手同等火力。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "inside-out-process",
+    "name": "inside-out-process",
+    "source": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee） · 第 19 章 作家的创造方法",
+    "desc": "用户想直接写对白或剧本、越写越卡，或不知道从大纲怎么到成片时调用；不用于已进入纯文字润色/排版阶段。触发词：先写对白/步骤大纲/处理台本/银幕剧本/十分钟讲故事/从里到外/写不动。",
+    "stages": [
+      "storyline",
+      " outline",
+      " episode"
+    ],
+    "book": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "point-of-no-return",
+    "name": "point-of-no-return",
+    "source": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee） · 第 7 章 故事材质·进展纠葛（不归点）",
+    "desc": "用户发现剧集或幕内冲突忽强忽弱、第二幕拖沓、观众流失时调用；不用于已锁定节奏或用冲突数量衡量强度的情况。触发词：不归点/力度只升不降/第二幕拖沓/冲突升级/每一集要比上一集更狠/踩水。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "tenfold-creative-choice",
+    "name": "tenfold-creative-choice",
+    "source": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee） · 第 3 章 结构与背景·创作选择",
+    "desc": "用户对第一个方案或第一版满意，或要在多个反转、相遇、结局候选中取舍时调用；不用于纯灵感表达或已锁定的执行润色任务。触发词：第一个想法/反转怎么想/多几个方案/5:1、10:1、20:1/从未在银幕上出现。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《故事：材质、结构、风格和银幕剧作的原理》罗伯特·麦基（Robert McKee）"
+  },
+  {
+    "id": "covenant-of-arc",
+    "name": "covenant-of-arc",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第六章「剧本写作的金科玉律」",
+    "desc": "当用户写群像/长故事、发现某个配角\"从头到尾没变\"、或想判断一个角色该不该存在时使用；也用于诊断\"剧本平淡/少了点什么\"时的全员转变体检。不适用于：只需一句话设定、写一次性的纯反派工具人，或非叙事性的纯信息/说明文本。关键触发词：曲线公约 / 人物弧线 / 角色转变 / 配角要不要删 / character arc / no change / flat character。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "five-point-ending-storming-the-castle",
+    "name": "five-point-ending-storming-the-castle",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第三册 第三章《才思枯竭、无路可走》",
+    "desc": "当用户写到最后收不住：第三幕不知怎么打、结尾只剩一场正面对决、或大结局越写越俗时调用。不适用于第二幕还没写好就急着写结局、只想给结尾加个反转噱头、或非主角主导的纯群像收束。关键 trigger：「结尾收不住」「第三幕 / 大结局怎么打」「高塔意外 / 深入挖掘」；英文 storming the castle, five-point finale, third act ending, dig deep。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "logline-three-illnesses",
+    "name": "logline-three-illnesses",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第三册 第一章「逊毙了的想法！」",
+    "desc": "当用户写完一句话故事/提案、自己或听众觉得\"没劲/听不懂/绕\"时使用；用于诊断一句 logline 失败在哪种病并给出对应解药。不适用于：对完整剧本、分场、人物动机做深度诊断（那是结构/主干类 skill 的活），或只想润色文案而不关心卖点。关键触发词：太平淡 / 太复杂 / 刻意保守秘密 / 剧透 / 不敢说核心反转 / logline / too plain / too complicated / hiding the ball。",
+    "stages": [
+      "storyline"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "logline-transformation-machine",
+    "name": "logline-transformation-machine",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第三册 第一章（变形机器模板）/ 第二章（停滞＝死亡）",
+    "desc": "当用户手上素材很多、要压成一句话故事，或写完 logline 总觉得\"缺结构/不够成立\"时使用；用于把点子装进\"停滞=死亡+有缺点主角+第二幕+中点+一无所有+主题\"的固定槽位，边生成边检修。不适用于：只想润色一句话的措辞（那是三病/四要素的活），或写多线群像、非线性结构的完整大纲。关键触发词：变形机器 / 停滞=死亡 / logline模板 / 一句话故事模板 / transformation machine / stasis=death / logline template。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "no-double-mumbo-jumbo",
+    "name": "no-double-mumbo-jumbo",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第六章《剧本写作的金科玉律》",
+    "desc": "当用户的世界观同时存在两套互斥的超自然解释（外星科技 + 修仙、放射蜘蛛 + 化学意外、外星人 + 上帝），或设定越加越多、观众觉得乱、主角与反派能力来源不同时调用。不适用于只有一种魔力的设定、现实题材无超自然元素、多角色能力但同一来源、或刻意解构的喜剧/元叙事。关键 trigger：「设定太乱」「两种魔法 / 神秘力量并存」「又是科技又是魔法」；英文 double mumbo jumbo, two magic systems, one magic per movie。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "no-media-in-story",
+    "name": "no-media-in-story",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第六章「剧本写作的金科玉律」",
+    "desc": "当用户写奇幻/科幻/超能力/秘密身份等\"反常元素\"故事、想用新闻直播或全网围观放大危机时使用；用于判断是否该引入媒体/新闻/社交媒体。不适用于：故事本身讲媒体、调查记者题材，或必须全球联动才能成立的灾难/政治叙事。关键触发词：让媒体曝光 / 上新闻 / 全球直播 / 记者包围 / don't let the media in / news coverage / fourth wall。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "pope-in-the-pool",
+    "name": "pope-in-the-pool",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第六章《剧本写作的金科玉律》",
+    "desc": "当用户必须交代复杂世界观 / 背景设定 / 坏蛋计划，却怕写成说明书、信息轰炸或说教时调用。不适用于信息本来就可以删掉、严肃写实或纪录片不该搞笑、或场景已有强戏剧冲突无需额外奇观的场合。关键 trigger：「怎么交代设定不无聊」「背景交代太干 / 像说明书」「一边讲信息一边抓眼球」；英文 hide exposition, info dump, boring exposition, exposition scene。",
+    "stages": [
+      "episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "save-the-cat",
+    "name": "save-the-cat",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第六章《剧本写作的金科玉律》；第一册 导论",
+    "desc": "当用户问“观众为什么要喜欢这个主角 / 怎么让观众希望主角赢”，尤其是主角亦正亦邪、冷酷、反派或开场不讨喜时调用。不适用于主角本来就讨喜且已有明确共情入口、反派/真坏蛋不需要被喜欢、或问题只关乎剧情信息交代而非人物共情。关键 trigger：「让观众喜欢主角」「开场/第一集怎么让观众站主角这边」「主角不讨喜怎么办」；英文 save the cat, make the audience like the protagonist, root for the protagonist, unlikable protagonist。",
+    "stages": [
+      "episode",
+      " outline"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "scene-as-mini-story",
+    "name": "scene-as-mini-story",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第三册 第二章《教室里的麻烦》",
+    "desc": "当用户单场戏写出来死气沉沉、像纯解释说明，或要把 30 秒广告 / 短视频讲成完整弧线，或不知道一场戏的高潮与“死亡时刻”放在哪、该不该删时调用。不适用于整片结构失衡（应先看 40 卡案板）、快速功能性过场戏、或只想写一个笑点不需要弧线的场景。关键 trigger：「这场戏太平」「30 秒怎么讲完」「场景的死亡时刻 / 一无所有放哪」「把场景当迷你电影」；英文 scene falls flat, 30-second ad, death moment in a scene, scene as mini-movie。",
+    "stages": [
+      "episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "story-spine-five-questions",
+    "name": "story-spine-five-questions",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第三册 第四章「理直\"主干\"」",
+    "desc": "当用户写到一半迷路、不知道主角到底要什么、主线被支线淹没、或想确认\"这个故事到底在讲什么\"时使用；用于用五个问题理直故事脊柱（主角改变轨迹）。不适用于：只写一句话 logline（那是 U15/U16 的活），或群像/非线性结构没有单一主角可追踪时需先改造。关键触发词：故事脊柱 / 脊柱侧凸 / 理直主干 / 主角到底要什么 / 主题是什么 / story spine / five questions / main character / theme。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "storyboard-40-cards",
+    "name": "storyboard-40-cards",
+    "source": "《救猫咪》 布莱克·斯奈德 · 第一册 第五章《创造完美的野兽》；第三册 第二章《教室里的麻烦》",
+    "desc": "当用户已有 15 个剧情节拍点/大纲，要把它展开成 40 场具体戏，或初稿松散、第三幕偏轻、场景像背景故事、找不到卡点黑洞时调用。不适用于还没确定故事线/类型/主角、只想快速列大纲不必逐场体检、或已完稿只做局部修改的场景。关键 trigger：「节拍怎么落成场景」「案板 / 索引卡 / 40 场」「第三幕太轻」「黑洞」；英文 beat sheet to scenes, board / 40 cards, third act too thin, black hole。",
+    "stages": [
+      "outline"
+    ],
+    "book": "《救猫咪》 布莱克·斯奈德"
+  },
+  {
+    "id": "blake-snyder-beat-sheet",
+    "name": "blake-snyder-beat-sheet",
+    "source": "《救猫咪》布莱克·斯奈德 · 第一册·第四章（开始写剧本·布莱克·斯奈德节拍表）",
+    "desc": "当用户写剧本/短剧到第二幕卡壳、只有金点子和酷场面却串不成故事、要规划节奏（含竖屏短剧按分钟换算），或想定位初稿「拖沓/某处空」在哪一拍时调用；用于把故事填进 15 个具名节拍+比例页码的 BS2 施工图。不用于意识流/反叙事作品，也不用于只写单场戏。关键 trigger：「第二幕写不下去」「节奏怎么排」「卡在中间」「三幕之后还差什么」；英文：beat sheet / BS2 / act structure / midpoint / catalyst。",
+    "stages": [
+      "outline"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  },
+  {
+    "id": "genre-three-elements",
+    "name": "genre-three-elements",
+    "source": "《救猫咪》布莱克·斯奈德 · 第二册·第一章（鬼怪屋型）及第三~十章（各类型三元素）",
+    "desc": "当用户要判断一个故事属于哪种 Snyder 类型、或类型故事感觉「缺一口」却不知缺什么时调用；用于按每个类型的三元素（如鬼怪屋=怪物+房子+原罪）逐项勾选、以「缺什么补什么」替代「像不像」，把类型判断从贴题材标签变成可检查的体检表。不用于只需市场题材分类、或类型已成立只想改局部。关键 trigger：「这属于什么类型」「是不是鬼怪屋/金羊毛」「缺什么」「感觉不像」；英文：genre / monster in the house / three elements / what is missing。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  },
+  {
+    "id": "midpoint-all-is-lost-opposition",
+    "name": "midpoint-all-is-lost-opposition",
+    "source": "《救猫咪》布莱克·斯奈德 · 第一册·第四章（中点／一无所有）",
+    "desc": "当用户要设计或检修剧本的「中点」与「一无所有」两个节拍、发现两者没有形成反差，或短剧中点已定却不知后段低谷怎么安排时调用；用于把两拍约束成互为反题（中点伪胜则一无所有伪败+死亡气息，反之亦然）。不用于不需要结构对称的意识流写作，也不用于只关心单一节拍、不管配对关系。关键 trigger：「中点怎么写」「一无所有/最低谷怎么安排」「两拍不成对」「伪胜利伪失败」；英文：midpoint / all is lost / false victory / false defeat。",
+    "stages": [
+      "outline",
+      " episode"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  },
+  {
+    "id": "protagonist-three-criteria",
+    "name": "protagonist-three-criteria",
+    "source": "《救猫咪》布莱克·斯奈德 · 第一册·第三章（主角是谁）",
+    "desc": "当用户在同一个设定里纠结「选谁当主角」、主角很酷但剧情推不动、群像剧不确定讲谁、或为某演员量身写角色导致卖不动时调用；用于按三标准（最大冲突/最长情感历程/最多观众认同）海选那个服务故事线的主角，而不是迁就「最酷的人」。不用于配角/反派塑造，也不用于自传式、不追求大众认同的写作。关键 trigger：「选谁当主角」「这故事到底讲谁」「换个人会不会更好」「主角太完美没成长」；英文：protagonist / whose story is this / POV character。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  },
+  {
+    "id": "same-but-different-ten-types",
+    "name": "same-but-different-ten-types",
+    "source": "《救猫咪》布莱克·斯奈德 · 第一册·第二章（似而不同）",
+    "desc": "当用户的新故事怕跟市面雷同、被说「跟某某片一样」、想给创意定位类型却只会贴题材标签，或要决定先研究哪些同类型参考片时调用；用于「先归入十类型、吃透套路、再在最后一刻加 twist 扭头离开」的差异化定位。不用于真正无类型契约的实验叙事，也不用于纯照抄不改的跟风项目。关键 trigger：「会不会太像了」「怎么做出差异化」「这属于什么类型」「我的片子不属于任何类型」；英文：same but different / genre / cliché / twist。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  },
+  {
+    "id": "story-logline-four-elements",
+    "name": "story-logline-four-elements",
+    "source": "《救猫咪》布莱克·斯奈德 · 第一册·第一章（有否意外／强烈的心理影像／观众和成本／有杀伤力的片名）",
+    "desc": "当用户要给一个故事/短剧/电影写一句话故事线（logline），或拿到创意却判断不出够不够格动笔、讲不清「这剧讲什么」、要重拟片名时调用；用于把模糊点子压成可通过四要素（意外/心理影像/观众与成本/片名）体检的一句话。不用于纯文学、实验电影或已成形剧本的局部台词修改。关键 trigger：「一句话说不清」「帮我写个 logline/一句话梗概」「这个点子值不值得写」「帮我起个片名」；英文：logline / one-sentence pitch / what is the story about。",
+    "stages": [
+      "storyline",
+      " outline"
+    ],
+    "book": "《救猫咪》布莱克·斯奈德"
+  }
+]
