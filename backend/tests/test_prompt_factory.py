@@ -7,7 +7,9 @@ from app import prompt_factory
 def test_inject_skill_build_spine_has_rules():
     s = prompt_factory.inject_skill("build_spine")
     assert "编剧方法论约束" in s
-    assert "conflict_types" in s or "beat_structures" in s or "arc_shapes" in s
+    # 8-28 cangjie 蒸馏库已接入生成链（skills_v2 主注入）
+    assert "skills_v2" in s
+    assert "action-reaction-opposite" in s
 
 
 def test_inject_skill_unknown_stage_empty():
