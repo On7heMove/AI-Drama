@@ -22,6 +22,13 @@ class EventType(str, Enum):
     PLAN_COMPLETION = "plan_completion"
     CRISIS = "crisis"
     RESOLUTION = "resolution"
+    FALL = "fall"
+    FIGHT = "fight"
+    INJURY = "injury"
+    RISE = "rise"
+    SPEECH = "speech"
+    UNCONSCIOUS = "unconscious"
+    WIELD = "wield"
 
 
 @dataclass(frozen=True)
