@@ -119,6 +119,7 @@ _INDEX_HTML = """<!DOCTYPE html>
   <ul>
     <li><a href="/docs">📖 接口文档（可交互测试）</a></li>
     <li><a href="/health">❤️ 健康检查</a></li>
+    <li><a href="/spine">📖 剧本骨架（最近一轮）</a></li>
     <li><a href="/api/v1/settings">⚙️ 服务设置（LLM / 视频 API）</a></li>
     <li><a href="/api/v1/license/status">🔑 激活状态</a></li>
   </ul>
@@ -149,3 +150,51 @@ fetch('/health').then(r => r.json()).then(j => {
 async def index() -> str:
     """中文欢迎首页：状态 + 接口入口。"""
     return _INDEX_HTML
+
+
+@app.get("/spine", response_class=HTMLResponse)
+async def spine_page() -> str:
+    """显示最近一轮逆推骨架（real_e2e_1.json 的 spine）。"""
+    import json as _json
+    from pathlib import Path as _Path
+    e2e = _Path(__file__).resolve().parents[1] / "_e2e_out" / "real_e2e_1.json"
+    if not e2e.is_file():
+        return "<html><body><h1>无骨架产物</h1><p>%s 不存在</p></body></html>" % e2e
+    sp = _json.loads(e2e.read_text(encoding="utf-8")).get("spine", {})
+    rows = []
+    for n in sorted(sp.get("nodes") or [], key=lambda x: x.get("node_id", "")):
+        rng = "ep%d-%d" % (n.get("ep_start") or 0, n.get("ep_end") or 0)
+        rows.append(
+            "<div class='node'><div class='nhead'><b>[%s]</b> %s「%s」（%s）</div>"
+            "<div class='ev'>事件：%s</div>%s</div>"
+            % (n.get("node_id"), n.get("type"), n.get("title"), rng, n.get("event", ""),
+               "<div class='ev hook'>钩子：%s</div>" % n.get("hook") if n.get("hook") else ""))
+    cast = "".join(
+        "<div class='cast'><b>%s</b>（%s）<div>欲望：%s</div><div>阻力：%s</div><div>弧光：%s</div></div>"
+        % (c.get("name"), c.get("role"), c.get("desire"), c.get("obstacle"), c.get("arc"))
+        for c in sp.get("casting") or [])
+    oq = "".join("<li>%s</li>" % q for q in sp.get("open_questions") or [])
+    return """<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>剧本骨架 · 最近一轮</title>
+<style>
+body{font-family:"Microsoft YaHei",sans-serif;background:#101418;color:#e6edf3;margin:0;padding:32px 20px;}
+.wrap{max-width:860px;margin:0 auto;}
+h1{font-size:22px;border-bottom:1px solid #30363d;padding-bottom:12px;}
+h2{font-size:16px;color:#58a6ff;margin-top:28px;}
+.node{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:12px 16px;margin:10px 0;}
+.nhead{color:#f0b429;}
+.ev{color:#c9d1d9;font-size:14px;margin-top:6px;}
+.ev.hook{color:#8b949e;}
+.cast{background:#161b22;border:1px solid #30363d;border-radius:8px;padding:10px 14px;margin:8px 0;font-size:14px;}
+.cast div{color:#8b949e;margin-top:2px;}
+li{color:#c9d1d9;margin:4px 0;}
+a{color:#58a6ff;}
+</style></head><body><div class="wrap">
+<h1>📖 剧本骨架（最近一轮逆推 · 8-28 蒸馏注入）</h1>
+<p style="color:#8b949e">spine_title：<b style="color:#e6edf3">%s</b> ｜ 节点 %d ｜ 选角 %d ｜ 开放问题 %d</p>
+<h2>大事件节点</h2>%s
+<h2>选角</h2>%s
+<h2>开放问题</h2><ul>%s</ul>
+<p style="color:#8b949e;margin-top:24px">来源：backend/_e2e_out/real_e2e_1.json（<a href="/">返回首页</a>）</p>
+</div></body></html>""" % (
+        sp.get("spine_title", ""), len(sp.get("nodes") or []), len(sp.get("casting") or []),
+        len(sp.get("open_questions") or []), "".join(rows), cast, oq)
