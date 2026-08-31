@@ -42,7 +42,7 @@ def prepare_scene(scene, viewpoint: str | None = None, target_sec: float = 15.0)
     """
     engine = PacingEngine()
     beats = getattr(scene, "beats", []) or []
-    if beats and not any(b.duration_sec for b in beats):
+    if beats and not any(b.duration_sec is not None for b in beats):
         durs = engine.recommend_rhythm(scene, target_sec=target_sec, n_shots=len(beats))
         for b, d in zip(beats, durs):
             b.duration_sec = d
@@ -73,7 +73,7 @@ def validate_scene(scene, viewpoint: str | None = None) -> list[ConstraintIssue]
             "blocking", "error", getattr(scene, "scene_id", "") or "",
             evidence="站位推理无主动方",
             suggestion="提供 participants 或视角人物"))
-    if beats and not any(b.duration_sec for b in beats):
+    if beats and not any(b.duration_sec is not None for b in beats):
         issues.append(ConstraintIssue(
             "rhythm", "warning", getattr(scene, "scene_id", "") or "",
             evidence="节拍全部无时长",

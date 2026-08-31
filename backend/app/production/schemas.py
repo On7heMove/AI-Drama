@@ -136,7 +136,7 @@ class ShotBeat(BaseModel):
     action: str = ""
     dialogue: str = ""
     emotion: str = ""
-    duration_sec: float = 3.0
+    duration_sec: float | None = None   # None=未显式指定（由 PacingEngine/兜底定时长）
     scale: str = ""       # 分镜设计：景别（留空=自动 select_beat）
     angle: str = ""       # 分镜设计：机位角度（留空=自动）
     movement: str = ""    # 分镜设计：运动（留空=自动）
@@ -189,16 +189,19 @@ class QualityReport(BaseModel):
     retry_rounds: int = 0
 
     def summary(self) -> dict:
-        total = len(self.items)
+        # items 仅记录失败项：不把失败项数量冒充"全部检查项"，pass_rate 不再误导。
         fatal = [i for i in self.items if i.severity == "fatal"]
         error = [i for i in self.items if i.severity == "error"]
-        passed = [i for i in self.items if i.passed]
+        suggestion = [i for i in self.items if i.severity == "suggestion"]
+        gate_passed = not (fatal or error)
         return {
-            "total": total,
+            "issue_count": len(self.items),
             "fatal": len(fatal),
             "error": len(error),
-            "passed": len(passed),
-            "pass_rate": round(len(passed) / total, 4) if total else 1.0,
+            "suggestion": len(suggestion),
+            "gate_passed": gate_passed,
+            "pass_rate": 1.0 if gate_passed else 0.0,  # 门禁语义：无 fatal/error 视为通过
+            "retry_rounds": self.retry_rounds,
         }
 
     def fatal_for_ep(self, ep: int | None) -> list[QualityItem]:

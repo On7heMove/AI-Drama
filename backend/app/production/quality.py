@@ -192,7 +192,7 @@ def check_scene_focus(episodes: list[EpisodeScript], threshold: float | None = N
                     participants=[d.speaker for d in scene.dialogues],
                     location=scene.location, summary=summary,
                 ))
-                total_sec = sum(s.duration_sec for s in plan.shots)
+                total_sec = sum(s.duration_sec or 0 for s in plan.shots)
                 scene_type = plan.scene_type
             except Exception:  # noqa: BLE001, S110
                 pass
@@ -240,7 +240,7 @@ def check_episode_duration(episodes: list[EpisodeScript], rubric: dict) -> list[
                         participants=[d.speaker for d in scene.dialogues],
                         location=scene.location, summary=summary,
                     ))
-                    st = sum(s.duration_sec for s in plan.shots)
+                    st = sum(s.duration_sec or 0 for s in plan.shots)
                 except Exception:  # noqa: BLE001
                     st = 0.0
             total += st

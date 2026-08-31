@@ -73,8 +73,6 @@ STYLE_LOCK_16_9 = "写实电影质感，35mm胶片颗粒，暖调自然光，横
 STYLE_LOCK_9_16 = "写实电影质感，35mm胶片颗粒，暖调自然光，9:16。"
 STYLE_LOCK_EN_16_9 = "cinematic film look, 35mm film grain, warm natural light, 16:9 widescreen."
 STYLE_LOCK_EN_9_16 = "cinematic film look, 35mm film grain, warm natural light, vertical 9:16."
-# 当前画幅（build 入口设置）：9:16 竖屏 / 16:9 横屏
-_CURRENT_ASPECT: str = "16:9"
 
 
 def _join_neg(*parts: str) -> str:
@@ -113,14 +111,14 @@ def _join_neg(*parts: str) -> str:
     return "".join(out)
 
 
-def _style_lock() -> str:
-    r = _realism_lock_zh(_CURRENT_ASPECT)
-    return r or (STYLE_LOCK_9_16 if _CURRENT_ASPECT == "9:16" else STYLE_LOCK_16_9)  # realism_style 已按 8 画幅映射
+def _style_lock(aspect: str = "16:9") -> str:
+    r = _realism_lock_zh(aspect)
+    return r or (STYLE_LOCK_9_16 if aspect == "9:16" else STYLE_LOCK_16_9)  # realism_style 已按 8 画幅映射
 
 
-def _style_lock_en() -> str:
-    r = _realism_lock_en(_CURRENT_ASPECT)
-    return r or (STYLE_LOCK_EN_9_16 if _CURRENT_ASPECT == "9:16" else STYLE_LOCK_EN_16_9)  # realism_style 已按 8 画幅映射
+def _style_lock_en(aspect: str = "16:9") -> str:
+    r = _realism_lock_en(aspect)
+    return r or (STYLE_LOCK_EN_9_16 if aspect == "9:16" else STYLE_LOCK_EN_16_9)  # realism_style 已按 8 画幅映射
 
 _SCALE_EN = {
     "大远景": "extreme wide shot", "远景": "wide shot", "全景": "full shot",
@@ -177,8 +175,6 @@ _FIELDS_SYSTEM = (
     "\"dialogue\": \"台词英文（忠实原意，逐字翻译，不加戏）\"}，不要输出其它文字。"
 )
 _translation_cache: dict[str, dict] = {}
-# 当前视角人物（build 入口设置；站位推理锚点 = 主动方/视角人物，居左）
-_CURRENT_VIEWPOINT: str | None = None
 
 
 async def _translate_fields(client, scene_zh: str, staging: str, sound: str, tone: str, edit: str,
@@ -236,12 +232,12 @@ def _default_camera_pos(shot) -> str:
     return "正面平视机位"
 
 
-def _blocking_text(scene, shot) -> str:
+def _blocking_text(scene, shot, viewpoint: str | None = None) -> str:
     """站位/轴线标准（2026-08-14）：本镜优先，否则继承场景基准；未给则默认防越轴约束。"""
     b = ((shot.blocking if shot else "") or (getattr(scene, "blocking", "") or "")).strip()
     if b:
         return b
-    return _infer_blocking(scene, viewpoint=_CURRENT_VIEWPOINT).to_prompt()
+    return _infer_blocking(scene, viewpoint=viewpoint).to_prompt()
 
 
 async def _refine_motivation_llm(client, shot, scene, plan, beat, summary: str, emotion: str, index: int, total: int) -> None:
@@ -388,16 +384,35 @@ def _zh_fields_line(subject: str, action: str, location: str, time: str, emotion
     return f"主体{subject or '角色'}：{action}；地点：{location}；时间：{time}；情绪：{emotion}"
 
 
-def _eff_dur(beat, shot) -> float:
-    """镜总时长 = 视觉时长 + 对白时长 + 旁白时长（台词占时长机制）。"""
-    visual = beat.duration_sec or (shot.duration_sec if shot else 3.0)
-    return _eff_duration(visual, beat.dialogue or "", (shot.sound if shot else "") or "")
+def effective_shot_duration(shot, beat=None, dialogue: str = "") -> float:
+    """镜头总时长唯一口径（2026-08-31 统一）：基础画面时长 + 对白/旁白折算时长。
+
+    duration_sec 语义 = 纯视觉时长（缺省 3.0s）；总时长 = 视觉 + 台词/旁白（台词占时长）。
+    节拍分支：节拍显式时长优先，其次镜头时长；无节拍分支：镜头时长 + 旁白/对白折算。
+    展示（【约Ns】）与时间轴累计必须调用本函数，禁止直接读 duration_sec 造成双口径。
+    """
+    if beat is not None:
+        if getattr(beat, "duration_sec", None):
+            visual = float(beat.duration_sec)
+        elif shot is not None and getattr(shot, "duration_sec", None):
+            visual = float(shot.duration_sec)
+        else:
+            visual = 3.0
+        dlg = dialogue or (beat.dialogue or "")
+        sound = (shot.sound if shot is not None else "") or ""
+        return _eff_duration(visual, dlg, sound)
+    if shot is not None:
+        visual = shot.duration_sec or 3.0
+        sound = (shot.sound or "")
+    else:
+        visual, sound = 3.0, ""
+    return _eff_duration(visual, dialogue or "", sound)
 
 
 def _apply_pacing(engine: PacingEngine, scene, target_sec: float = 15.0) -> None:
     """节奏引擎：节拍全缺时长时按场景张力定时长（有显式时长则尊重生成结果）。"""
     beats = scene.beats
-    if not beats or any(b.duration_sec for b in beats):
+    if not beats or any(b.duration_sec is not None for b in beats):
         return
     durs = engine.recommend_rhythm(scene, target_sec=target_sec, n_shots=len(beats))
     for b, d in zip(beats, durs):
@@ -405,14 +420,15 @@ def _apply_pacing(engine: PacingEngine, scene, target_sec: float = 15.0) -> None
 
 
 def build_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0, speed: dict | None = None,
-                       *, scene_type: str = "", genre: str = "") -> str:
+                       *, scene_type: str = "", genre: str = "",
+                       aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """中文版：含 调度/色调/剪辑/声音（书知识直通）。负面按 scene_type×scale×genre 自适应。"""
-    dur = shot.duration_sec
+    dur = effective_shot_duration(shot)
     acts = "；".join(scene.action_blocks[:3])
     dlg = "；".join(_strip_dialogue_translation(f"{d.speaker}：{d.line}") for d in scene.dialogues[:3])
     _spd = speed or _decide_speed(acts, emotion or shot.emotion)
     lines = [
-        f"【风格锁定】{_style_lock()}",
+        f"【风格锁定】{_style_lock(aspect)}",
         f"【镜头】机位：{_default_camera_pos(shot)}｜{shot.scale}｜{shot.angle}｜{shot.movement}（约{dur:.0f}s，稳定）",
         f"【{_seg_label(start_sec, start_sec + dur)}】",
     ]
@@ -422,7 +438,7 @@ def build_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0, speed:
         lines.append(f"【画面】{shot.content}")
     if dlg:
         lines.append(f"【对白】{dlg}")
-    lines.append(f"【站位·轴线】{_blocking_text(scene, shot)}")
+    lines.append(f"【站位·轴线】{_blocking_text(scene, shot, viewpoint)}")
     if shot.staging:
         lines.append(f"【调度】{_aug_staging_zh(shot.staging, _spd)}")
     lines.append(f"【色调】{_tone_text(scene, shot)}")
@@ -439,9 +455,10 @@ def build_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0, speed:
 
 
 def build_en_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0,
-                          fields_en: dict | None = None, speed: dict | None = None) -> str:
+                          fields_en: dict | None = None, speed: dict | None = None,
+                          aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """英文版（本地兜底或 LLM 字段译文）。"""
-    dur = shot.duration_sec
+    dur = effective_shot_duration(shot)
     acts = "；".join(scene.action_blocks[:3])
     _spd = speed or _decide_speed(acts, emotion or shot.emotion)
     fe = fields_en or {}
@@ -456,7 +473,7 @@ def build_en_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0,
         pos = _default_camera_pos(shot)
         cam += f" | position: {_POS_EN.get(pos, pos)}"
     lines = [
-        f"【Style】{_style_lock_en()}",
+        f"【Style】{_style_lock_en(aspect)}",
         cam,
         _seg_label_en(start_sec, start_sec + dur),
         f"Scene: {scene_line.rstrip('.').rstrip()}.",
@@ -470,7 +487,7 @@ def build_en_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0,
     edit = fe.get("edit") or shot.edit or ""
     sound = fe.get("sound") or shot.sound or "ambient + dialogue priority; music follows the mood"
     light_en = fe.get("lighting") or (shot.lighting or scene.lighting or "")
-    blocking_en = _fix_blocking_en(fe.get("blocking") or _blocking_text(scene, shot))
+    blocking_en = _fix_blocking_en(fe.get("blocking") or _blocking_text(scene, shot, viewpoint))
     if staging:
         lines.append(f"Staging: {_aug_staging_en(staging, _spd)}")
     if blocking_en:
@@ -489,9 +506,10 @@ def build_en_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0,
 
 
 def build_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: float = 0.0,
-                               speed: dict | None = None, *, scene_type: str = "", genre: str = "") -> str:
+                               speed: dict | None = None, *, scene_type: str = "", genre: str = "",
+                               aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """中文版（节拍）：含 调度/色调/剪辑/声音。负面按 scene_type×scale×genre 自适应。"""
-    dur = _eff_dur(beat, shot)
+    dur = effective_shot_duration(shot, beat)
     # 旁白镜（无对白、声音含旁白·原文）：画面是旁白伴随视觉，非动作戏——强制实时，禁止动作升格/打击音效
     _is_vo_shot = bool(shot and "旁白·原文" in (shot.sound or "")) and not (beat.dialogue or "")
     _spd = speed or _decide_speed(("" if _is_vo_shot else beat.action) or "", beat.emotion or emotion)
@@ -500,7 +518,7 @@ def build_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: flo
     else:
         cam = f"近景｜平视｜固定机位（约{dur:.0f}s，稳定）"
     lines = [
-        f"【风格锁定】{_style_lock()}",
+        f"【风格锁定】{_style_lock(aspect)}",
         f"【镜头】机位：{_default_camera_pos(shot)}｜{cam}",
         f"【{_seg_label(start_sec, start_sec + dur)}】",
         f"【画面】{beat.action or shot.content if shot else ''}",
@@ -508,7 +526,7 @@ def build_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: flo
     if beat.dialogue:
         lines.append(f"【对白】{_strip_dialogue_translation(beat.dialogue)}")
     if shot:
-        lines.append(f"【站位·轴线】{_blocking_text(scene, shot)}")
+        lines.append(f"【站位·轴线】{_blocking_text(scene, shot, viewpoint)}")
         if shot.staging:
             lines.append(f"【调度】{_aug_staging_zh(shot.staging, _spd)}")
         lines.append(f"【色调】{_tone_text(scene, shot)}")
@@ -557,9 +575,10 @@ def _en_dialogue_line(beat_dialogue: str) -> str:
 
 
 def build_en_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: float = 0.0,
-                                    fields_en: dict | None = None, speed: dict | None = None) -> str:
+                                    fields_en: dict | None = None, speed: dict | None = None,
+                                    aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """英文版（节拍）：本地兜底或 LLM 字段译文。"""
-    dur = _eff_dur(beat, shot)
+    dur = effective_shot_duration(shot, beat)
     # 旁白镜（无对白、声音含旁白·原文）：画面是旁白伴随视觉，非动作戏——强制实时，禁止动作升格/打击音效
     _is_vo_shot = bool(shot and "旁白·原文" in (shot.sound or "")) and not (beat.dialogue or "")
     _spd = speed or _decide_speed(("" if _is_vo_shot else beat.action) or "", beat.emotion or emotion)
@@ -580,7 +599,7 @@ def build_en_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: 
             scene.location, scene.time, beat.emotion or emotion,
         )
     lines = [
-        f"【Style】{_style_lock_en()}",
+        f"【Style】{_style_lock_en(aspect)}",
         cam,
         _seg_label_en(start_sec, start_sec + dur),
         f"Scene: {scene_line.rstrip('.').rstrip()}.",
@@ -592,7 +611,7 @@ def build_en_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: 
     edit = fe.get("edit") or (shot.edit if shot else "") or ""
     sound = fe.get("sound") or (shot.sound if shot else "") or "ambient + dialogue priority; music follows the mood"
     light_en = fe.get("lighting") or ((shot.lighting if shot else "") or scene.lighting or "")
-    blocking_en = _fix_blocking_en(fe.get("blocking") or _blocking_text(scene, shot))
+    blocking_en = _fix_blocking_en(fe.get("blocking") or _blocking_text(scene, shot, viewpoint))
     if staging:
         lines.append(f"Staging: {_aug_staging_en(staging, _spd)}")
     if blocking_en:
@@ -610,21 +629,12 @@ def build_en_video_prompt_from_beat(scene, beat, shot, emotion: str, start_sec: 
     return "\n".join(lines)
 
 
-def _beat_dur(beat, shots: list, j: int) -> float:
-    if beat.duration_sec:
-        return beat.duration_sec
-    if shots:
-        return shots[j % len(shots)].duration_sec
-    return 3.0
 
 
 async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, global_timeline: bool = False,
                                  pacing: bool = False, viewpoint: str | None = None,
                                  aspect: str = "16:9", genre: str = "") -> list[ShotPrompt]:
     """生产用：双语输出 + 书知识字段 + LLM 导演级翻译 + 可选节奏填充 + 站位推理视角人物 + 画幅。"""
-    global _CURRENT_VIEWPOINT, _CURRENT_ASPECT
-    _CURRENT_VIEWPOINT = viewpoint
-    _CURRENT_ASPECT = aspect
     selector = ShotSelector()
     renderer = PromptRenderer()
     engine = PacingEngine() if pacing else None
@@ -658,7 +668,6 @@ async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, globa
                 focus_seq_counts: dict[str, int] = {}
                 prev_motions: list[str] = []
                 for j, beat in enumerate(scene.beats):
-                    dur = beat.duration_sec or 3.0
                     for _w in _audit_visual(beat.action or ""):
                         _log.warning("画面守卫 %s: %s", (beat.action or "")[:30], _w)
                     # 正反打：镜头目标=本镜说话人（beat.subject）放首位，机位/过肩按说话人推导
@@ -703,7 +712,7 @@ async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, globa
                     await _refine_motivation_llm(client, shot, scene, plan, beat, summary, emotion, j, len(scene.beats))
                     for _w in _audit_motivation_internal(shot):
                         _log.warning("镜头动机(后台) %s: %s", (beat.action or "")[:30], _w)
-                    img = build_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre)
+                    img = build_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre, aspect=aspect, viewpoint=viewpoint)
                     zh = _zh_fields_line(beat.subject, beat.action or (shot.content if shot else ""),
                                          scene.location, scene.time, beat.emotion or emotion)
                     fields_en = await _translate_fields(
@@ -715,32 +724,33 @@ async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, globa
                         blocking=(shot.blocking if shot else "") or scene.blocking or "",
                         dialogue=_strip_dialogue_translation(beat.dialogue) or "",
                     )
-                    en = build_en_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, fields_en=fields_en)
+                    en = build_en_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, fields_en=fields_en, aspect=aspect, viewpoint=viewpoint)
                     if j < len(scene.beats) - 1:
                         img += "\n【硬切】"
                         en += "\nHARD CUT"
                     image_prompts.append(img)
                     english_prompts.append(en)
-                    dur = _eff_dur(beat, shot)
+                    dur = effective_shot_duration(shot, beat)
                     t += dur
             else:
                 image_prompts = []
                 english_prompts = []
                 t = t_global if global_timeline else 0.0
                 for j, s in enumerate(plan.shots):
-                    img = build_video_prompt(scene, s, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre)
+                    img = build_video_prompt(scene, s, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre, aspect=aspect, viewpoint=viewpoint)
                     zh = _zh_fields_line("", "；".join(scene.action_blocks[:3]), scene.location, scene.time, emotion)
                     fields_en = await _translate_fields(
                         client, zh, s.staging, s.sound, s.tone, s.edit,
                         camera=s.camera_pos, lighting=s.lighting or scene.lighting or "",
                         blocking=s.blocking or scene.blocking or "")
-                    en = build_en_video_prompt(scene, s, emotion, start_sec=t, fields_en=fields_en)
+                    en = build_en_video_prompt(scene, s, emotion, start_sec=t, fields_en=fields_en, aspect=aspect, viewpoint=viewpoint)
                     if j < len(plan.shots) - 1:
                         img += "\n【硬切】"
                         en += "\nHARD CUT"
                     image_prompts.append(img)
                     english_prompts.append(en)
-                    t += s.duration_sec
+                    dur = effective_shot_duration(s)
+                    t += dur
             if global_timeline:
                 t_global = t
             out.append(ShotPrompt(ep=ep.ep, scene_id=si.scene_id, scene_type=plan.scene_type,
@@ -753,9 +763,6 @@ def build_shot_prompts(episodes: list[EpisodeScript], *, global_timeline: bool =
                        pacing: bool = False, viewpoint: str | None = None,
                        aspect: str = "16:9", genre: str = "") -> list[ShotPrompt]:
     """离线/测试用：同步构建（英文版本地兜底）+ 站位推理视角人物 + 画幅。"""
-    global _CURRENT_VIEWPOINT, _CURRENT_ASPECT
-    _CURRENT_VIEWPOINT = viewpoint
-    _CURRENT_ASPECT = aspect
     selector = ShotSelector()
     renderer = PromptRenderer()
     engine = PacingEngine() if pacing else None
@@ -789,7 +796,6 @@ def build_shot_prompts(episodes: list[EpisodeScript], *, global_timeline: bool =
                 focus_seq_counts: dict[str, int] = {}
                 prev_motions: list[str] = []
                 for j, beat in enumerate(scene.beats):
-                    dur = beat.duration_sec or 3.0
                     for _w in _audit_visual(beat.action or ""):
                         _log.warning("画面守卫 %s: %s", (beat.action or "")[:30], _w)
                     # 正反打：镜头目标=本镜说话人（beat.subject）放首位，机位/过肩按说话人推导
@@ -833,28 +839,29 @@ def build_shot_prompts(episodes: list[EpisodeScript], *, global_timeline: bool =
                     prev_motions = (prev_motions + [selector.movement_id(shot.movement)])[-2:]
                     for _w in _audit_motivation_internal(shot):
                         _log.warning("镜头动机(后台) %s: %s", (beat.action or "")[:30], _w)
-                    img = build_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre)
-                    en = build_en_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t)
+                    img = build_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre, aspect=aspect, viewpoint=viewpoint)
+                    en = build_en_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, aspect=aspect, viewpoint=viewpoint)
                     if j < len(scene.beats) - 1:
                         img += "\n【硬切】"
                         en += "\nHARD CUT"
                     image_prompts.append(img)
                     english_prompts.append(en)
-                    dur = _eff_dur(beat, shot)
+                    dur = effective_shot_duration(shot, beat)
                     t += dur
             else:
                 image_prompts = []
                 english_prompts = []
                 t = t_global if global_timeline else 0.0
                 for j, s in enumerate(plan.shots):
-                    img = build_video_prompt(scene, s, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre)
-                    en = build_en_video_prompt(scene, s, emotion, start_sec=t)
+                    img = build_video_prompt(scene, s, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre, aspect=aspect, viewpoint=viewpoint)
+                    en = build_en_video_prompt(scene, s, emotion, start_sec=t, aspect=aspect, viewpoint=viewpoint)
                     if j < len(plan.shots) - 1:
                         img += "\n【硬切】"
                         en += "\nHARD CUT"
                     image_prompts.append(img)
                     english_prompts.append(en)
-                    t += s.duration_sec
+                    dur = effective_shot_duration(s)
+                    t += dur
             if global_timeline:
                 t_global = t
             out.append(ShotPrompt(ep=ep.ep, scene_id=si.scene_id, scene_type=plan.scene_type,

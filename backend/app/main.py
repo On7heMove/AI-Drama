@@ -160,6 +160,7 @@ async def spine_page() -> str:
     e2e = _Path(__file__).resolve().parents[1] / "_e2e_out" / "real_e2e_1.json"
     if not e2e.is_file():
         return "<html><body><h1>无骨架产物</h1><p>%s 不存在</p></body></html>" % e2e
+    from html import escape as _esc
     sp = _json.loads(e2e.read_text(encoding="utf-8")).get("spine", {})
     rows = []
     for n in sorted(sp.get("nodes") or [], key=lambda x: x.get("node_id", "")):
@@ -167,13 +168,15 @@ async def spine_page() -> str:
         rows.append(
             "<div class='node'><div class='nhead'><b>[%s]</b> %s「%s」（%s）</div>"
             "<div class='ev'>事件：%s</div>%s</div>"
-            % (n.get("node_id"), n.get("type"), n.get("title"), rng, n.get("event", ""),
-               "<div class='ev hook'>钩子：%s</div>" % n.get("hook") if n.get("hook") else ""))
+            % (_esc(str(n.get("node_id"))), _esc(str(n.get("type"))), _esc(str(n.get("title"))),
+               rng, _esc(str(n.get("event", ""))),
+               "<div class='ev hook'>钩子：%s</div>" % _esc(str(n.get("hook"))) if n.get("hook") else ""))
     cast = "".join(
         "<div class='cast'><b>%s</b>（%s）<div>欲望：%s</div><div>阻力：%s</div><div>弧光：%s</div></div>"
-        % (c.get("name"), c.get("role"), c.get("desire"), c.get("obstacle"), c.get("arc"))
+        % (_esc(str(c.get("name"))), _esc(str(c.get("role"))), _esc(str(c.get("desire"))),
+           _esc(str(c.get("obstacle"))), _esc(str(c.get("arc"))))
         for c in sp.get("casting") or [])
-    oq = "".join("<li>%s</li>" % q for q in sp.get("open_questions") or [])
+    oq = "".join("<li>%s</li>" % _esc(str(q)) for q in sp.get("open_questions") or [])
     return """<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>剧本骨架 · 最近一轮</title>
 <style>
 body{font-family:"Microsoft YaHei",sans-serif;background:#101418;color:#e6edf3;margin:0;padding:32px 20px;}

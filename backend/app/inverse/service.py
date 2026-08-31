@@ -22,6 +22,8 @@ from app.production.prompts import load_prompt
 from app.production.schemas import (
     EpisodeBeat,
     EpisodeScript,
+    Outline,
+    QualityItem,
     SceneScript,
     StoryBrief,
     StoryLine,
@@ -35,6 +37,13 @@ from app.story.foreshadow_ledger import ForeshadowLedger
 
 MAX_FORESHADOWS_IN_PROMPT = 12
 MAX_STATE_THREADS = 8
+MAX_EPISODE_RETRIES = 2   # 单集自动回炉：首轮 + 最多 2 次重写
+
+# 回炉门禁只统计"重写剧本能修复"的维度；大纲/块级维度（four_lines/conflict_upgrade/info_reveal/explosion_density/emotion）不参与单集回炉判定
+RETRY_GATE_DIMENSIONS = {
+    "cliffhanger", "open_hook", "explosion", "logic", "event_type",
+    "scene_focus", "scene_duration", "episode_duration", "emotion_vector", "bible",
+}
 EPISODE_MAX_TOKENS = 24000
 OUTLINE_MAX_TOKENS = 24000
 SPINE_MAX_TOKENS = 40000
@@ -182,9 +191,31 @@ async def _generate_beats(plan, story: StoryLine, client: DeepSeekClient,
     return beats, user, data
 
 
+def format_quality_feedback(items: list[QualityItem]) -> str:
+    """把质检阻断项格式化为下一轮生成提示词注入的修正要求。"""
+    if not items:
+        return ""
+    lines = ["## 上轮质检未通过项（必须逐条修正后重写本集；不得删除本集既有剧情承诺，除非与上述修正冲突）"]
+    for i in items:
+        sev = {"fatal": "硬伤", "error": "错误"}.get(i.severity, i.severity)
+        lines.append(f"- [{i.dimension}/{sev}] {i.evidence}")
+        if i.suggestion:
+            lines.append(f"  修正：{i.suggestion}")
+    return "\n".join(lines)
+
+
+async def _episode_retry_gate(outline: Outline, script: EpisodeScript, vectors: dict | None) -> list[QualityItem]:
+    """单集回炉门禁：只取该集可被重写修复的 fatal/error 项（大纲/块级维度排除）。"""
+    report = await run_quality(outline, [script], script_id=f"ep{script.ep}_gate", vectors=vectors)
+    return [i for i in report.items
+            if i.ep == script.ep and i.severity in {"fatal", "error"}
+            and i.dimension in RETRY_GATE_DIMENSIONS]
+
+
 # ---------------------------------------------------------------- 单集剧本生成
 async def _generate_episode_raw(plan, beat: EpisodeBeat, story: StoryLine, state: ScriptState,
-                                client: DeepSeekClient, ep: int, foreshadows: list[str]):
+                                client: DeepSeekClient, ep: int, foreshadows: list[str],
+                                retry_feedback: str | None = None):
     template = load_prompt("episode")
     beat_json = json.dumps(beat.model_dump(), ensure_ascii=False)
     lines_txt = "\n".join(f"- [{ln.kind}] {ln.name}：{ln.summary}" for ln in story.lines)
@@ -201,6 +232,8 @@ async def _generate_episode_raw(plan, beat: EpisodeBeat, story: StoryLine, state
         user += "\n\n## 方法论技能约束（cangjie 蒸馏注入）\n" + _skill
     if foreshadows:
         user += _REFS_RULE
+    if retry_feedback:
+        user += "\n\n" + retry_feedback
     data = await client.chat_json(EPISODE_SYSTEM, user, max_tokens=EPISODE_MAX_TOKENS)
     data = _sanitize_state_update(data)
     for _sc in data.get("scenes") or []:
@@ -226,8 +259,7 @@ async def _generate_episode_raw(plan, beat: EpisodeBeat, story: StoryLine, state
         scenes=[SceneScript.model_validate(s) for s in data.get("scenes") or []],
         events=[e for e in (data.get("events") or []) if isinstance(e, dict)],
     )
-    state.update(ep, data)
-    state.open_threads = state.open_threads[:MAX_STATE_THREADS]
+    # 状态提交移到主流程：仅当该集最终接受（含回炉收敛）后才 state.update，避免重写轮次污染滚动状态
     return script, user, data
 
 
@@ -273,12 +305,31 @@ async def run_inverse(
     episodes: list[EpisodeScript] = []
     episode_prompts: list[dict] = []
     state_updates: list[dict] = []
+    retry_log: list[dict] = []
+    outline = Outline(story_line=story, beats=beats)
     for b in beats:
         ep = b.ep
         if progress:
             progress(f"episode_{ep}")
-        script, user, raw = await _generate_episode_raw(
-            plan, b, story, state, client, ep, _tagged(ledger))
+        retry_feedback: str | None = None
+        retry_rounds = 0
+        first_errors: list[str] = []
+        final_errors: list[str] = []
+        for attempt in range(MAX_EPISODE_RETRIES + 1):
+            script, user, raw = await _generate_episode_raw(
+                plan, b, story, state, client, ep, _tagged(ledger), retry_feedback=retry_feedback)
+            blocking = await _episode_retry_gate(outline, script, state.emotion_vectors)
+            evidence = [f"{i.dimension}: {i.evidence}" for i in blocking]
+            if attempt == 0:
+                first_errors = evidence
+            final_errors = evidence
+            if not blocking:
+                break
+            retry_rounds = attempt + 1
+            retry_feedback = format_quality_feedback(blocking)
+        # 仅最终接受版提交状态，保证下一集拿到的是收敛后的滚动状态
+        state.update(ep, raw)
+        state.open_threads = state.open_threads[:MAX_STATE_THREADS]
         episodes.append(script)
         episode_prompts.append({"ep": ep, "user": user})
         su = raw.get("state_update") or {}
@@ -289,14 +340,21 @@ async def run_inverse(
         state_updates.append({
             "ep": ep, "open_threads": su.get("open_threads") or [],
             "resolved": resolved, "paid": paid, "summary": raw.get("summary") or "",
+            "retry_rounds": retry_rounds,
+            "first_errors": first_errors,
+            "final_errors": final_errors,
         })
+        if retry_rounds:
+            retry_log.append({
+                "ep": ep, "retry_rounds": retry_rounds,
+                "first_errors": first_errors, "final_errors": final_errors,
+            })
 
     if progress:
         progress("quality")
-    from app.production.schemas import Outline
-    outline = Outline(story_line=story, beats=beats)
     report = await run_quality(outline, episodes, script_id=title or "inverse",
                                vectors=state.emotion_vectors)
+    report.retry_rounds = sum(r["retry_rounds"] for r in retry_log)
 
     return {
         "title": title or plan.spine_title or "",
@@ -315,6 +373,10 @@ async def run_inverse(
         "state_updates": state_updates,
         "quality": report.summary(),
         "quality_items": [i.model_dump() for i in report.items],
+        "retry": {
+            "episodes": retry_log,
+            "total_retries": sum(r["retry_rounds"] for r in retry_log),
+        },
         "prompts": {"outline": outline_prompt, "episode": episode_prompts},
         "model": client.model,
     }
