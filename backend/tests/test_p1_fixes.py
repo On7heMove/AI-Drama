@@ -154,3 +154,58 @@ def test_run_real_e2e_paths_portable():
     assert "if __name__ == \"__main__\":" in code                   # 可导入、可测试
     # 旧目录名仅存在于兼容回退分支
     assert "_瀑布流_提示词模块" in code
+
+
+
+# ---------------------------------------------------------------- P1-11 翻译缓存 LRU
+def test_translation_cache_key_includes_version_model_aspect():
+    from app.production import storyboard_export as se
+    k1 = se._translation_cache_key("m1", "9:16", "zh")
+    k2 = se._translation_cache_key("m1", "16:9", "zh")
+    k3 = se._translation_cache_key("m2", "9:16", "zh")
+    k4 = se._translation_cache_key("m1", "9:16", "zh")
+    assert k1 == k4          # 同参命中
+    assert k1 != k2          # 画幅不同 → 不同 key
+    assert k1 != k3          # 模型不同 → 不同 key
+    assert se._TRANSLATION_PROMPT_VERSION in k1  # 提示词版本纳入 key
+
+
+def test_translation_cache_lru_eviction_and_no_failure_cache():
+    from app.production import storyboard_export as se
+    se._translation_cache.clear()
+    old_max = se._TRANSLATION_CACHE_MAX
+    se._TRANSLATION_CACHE_MAX = 3
+    try:
+        for i in range(5):
+            se._cache_put(f"k{i}", {"scene": f"s{i}"})
+        assert len(se._translation_cache) == 3           # 容量上限生效
+        assert "k0" not in se._translation_cache         # 最久未用被逐出
+        assert "k1" not in se._translation_cache
+        assert "k4" in se._translation_cache             # 最新保留
+        # 命中会刷新 LRU 序
+        assert se._cache_get("k2") == {"scene": "s2"}
+        se._cache_put("k5", {"scene": "s5"})
+        assert "k3" not in se._translation_cache         # k2 刚被命中，k3 被逐出
+        # 失败/空结果不缓存
+        se._cache_put("k_empty", {})
+        assert "k_empty" not in se._translation_cache
+    finally:
+        se._TRANSLATION_CACHE_MAX = old_max
+        se._translation_cache.clear()
+
+
+# ---------------------------------------------------------------- P1-13 动作块摘要
+def test_join_actions_char_budget():
+    from app.production import storyboard_export as se
+    blocks = ["第一幕", "第二幕", "第三幕"]
+    out = se._join_actions(blocks, max_chars=8)
+    assert out == "第一幕；第二幕"     # 预算内保留完整块，不无条件取前 3 条
+    assert "第三幕" not in out
+    # 超长单块按预算截断
+    long = se._join_actions(["动作描述内容非常长超出预算"], max_chars=6)
+    assert len(long) == 6
+    # 空输入
+    assert se._join_actions([]) == ""
+    assert se._join_actions(None) == ""
+    # 分隔符计入预算：max_chars=2 时只能放下一个块
+    assert se._join_actions(["a", "b"], max_chars=2) == "a"

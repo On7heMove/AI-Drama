@@ -15,8 +15,10 @@ from __future__ import annotations
 
 import re
 
+import hashlib
 import json
 import logging as _logging
+from collections import OrderedDict
 
 from app.production.schemas import EpisodeScript, ShotPrompt, TranslatedFields
 from app.production.verb_selector import select_verb
@@ -174,18 +176,43 @@ _FIELDS_SYSTEM = (
     "\"blocking\": \"人物站位/轴线英文（如：A on the left, B on the right, face to face; keep the 180-degree axis, no left-right swap; cross-the-line=越轴; 禁止越轴跳切=do not cross the 180-degree line (never write 'jump cut')）\", "
     "\"dialogue\": \"台词英文（忠实原意，逐字翻译，不加戏）\"}，不要输出其它文字。"
 )
-_translation_cache: dict[str, dict] = {}
+# P1-11：翻译缓存改为有容量上限的 LRU；key 含 提示词版本/模型/画幅/源字段；失败或空结果不缓存
+_TRANSLATION_CACHE_MAX = 512
+_TRANSLATION_PROMPT_VERSION = "v1-" + hashlib.sha1(_FIELDS_SYSTEM.encode("utf-8")).hexdigest()[:8]
+_translation_cache: "OrderedDict[str, dict]" = OrderedDict()
+
+
+def _translation_cache_key(model: str, aspect: str, zh: str) -> str:
+    return f"{_TRANSLATION_PROMPT_VERSION}|{model}|{aspect}|{zh}"
+
+
+def _cache_get(key: str) -> dict | None:
+    v = _translation_cache.get(key)
+    if v is not None:
+        _translation_cache.move_to_end(key)
+    return v
+
+
+def _cache_put(key: str, value: dict) -> None:
+    if not value:
+        return  # 失败/空翻译结果不缓存，避免长期命中旧错误
+    _translation_cache[key] = value
+    _translation_cache.move_to_end(key)
+    while len(_translation_cache) > _TRANSLATION_CACHE_MAX:
+        _translation_cache.popitem(last=False)
 
 
 async def _translate_fields(client, scene_zh: str, staging: str, sound: str, tone: str, edit: str,
                             camera: str = "", lighting: str = "", blocking: str = "",
-                            dialogue: str = "") -> dict:
+                            dialogue: str = "", *, aspect: str = "16:9", model: str = "") -> dict:
     zh = json.dumps({"scene": scene_zh, "staging": staging, "sound": sound,
                      "tone": tone, "edit": edit, "camera": camera,
                      "lighting": lighting, "blocking": blocking,
                      "dialogue": dialogue}, ensure_ascii=False)
-    if zh in _translation_cache:
-        return _translation_cache[zh]
+    key = _translation_cache_key(model, aspect, zh)
+    cached = _cache_get(key)
+    if cached is not None:
+        return cached
     from app.storyboard.visual_guard import is_skeleton_en as _is_skeleton_en
 
     data: dict = {}
@@ -204,7 +231,7 @@ async def _translate_fields(client, scene_zh: str, staging: str, sound: str, ton
                 break
         except Exception:  # noqa: BLE001, S112 翻译失败回退本地，不阻塞管线
             continue
-    _translation_cache[zh] = data
+    _cache_put(key, data)
     return data
 
 
@@ -388,6 +415,29 @@ def _zh_fields_line(subject: str, action: str, location: str, time: str, emotion
     return f"主体{subject or '角色'}：{action}；地点：{location}；时间：{time}；情绪：{emotion}"
 
 
+def _join_actions(action_blocks: list[str], max_chars: int = 80) -> str:
+    """动作块摘要（P1-13）：按字符预算拼接，不再无条件只取前 3 条。
+
+    尽量保留完整动作块；预算不足时截断超长块。分隔符「；」计入预算。
+    """
+    parts: list[str] = []
+    budget = max_chars
+    for raw in action_blocks or []:
+        a = (raw or "").strip()
+        if not a:
+            continue
+        sep_cost = 1 if parts else 0
+        if budget <= sep_cost:
+            break
+        if len(a) + sep_cost > budget:
+            parts.append(a[: budget - sep_cost])
+            budget = 0
+            break
+        parts.append(a)
+        budget -= len(a) + sep_cost
+    return "；".join(parts)
+
+
 def effective_shot_duration(shot, beat=None, dialogue: str = "") -> float:
     """镜头总时长唯一口径（2026-08-31 统一）：基础画面时长 + 对白/旁白折算时长。
 
@@ -428,7 +478,7 @@ def build_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0, speed:
                        aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """中文版：含 调度/色调/剪辑/声音（书知识直通）。负面按 scene_type×scale×genre 自适应。"""
     dur = effective_shot_duration(shot)
-    acts = "；".join(scene.action_blocks[:3])
+    acts = _join_actions(scene.action_blocks)
     dlg = "；".join(_strip_dialogue_translation(f"{d.speaker}：{d.line}") for d in scene.dialogues[:3])
     _spd = speed or _decide_speed(acts, emotion or shot.emotion)
     lines = [
@@ -463,7 +513,7 @@ def build_en_video_prompt(scene, shot, emotion: str, start_sec: float = 0.0,
                           aspect: str = "16:9", viewpoint: str | None = None) -> str:
     """英文版（本地兜底或 LLM 字段译文）。"""
     dur = effective_shot_duration(shot)
-    acts = "；".join(scene.action_blocks[:3])
+    acts = _join_actions(scene.action_blocks)
     _spd = speed or _decide_speed(acts, emotion or shot.emotion)
     fe = fields_en or {}
     if fe.get("scene"):
@@ -727,6 +777,7 @@ async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, globa
                         lighting=(shot.lighting if shot else "") or scene.lighting or "",
                         blocking=(shot.blocking if shot else "") or scene.blocking or "",
                         dialogue=_strip_dialogue_translation(beat.dialogue) or "",
+                        aspect=aspect, model=getattr(client, "model", ""),
                     )
                     en = build_en_video_prompt_from_beat(scene, beat, shot, emotion, start_sec=t, fields_en=fields_en, aspect=aspect, viewpoint=viewpoint)
                     if j < len(scene.beats) - 1:
@@ -742,11 +793,12 @@ async def build_shot_prompts_llm(episodes: list[EpisodeScript], client, *, globa
                 t = t_global if global_timeline else 0.0
                 for j, s in enumerate(plan.shots):
                     img = build_video_prompt(scene, s, emotion, start_sec=t, scene_type=plan.scene_type, genre=genre, aspect=aspect, viewpoint=viewpoint)
-                    zh = _zh_fields_line("", "；".join(scene.action_blocks[:3]), scene.location, scene.time, emotion)
+                    zh = _zh_fields_line("", _join_actions(scene.action_blocks), scene.location, scene.time, emotion)
                     fields_en = await _translate_fields(
                         client, zh, s.staging, s.sound, s.tone, s.edit,
                         camera=s.camera_pos, lighting=s.lighting or scene.lighting or "",
-                        blocking=s.blocking or scene.blocking or "")
+                        blocking=s.blocking or scene.blocking or "",
+                        aspect=aspect, model=getattr(client, "model", ""))
                     en = build_en_video_prompt(scene, s, emotion, start_sec=t, fields_en=fields_en, aspect=aspect, viewpoint=viewpoint)
                     if j < len(plan.shots) - 1:
                         img += "\n【硬切】"
