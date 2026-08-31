@@ -16,6 +16,30 @@ from app.config import settings
 from app.paths import runtime_dir
 
 
+MAX_TRANSIENT_RETRIES = 3   # chat 单层瞬时错误重试次数（网络/超时/限流/5xx/空内容）
+MAX_JSON_ATTEMPTS = 3       # chat_json 总调用预算（含首调）：避免 chat×chat_json 重试放大
+
+
+def _is_retryable_error(exc: Exception) -> bool:
+    """错误分级（P1-9 统一重试策略）：瞬时错误可重试，鉴权/参数类快速失败。
+
+    - 可重试：429 限流、5xx、网络/超时/连接类、模型空内容
+    - 不重试：401/403/400/404/422 等鉴权与参数错误（重试只会浪费成本与延迟）
+    - 未知错误默认按瞬时处理（有 MAX_JSON_ATTEMPTS 总预算兜底）
+    """
+    if isinstance(exc, RuntimeError) and "空内容" in str(exc):
+        return True
+    status = getattr(exc, "status_code", None)
+    if isinstance(status, int):
+        return status in (429,) or 500 <= status < 600
+    if isinstance(exc, (TimeoutError, asyncio.TimeoutError)):
+        return True
+    name = type(exc).__name__
+    if any(k in name for k in ("Connection", "Timeout", "RateLimit", "InternalServer")):
+        return True
+    return True
+
+
 @dataclass
 class LLMUsage:
     calls: int = 0
@@ -112,13 +136,15 @@ class DeepSeekClient:
         json_mode: bool = False,
         max_tokens: int | None = None,
         temperature: float | None = None,
+        retries: int = MAX_TRANSIENT_RETRIES,
     ) -> str:
+        """单次生成 + retries 次瞬时错误重试；鉴权/参数类错误原样上抛（快速失败）。"""
         messages = [
             {"role": "system", "content": system},
             {"role": "user", "content": user},
         ]
         last_err: Exception | None = None
-        for attempt in range(3):
+        for attempt in range(retries + 1):
             try:
                 resp = await self._client.chat.completions.create(
                     model=self.model,
@@ -134,19 +160,30 @@ class DeepSeekClient:
                 return parse_json(content) if json_mode else content
             except Exception as e:  # noqa: BLE001
                 last_err = e
+                if not _is_retryable_error(e):
+                    raise  # 非瞬时错误：原样上抛，便于上层识别 status_code
+                if attempt >= retries:
+                    break
                 await asyncio.sleep(2**attempt)
-        raise RuntimeError(f"LLM 调用失败（3 次重试后）: {last_err}")
+        raise RuntimeError(f"LLM 调用失败（{retries} 次重试后）: {last_err}")
 
     async def chat_json(self, system: str, user: str, **kw: object) -> dict:
+        """JSON 生成统一预算：本层负责全部重试（瞬时错误 + JSON 解析），chat 传 retries=0 不再放大。
+
+        最多 MAX_JSON_ATTEMPTS 次真实调用；非瞬时（鉴权/参数）错误立即失败。
+        """
+        kw.pop("retries", None)  # 预算统一由本层控制
         last_exc: Exception | None = None
-        for _ in range(3):
-            text = await self.chat(system, user, json_mode=True, **kw)
+        for _ in range(MAX_JSON_ATTEMPTS):
             try:
+                text = await self.chat(system, user, json_mode=True, retries=0, **kw)
                 return json.loads(text)
-            except json.JSONDecodeError as exc:
+            except Exception as exc:  # noqa: BLE001
                 last_exc = exc
+                if not _is_retryable_error(exc) and not isinstance(exc, json.JSONDecodeError):
+                    raise  # 非瞬时且非 JSON 错误：不重试
                 await asyncio.sleep(1.0)
-        raise RuntimeError(f"LLM 返回非 JSON（3 次重试后）：{last_exc}") from last_exc
+        raise RuntimeError(f"LLM 返回非 JSON/调用失败（{MAX_JSON_ATTEMPTS} 次尝试后）：{last_exc}") from last_exc
 
 
 def parse_json(text: str) -> str:

@@ -163,6 +163,22 @@ class EpisodeScript(BaseModel):
     events: list[dict] = Field(default_factory=list)   # 结构化事件：{type,actor,target?,detail?,citation?}
 
 
+class TranslatedFields(BaseModel):
+    """LLM 英文分镜翻译契约（P1-10）：字段缺失用默认值，类型错误进入本地回退。
+
+    build_en_video_prompt* 通过 fe.get(key) 读取；经本模型校验后所有键必为 str。
+    """
+    scene: str = ""
+    staging: str = ""
+    sound: str = ""
+    tone: str = ""
+    edit: str = ""
+    camera: str = ""
+    lighting: str = ""
+    blocking: str = ""
+    dialogue: str = ""
+
+
 class ShotPrompt(BaseModel):
     """一镜的分镜提示词（复用 storyboard 模块渲染）+ 图片生成提示词列表（标准动作）。"""
 

@@ -7,16 +7,21 @@
 - 量化：结构达标率 / 逻辑错误数 / 伏笔回收率 / 剧本落盘
 """
 import asyncio, json, os, sys, re, time, datetime
+from pathlib import Path
 
-BE = os.path.abspath(r"backend")
+# P1-7：以脚本自身路径定位 backend，不再依赖 cwd 或旧目录名
+BE_DIR = Path(__file__).resolve().parent          # backend/
+BE = str(BE_DIR)
 sys.path.insert(0, BE)
 
-# 1) 密钥注入（仅内存，不落盘/不打印）
+# 1) 密钥注入（仅内存，不落盘/不打印）；优先 backend/.env，兼容旧目录
 def _inject_key():
-    env_path = r"_瀑布流_提示词模块\backend\.env"
-    if not os.path.isfile(env_path):
-        raise SystemExit("密钥文件缺失")
-    for line in open(env_path, encoding="utf-8"):
+    candidates = [BE_DIR / ".env",
+                  BE_DIR.parent / "_瀑布流_提示词模块" / "backend" / ".env"]
+    env_path = next((c for c in candidates if c.is_file()), None)
+    if env_path is None:
+        raise SystemExit("密钥文件缺失（backend/.env）")
+    for line in env_path.read_text(encoding="utf-8").splitlines():
         line = line.strip()
         if line and not line.startswith("#") and "=" in line:
             k, v = line.split("=", 1)
@@ -30,6 +35,7 @@ _inject_key()
 
 from app.inverse.service import run_inverse
 from app.production.llm_client import DeepSeekClient
+from app.production.screenplay_render import render_screenplay, screenplay_chars
 
 
 class RecordingClient(DeepSeekClient):
@@ -46,7 +52,7 @@ class RecordingClient(DeepSeekClient):
 
 SYNOPSIS = """公元4000年，人类进入芯片时代。每个人在出生一个月后便要被植入芯片，芯片记录着这个人的社会分工、必要知识、意识形态与社会交往，人与人之间不再具有亲情友情爱情。某一天一颗彗星掠过地球造成磁场巨变，所有硅基芯片与存储设备失效，人类突然失去芯片制约，以自然属性人状态重新摸索生存，在互助与矛盾中重新产生亲情友情爱情。在人类逐渐恢复科学技术与生产力后，巨大问题摆在面前：回到最高效的芯片时代，还是保持情感维系但有局限的自然状态。男主角陈思扬在这个过程中与女主孙丽莎建立深厚感情，在人类抉择最后时刻，陈思扬选择拿出芯片摔在地上，选择继续有爱的生活。"""
 
-OUT = os.path.join(BE, "_e2e_out")
+OUT = str(BE_DIR / "_e2e_out")
 os.makedirs(OUT, exist_ok=True)
 
 
@@ -70,7 +76,7 @@ def quantify(result, run_id):
         "foreshadow_planted": total,
         "foreshadow_paid": paid,
         "foreshadow_recovery_rate": round(paid / total, 3) if total else None,
-        "screenplay_chars": len(json.dumps(episodes, ensure_ascii=False)),
+        "screenplay_chars": screenplay_chars(episodes),
         "quality_summary": result.get("quality"),
     }
 
@@ -113,14 +119,7 @@ async def main():
         io_open.write("\n".join(wf))
         io_open.close()
         with open(os.path.join(OUT, run_id + "_screenplay.md"), "w", encoding="utf-8") as f:
-            for ep in result["episodes"]:
-                f.write("## 第%s集 %s\n\n" % (ep.get("ep"), ep.get("title", "")))
-                for sc in ep.get("scenes", []):
-                    f.write("### %s %s\n" % (sc.get("location", ""), sc.get("time", "")))
-                    for a in sc.get("action_blocks", []):
-                        f.write("（%s）\n" % a)
-                    for d in sc.get("dialogues", []):
-                        f.write("%s：%s\n" % (d.get("speaker", ""), d.get("line", "")))
+            f.write(render_screenplay(result["episodes"]))
         print("=== round %d done: structure=%s logic_err=%d fatal=%d foreshadow=%s ==="
               % (i, q["structure_ok"], q["logic_errors"], q["fatal_issues"], q["foreshadow_recovery_rate"]), flush=True)
 
@@ -146,4 +145,5 @@ async def main():
     print(json.dumps(summary, ensure_ascii=False, indent=1))
 
 
-asyncio.run(main())
+if __name__ == "__main__":
+    asyncio.run(main())

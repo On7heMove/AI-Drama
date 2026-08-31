@@ -18,7 +18,7 @@ import re
 import json
 import logging as _logging
 
-from app.production.schemas import EpisodeScript, ShotPrompt
+from app.production.schemas import EpisodeScript, ShotPrompt, TranslatedFields
 from app.production.verb_selector import select_verb
 from app.storyboard.blocking import infer_blocking as _infer_blocking
 from app.storyboard.dialogue_staging import (
@@ -189,14 +189,18 @@ async def _translate_fields(client, scene_zh: str, staging: str, sound: str, ton
     from app.storyboard.visual_guard import is_skeleton_en as _is_skeleton_en
 
     data: dict = {}
-    for _attempt in range(3):  # 骨架回退=失败，自动重试（防 moves./clutches. 漏网）
+    for _attempt in range(3):  # 骨架回退=失败，自动重试（防 moves./clutches. 漏网）；chat 已做瞬时重试，此处不放大
         try:
-            text = await client.chat(_FIELDS_SYSTEM, zh, json_mode=True, max_tokens=2000, temperature=0.3)
+            text = await client.chat(_FIELDS_SYSTEM, zh, json_mode=True, max_tokens=2000, temperature=0.3, retries=1)
             cand = json.loads(text)
             import re as _re
             _zh_rem = _re.search(r"[\u4e00-\u9fff]", json.dumps(cand, ensure_ascii=False)) if isinstance(cand, dict) else None
             if isinstance(cand, dict) and not _is_skeleton_en(cand.get("scene", "")) and not _zh_rem:
-                data = cand
+                # P1-10：LLM JSON 经 TranslatedFields 契约校验；缺字段补默认值，类型/结构非法回退本地
+                try:
+                    data = TranslatedFields.model_validate(cand).model_dump()
+                except Exception:  # noqa: BLE001
+                    data = {}
                 break
         except Exception:  # noqa: BLE001, S112 翻译失败回退本地，不阻塞管线
             continue
